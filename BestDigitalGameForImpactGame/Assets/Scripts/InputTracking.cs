@@ -37,4 +37,12 @@ public class InputTracking : MonoBehaviour
         File.AppendAllText(logFilePath, logEntry + "\n"); // appends to file
         Debug.Log(logEntry);
     }
+
+    public void LogEvent(string message)
+    {
+        string logEntry = Time.time.ToString("F2") + "s: " + message;
+        File.AppendAllText(logFilePath, logEntry + "\n");
+        Debug.Log(logEntry);
+    }
+
 }
