@@ -1,0 +1,10 @@
+Input Log
+0.20s: Mouse0
+0.20s: LeftClick
+1.25s: Mouse1
+1.25s: RightClick
+1.65s: W
+2.21s: S
+6.77s: Mouse2
+6.77s: MiddleClick
+7.24s: S
