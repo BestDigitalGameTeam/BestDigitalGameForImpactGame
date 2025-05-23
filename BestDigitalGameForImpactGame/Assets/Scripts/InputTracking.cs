@@ -21,27 +21,20 @@ public class InputTracking : MonoBehaviour
         {
             if (Input.GetKeyDown(key))
             {
-                LogKey(key.ToString());
+                LogEvent(key.ToString());
             }
         }
 
         // detect mouse
-        if (Input.GetMouseButtonDown(0)) LogKey("LeftClick");
-        if (Input.GetMouseButtonDown(1)) LogKey("RightClick");
-        if (Input.GetMouseButtonDown(2)) LogKey("MiddleClick");
-    }
-
-    private void LogKey(string button)
-    {
-        string logEntry = Time.time.ToString("F2") + "s: " + button; // gets time key is pressed, to 5 decimal places
-        File.AppendAllText(logFilePath, logEntry + "\n"); // appends to file
-        Debug.Log(logEntry);
+        if (Input.GetMouseButtonDown(0)) LogEvent("LeftClick");
+        if (Input.GetMouseButtonDown(1)) LogEvent("RightClick");
+        if (Input.GetMouseButtonDown(2)) LogEvent("MiddleClick");
     }
 
     public void LogEvent(string message)
     {
-        string logEntry = Time.time.ToString("F2") + "s: " + message;
-        File.AppendAllText(logFilePath, logEntry + "\n");
+        string logEntry = Time.time.ToString("F2") + "s: " + message; // gets time key is pressed, to 5 decimal places
+        File.AppendAllText(logFilePath, logEntry + "\n"); // appends to file
         Debug.Log(logEntry);
     }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class scrDoorTrigger : MonoBehaviour
 {
     public string doorColor = "Red"; // Set this in Inspector
-    private InputTracking inputLogger;
+    public InputTracking inputLogger;
 
     private void Start()
     {
