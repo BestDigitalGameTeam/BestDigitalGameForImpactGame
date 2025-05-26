@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 114167009}
   - component: {fileID: 114167008}
   - component: {fileID: 114167007}
-  - component: {fileID: 114167006}
   m_Layer: 0
   m_Name: Slice (2)
   m_TagString: Untagged
@@ -154,33 +153,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 368216567}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!54 &114167006
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114167004}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &114167007
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -210,7 +182,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114167004}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -525,8 +497,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368216561}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.27, z: 2.77}
+  m_LocalRotation: {x: 0.19257647, y: -0.08285909, z: -0.38645086, w: 0.89816725}
+  m_LocalPosition: {x: 0.44, y: 7.87, z: 13.77}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -539,7 +511,7 @@ Transform:
   - {fileID: 1090771288}
   - {fileID: 1191671678}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.373, y: -18.075, z: -49.183}
 --- !u!65 &368216568
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1312,7 +1284,6 @@ GameObject:
   - component: {fileID: 548566652}
   - component: {fileID: 548566651}
   - component: {fileID: 548566650}
-  - component: {fileID: 548566649}
   m_Layer: 0
   m_Name: Slice (5)
   m_TagString: Untagged
@@ -1335,33 +1306,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 368216567}
   m_LocalEulerAnglesHint: {x: 0, y: 225, z: 0}
---- !u!54 &548566649
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548566647}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &548566650
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1391,7 +1335,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 548566647}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1449,7 +1393,6 @@ GameObject:
   - component: {fileID: 622364821}
   - component: {fileID: 622364820}
   - component: {fileID: 622364819}
-  - component: {fileID: 622364818}
   m_Layer: 0
   m_Name: Slice (4)
   m_TagString: Untagged
@@ -1472,33 +1415,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 368216567}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!54 &622364818
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622364816}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &622364819
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1528,7 +1444,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622364816}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1804,7 +1720,6 @@ GameObject:
   - component: {fileID: 897369025}
   - component: {fileID: 897369024}
   - component: {fileID: 897369023}
-  - component: {fileID: 897369022}
   m_Layer: 0
   m_Name: Slice (1)
   m_TagString: Untagged
@@ -1827,33 +1742,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 368216567}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
---- !u!54 &897369022
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897369020}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &897369023
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1883,7 +1771,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897369020}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2050,7 +1938,6 @@ GameObject:
   - component: {fileID: 1090771292}
   - component: {fileID: 1090771291}
   - component: {fileID: 1090771290}
-  - component: {fileID: 1090771289}
   m_Layer: 0
   m_Name: Slice (6)
   m_TagString: Untagged
@@ -2073,33 +1960,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 368216567}
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!54 &1090771289
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090771287}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &1090771290
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2129,7 +1989,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090771287}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2187,7 +2047,6 @@ GameObject:
   - component: {fileID: 1191671682}
   - component: {fileID: 1191671681}
   - component: {fileID: 1191671680}
-  - component: {fileID: 1191671679}
   m_Layer: 0
   m_Name: Slice (7)
   m_TagString: Untagged
@@ -2210,33 +2069,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 368216567}
   m_LocalEulerAnglesHint: {x: 0, y: 315, z: 0}
---- !u!54 &1191671679
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191671677}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &1191671680
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2266,7 +2098,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191671677}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2518,7 +2350,6 @@ GameObject:
   - component: {fileID: 1413579152}
   - component: {fileID: 1413579151}
   - component: {fileID: 1413579150}
-  - component: {fileID: 1413579149}
   m_Layer: 0
   m_Name: Slice
   m_TagString: Untagged
@@ -2541,33 +2372,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 368216567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1413579149
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413579147}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &1413579150
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2597,7 +2401,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413579147}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2655,7 +2459,6 @@ GameObject:
   - component: {fileID: 1507377110}
   - component: {fileID: 1507377109}
   - component: {fileID: 1507377108}
-  - component: {fileID: 1507377107}
   m_Layer: 0
   m_Name: Slice (3)
   m_TagString: Untagged
@@ -2678,33 +2481,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 368216567}
   m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
---- !u!54 &1507377107
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507377105}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &1507377108
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2734,7 +2510,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507377105}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
