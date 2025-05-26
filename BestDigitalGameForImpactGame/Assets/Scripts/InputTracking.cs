@@ -35,7 +35,7 @@ public class InputTracking : MonoBehaviour
     {
         string logEntry = Time.time.ToString("F2") + "s: " + message; // gets time key is pressed, to 5 decimal places
         File.AppendAllText(logFilePath, logEntry + "\n"); // appends to file
-        Debug.Log(logEntry);
+        //Debug.Log(logEntry); <-- Commenting this out so that I can see my debug messages - August
     }
 
 }
