@@ -1,12 +1,22 @@
+using System;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     [SerializeField] float lifeTime = 5.0f;
+    private float fSpawnTime;
 
     private void Start()
     {
-        Destroy(gameObject, lifeTime); // Auto-destroy
+        fSpawnTime = Time.time;
+    }
+
+    private void Update()
+    {
+        if (fSpawnTime + lifeTime <= Time.time)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
