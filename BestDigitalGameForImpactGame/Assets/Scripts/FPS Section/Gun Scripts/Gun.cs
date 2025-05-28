@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         PlayerShoot.ShootInput += Shoot;
+        gunData.m_iCurrentAmmo = gunData.m_iClipSize;
     }
 
     private void Update()

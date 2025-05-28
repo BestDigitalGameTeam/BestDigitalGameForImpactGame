@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController playerController;
-    private Vector3 m_vec3MoveDir;
+    public Vector3 m_vec3MoveDir;
     
     private bool m_bSprinting;
     public float m_fJumpForce = 1.0f;
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float m_fMoveSpeed;
     public float m_fSprintSpeed;
     public bool m_bCanMove = true;
+    
 
     public AudioSource m_defaultAudioPlayer;
     public AudioSource m_movementAudioPlayer;
@@ -29,6 +30,18 @@ public class PlayerController : MonoBehaviour
     public AudioSource m_interactAudioPlayer;
 
     private LayerMask interactablesMask;
+
+    
+    //Public Ledge functions
+    public void EnteredLedge()
+    {
+        m_bCanMove = false;
+    }
+    
+    public void ExitedLedge()
+    {
+        m_bCanMove = true;
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -51,43 +64,47 @@ public class PlayerController : MonoBehaviour
         float fXSpeed = m_bCanMove ? (m_bSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Vertical") : 0.0f;
         float fYSpeed = m_bCanMove ? (m_bSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Horizontal") : 0.0f;
         float fMoveDirY = m_vec3MoveDir.y;
-        m_vec3MoveDir = (forward * fXSpeed) + (right * fYSpeed);
+        
+        if (m_bCanMove)
+        {
+            //If not on ledge
+            m_vec3MoveDir = (forward * fXSpeed) + (right * fYSpeed);
+        }
+        
         
         //Jump Controls
         if (Input.GetKey(KeyCode.Space) && m_bCanMove && playerController.isGrounded)
         {
             m_vec3MoveDir.y = m_fJumpForce;
         }
-        else
+        else if(m_bCanMove)
         {
             m_vec3MoveDir.y = fMoveDirY;
         }
         
         //Gravity
-        if(!playerController.isGrounded)
+        if(!playerController.isGrounded && m_bCanMove)
         {
             m_vec3MoveDir.y -= m_fGravityForce * Time.deltaTime;
         }
         playerController.Move(m_vec3MoveDir * Time.deltaTime);
+        
+        //Camera movement
+        rotationX += -Input.GetAxis("Mouse Y") * m_fSensitivity;
+        rotationX = Mathf.Clamp(rotationX, -m_fCamXLimit, m_fCamXLimit);
+        PlayerCam.transform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
+        transform.rotation *= Quaternion.Euler(0.0f, Input.GetAxis("Mouse X"), 0.0f);
 
-        if (m_bCanMove)
+        if (Input.GetKey(KeyCode.LeftControl))
         {
-            //Camera movement
-            rotationX += -Input.GetAxis("Mouse Y") * m_fSensitivity;
-            rotationX = Mathf.Clamp(rotationX, -m_fCamXLimit, m_fCamXLimit);
-            PlayerCam.transform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
-            transform.rotation *= Quaternion.Euler(0.0f, Input.GetAxis("Mouse X"), 0.0f);
-
-            if (Input.GetKey(KeyCode.LeftControl))
-            {
-                //Crouch - this can be implemented better
-                transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
-            }
-            else
-            {
-                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            }
+            //Crouch - this can be implemented better
+            transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
         }
+        else
+        {
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        
 
         if (Input.anyKeyDown)
         {
