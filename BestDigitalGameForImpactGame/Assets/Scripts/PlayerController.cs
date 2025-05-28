@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     public Vector3 m_vec3MoveDir;
     
     private bool m_bSprinting;
-    public float m_fJumpForce = 1.0f;
+    private float m_fBaseJumpForce = 5.0f;
+    public float m_fJumpForce = 5.0f;
     public float m_fGravityForce = 9.81f;
     
     public Camera PlayerCam;
@@ -42,14 +43,21 @@ public class PlayerController : MonoBehaviour
     {
         m_bCanMove = true;
     }
+
+    public void ApplyJumpForce(float _fJumpPadForce)
+    {
+        m_vec3MoveDir.y = _fJumpPadForce;
+    }
     
     // Start is called before the first frame update
     void Start()
     {
+        //Establishing variables
         playerController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         interactablesMask = LayerMask.GetMask("Interactable");
+        m_fBaseJumpForce = m_fJumpForce;
     }
 
     // Update is called once per frame
