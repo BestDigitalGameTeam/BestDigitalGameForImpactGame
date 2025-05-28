@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource m_defaultAudioPlayer;
     public AudioSource m_movementAudioPlayer;
-    public AudioSource m_shootAudioPlayer;
+    //public AudioSource m_shootAudioPlayer; <--- Moving to Gun.cs - August
     public AudioSource m_speedAudioPlayer;
     public AudioSource m_interactAudioPlayer;
 
@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
         //Movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -54,7 +52,6 @@ public class PlayerController : MonoBehaviour
         float fYSpeed = m_bCanMove ? (m_bSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Horizontal") : 0.0f;
         float fMoveDirY = m_vec3MoveDir.y;
         m_vec3MoveDir = (forward * fXSpeed) + (right * fYSpeed);
-
         
         //Jump Controls
         if (Input.GetKey(KeyCode.Space) && m_bCanMove && playerController.isGrounded)
@@ -106,11 +103,12 @@ public class PlayerController : MonoBehaviour
                 //m_movementAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
                 //m_movementAudioPlayer.Play();
             }
-            else if (Input.GetKeyDown(KeyCode.Mouse0))
+            // Moving to Gun.cs - August
+            /*else if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 m_shootAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
                 m_shootAudioPlayer.Play();
-            }
+            }*/
             else if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 m_speedAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
