@@ -113,7 +113,8 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         
-
+        //Disabled sound effects cause it was getting annoying
+        /*
         if (Input.anyKeyDown)
         {
             //Input Sound Effects
@@ -133,7 +134,7 @@ public class PlayerController : MonoBehaviour
             {
                 m_shootAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
                 m_shootAudioPlayer.Play();
-            }*/
+            }
             else if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 m_speedAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
@@ -147,6 +148,6 @@ public class PlayerController : MonoBehaviour
                     m_interactAudioPlayer.Play();
                 }
             }
-        }
+        }*/
     }
 }
