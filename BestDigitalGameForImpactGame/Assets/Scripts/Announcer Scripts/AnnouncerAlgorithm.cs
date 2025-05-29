@@ -1,11 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using System.Data;
+using UnityEngine.Events;
 
 // File Authour: Charli 
 // all the switch statements are kinda gross anyone have better idea?
 
 public enum GenreBias
 {
+    None,
     Shooter,
     Platformer,
     Puzzle,
@@ -13,8 +17,9 @@ public enum GenreBias
 
 // Class for changing weightings and weighing up biases
 // Main AI brain for calling events and managing AI algorithm
-public class AnnouncerAlgorithm : MonoBehaviour
+public class AnnouncerAlgorithm : Singleton<AnnouncerAlgorithm>
 {
+    #region variables!!
     [SerializeField] private float m_fGenreBias_Shooter;
     [SerializeField] private float m_fGenreBias_Platformer;
     [SerializeField] private float m_fGenreBias_Puzzle;
@@ -24,21 +29,26 @@ public class AnnouncerAlgorithm : MonoBehaviour
     // which bias the anouncer is initially anchored to
     // AI will weight this too high and keep reference of which type to make sure it can be referred back to
     // to highlight anchoring bias
-    [SerializeField] private GenreBias m_InitialAnchorBias;
-    public GenreBias m_CurrentBias;
+    [SerializeField] private GenreBias m_InitialAnchorBias = GenreBias.None;
+    public GenreBias m_CurrentBias = GenreBias.None;
 
     // how much the anchoring bias is affecting the AI's decision making
     [SerializeField] private float m_fAnchoringBiasWeight = 5;
     // how much confirmatin bias is affecting weighting
     [SerializeField] private float m_fConfirmationBiasWeight = 2;
 
+    [SerializeField] private float m_PlayerReinforcementAmount = 1;
+
+    #endregion
+
+    #region events
+    public UnityEvent Announcer_Happy;
+    #endregion
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_GenreBiasList = new();
-        m_GenreBiasList.Add(m_fGenreBias_Shooter);
-        m_GenreBiasList.Add(m_fGenreBias_Platformer);
-        m_GenreBiasList.Add(m_fGenreBias_Puzzle);
+        CalculateBiasWeightings();
     }
 
     // Update is called once per frame
@@ -66,13 +76,26 @@ public class AnnouncerAlgorithm : MonoBehaviour
                 break;
         }
 
-        m_GenreBiasList.Sort(); // might need to change, ma not sort in correct order
+        m_GenreBiasList = new()
+        {
+            m_fGenreBias_Shooter,
+            m_fGenreBias_Platformer,
+            m_fGenreBias_Puzzle
+        };
+
+        m_GenreBiasList.Sort(); // might need to change, may not sort in correct order
         m_GenreBiasList.Reverse();
+
+        if (m_GenreBiasList[0] == m_fGenreBias_Shooter) m_CurrentBias = GenreBias.Shooter;
+        else if (m_GenreBiasList[0] == m_fGenreBias_Platformer) m_CurrentBias = GenreBias.Platformer;
+        else if (m_GenreBiasList[0] == m_fGenreBias_Puzzle) m_CurrentBias = GenreBias.Puzzle;
     }
 
     // accessed from player/doors etc to increase/decrease AI bias
     public void IncreaseGenreBias(GenreBias _biasType, float _amt)
     {
+        if (_amt > 0) Announcer_Happy.Invoke();
+
         switch (_biasType)
         {
             case GenreBias.Shooter:
