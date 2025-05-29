@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2058796862649917590}
   - component: {fileID: 7001372863712595772}
   m_Layer: 3
-  m_Name: Base Projectile
+  m_Name: Shotgun Projectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cb5cab468efb3db4db470d2887de8f08, type: 2}
+  - {fileID: 2100000, guid: ef87c34cba7c9414eac7f5afe3654632, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
