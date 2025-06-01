@@ -7,7 +7,12 @@ public class FallAwayScript : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //Add destruction Animation?
-            Destroy(gameObject);
+            Invoke(nameof(SelfDestruct),1.0f);
         }
+    }
+
+    private void SelfDestruct()
+    {
+        Destroy(gameObject);
     }
 }

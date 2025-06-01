@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     
     public float m_fMoveSpeed;
     public float m_fSprintSpeed;
+    public float m_fAirResistance = 1.5f;
     public bool m_bCanMove = true;
     
 
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour
         if (m_bCanMove)
         {
             //If not on ledge
-            m_vec3MoveDir = (forward * fXSpeed) + (right * fYSpeed);
+            m_vec3MoveDir = (forward * (playerController.isGrounded ? fXSpeed : (fXSpeed/m_fAirResistance)) + (right * (playerController.isGrounded ? fYSpeed : fYSpeed/m_fAirResistance)));
         }
         
         
