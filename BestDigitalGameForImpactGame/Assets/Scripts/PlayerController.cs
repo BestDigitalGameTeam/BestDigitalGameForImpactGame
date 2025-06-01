@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController playerController;
-    public Vector3 m_vec3MoveDir;
+    private Vector3 m_vec3MoveDir;
     
     private bool m_bSprinting;
     private float m_fBaseJumpForce = 5.0f;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool m_bCanMove = true;
     
 
-    public AudioSource m_defaultAudioPlayer;
+    public AudioSource m_defaultAudioPlayer; 
     public AudioSource m_movementAudioPlayer;
     //public AudioSource m_shootAudioPlayer; <--- Moving to Gun.cs - August
     public AudioSource m_speedAudioPlayer;
@@ -47,6 +47,21 @@ public class PlayerController : MonoBehaviour
     public void ApplyJumpForce(float _fJumpPadForce)
     {
         m_vec3MoveDir.y = _fJumpPadForce;
+    }
+
+    public void SetVelocity(Vector3 _velocity)
+    {
+        m_vec3MoveDir = _velocity;
+    }
+
+    public void AddVelocity(Vector3 _velocity)
+    {
+        m_vec3MoveDir += _velocity;
+    }
+
+    public void Jump()
+    {
+        m_vec3MoveDir.y = m_fJumpForce; 
     }
     
     // Start is called before the first frame update
@@ -83,7 +98,7 @@ public class PlayerController : MonoBehaviour
         //Jump Controls
         if (Input.GetKey(KeyCode.Space) && m_bCanMove && playerController.isGrounded)
         {
-            m_vec3MoveDir.y = m_fJumpForce;
+            Jump();
         }
         else if(m_bCanMove)
         {

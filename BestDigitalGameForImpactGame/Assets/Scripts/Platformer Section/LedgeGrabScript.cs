@@ -58,7 +58,7 @@ public class LedgeGrabScript : MonoBehaviour
 
         if (distToLedge > 0.01f)
         {
-            Controller.m_vec3MoveDir = dirToLedge.normalized * (m_fMoveToLedgeSpeed * Time.deltaTime);
+            Controller.SetVelocity(dirToLedge.normalized * (m_fMoveToLedgeSpeed * Time.deltaTime));
         }
         
         if(distToLedge>m_fMaxLedgeGrabDistance) ExitLedge();
@@ -103,7 +103,7 @@ public class LedgeGrabScript : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     //manually override jump controls when jumping off of ledge
-                    Controller.m_vec3MoveDir.y = Controller.m_fJumpForce;
+                    Controller.Jump();
                 }
             }
         }
