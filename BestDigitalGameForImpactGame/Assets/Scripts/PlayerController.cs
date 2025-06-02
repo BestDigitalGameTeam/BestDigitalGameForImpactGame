@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController playerController;
-    public Vector3 m_vec3MoveDir;
+    private Vector3 m_vec3MoveDir;
     
     private bool m_bSprinting;
     private float m_fBaseJumpForce = 5.0f;
@@ -21,10 +21,11 @@ public class PlayerController : MonoBehaviour
     
     public float m_fMoveSpeed;
     public float m_fSprintSpeed;
+    public float m_fAirResistance = 1.5f;
     public bool m_bCanMove = true;
     
 
-    public AudioSource m_defaultAudioPlayer;
+    public AudioSource m_defaultAudioPlayer; 
     public AudioSource m_movementAudioPlayer;
     //public AudioSource m_shootAudioPlayer; <--- Moving to Gun.cs - August
     public AudioSource m_speedAudioPlayer;
@@ -47,6 +48,21 @@ public class PlayerController : MonoBehaviour
     public void ApplyJumpForce(float _fJumpPadForce)
     {
         m_vec3MoveDir.y = _fJumpPadForce;
+    }
+
+    public void SetVelocity(Vector3 _velocity)
+    {
+        m_vec3MoveDir = _velocity;
+    }
+
+    public void AddVelocity(Vector3 _velocity)
+    {
+        m_vec3MoveDir += _velocity;
+    }
+
+    public void Jump()
+    {
+        m_vec3MoveDir.y = m_fJumpForce; 
     }
     
     // Start is called before the first frame update
@@ -76,14 +92,14 @@ public class PlayerController : MonoBehaviour
         if (m_bCanMove)
         {
             //If not on ledge
-            m_vec3MoveDir = (forward * fXSpeed) + (right * fYSpeed);
+            m_vec3MoveDir = (forward * (playerController.isGrounded ? fXSpeed : (fXSpeed/m_fAirResistance)) + (right * (playerController.isGrounded ? fYSpeed : fYSpeed/m_fAirResistance)));
         }
         
         
         //Jump Controls
         if (Input.GetKey(KeyCode.Space) && m_bCanMove && playerController.isGrounded)
         {
-            m_vec3MoveDir.y = m_fJumpForce;
+            Jump();
         }
         else if(m_bCanMove)
         {
@@ -113,7 +129,8 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         
-
+        //Disabled sound effects cause it was getting annoying
+        /*
         if (Input.anyKeyDown)
         {
             //Input Sound Effects
@@ -133,7 +150,7 @@ public class PlayerController : MonoBehaviour
             {
                 m_shootAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
                 m_shootAudioPlayer.Play();
-            }*/
+            }
             else if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 m_speedAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
@@ -147,6 +164,6 @@ public class PlayerController : MonoBehaviour
                     m_interactAudioPlayer.Play();
                 }
             }
-        }
+        }*/
     }
 }
