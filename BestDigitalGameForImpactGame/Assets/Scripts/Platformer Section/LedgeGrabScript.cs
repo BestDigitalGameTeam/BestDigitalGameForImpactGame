@@ -95,8 +95,18 @@ public class LedgeGrabScript : MonoBehaviour
         {
             HoldCharacterOnLedge();
             m_fTimeOnLedge += Time.deltaTime;
+
+            Vector2 InputDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            Vector2 DirToLedge = new Vector2(transform.position.x-currentLedge.position.x,
+                transform.position.z-currentLedge.position.z);
+
+            float dotProd = Vector2.Dot(InputDir.normalized, DirToLedge.normalized);
+            
+            Debug.Log(dotProd);
+                
+                
             if (m_fTimeOnLedge >= m_fMinTimeOnLedge &&
-                (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 || Input.GetKeyDown(KeyCode.Space)))
+                ((dotProd<=0.5f && InputDir != Vector2.zero) || Input.GetKeyDown(KeyCode.Space)))
             {
                 //once initial hold time has past (stopping the ledges just becoming a ladder) exiting player from ledge
                 ExitLedge();

@@ -75,6 +75,7 @@ public class SplineFollower : MonoBehaviour
     {
         //Updating Platform Position based on loop type and easing
         m_fTime += m_fSpeed * m_fLoopMultiplier * Time.deltaTime;
+        
         switch (SplineEasing)
         {
             case Easing.None:

@@ -638,6 +638,7 @@ MonoBehaviour:
   m_fSensitivity: 2
   m_fMoveSpeed: 6
   m_fSprintSpeed: 12
+  m_fAirResistance: 1.5
   m_bCanMove: 1
   m_defaultAudioPlayer: {fileID: 2052293533}
   m_movementAudioPlayer: {fileID: 2052293532}
@@ -714,7 +715,7 @@ MonoBehaviour:
   CharController: {fileID: 957895066}
   m_fMoveToLedgeSpeed: 300
   m_fMaxLedgeGrabDistance: 1
-  m_fMinTimeOnLedge: 0.5
+  m_fMinTimeOnLedge: 0.25
   m_fLedgeDetectionLength: 3
   m_fLedgeCastRadius: 0.5
 --- !u!114 &957895070
