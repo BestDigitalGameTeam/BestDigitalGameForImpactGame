@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.IO;
 
+// File authour: Charli
+
 public class InputTracking : MonoBehaviour
 {
     private string logFilePath;
