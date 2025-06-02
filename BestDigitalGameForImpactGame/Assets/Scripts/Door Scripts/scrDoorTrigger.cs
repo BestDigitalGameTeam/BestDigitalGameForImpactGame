@@ -3,6 +3,7 @@ using UnityEngine;
 public class scrDoorTrigger : MonoBehaviour
 {
     public string doorColor = "Red"; // Set this in Inspector
+    public GenreBias doorType = GenreBias.Shooter;
     public InputTracking inputLogger;
 
     private void Start()
@@ -16,5 +17,6 @@ public class scrDoorTrigger : MonoBehaviour
         {
             inputLogger.LogEvent("Entered " + doorColor + " door");
         }
+        AnnouncerAlgorithm.Instance.IncreaseGenreBias(doorType, 1);
     }
 }
