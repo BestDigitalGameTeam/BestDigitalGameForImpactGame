@@ -3,17 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Projectile
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Projectiles
   - Water
   - UI
   - Interactable
-  - 
-  - 
+  - Ledge
+  - Platform
   - 
   - 
   - 

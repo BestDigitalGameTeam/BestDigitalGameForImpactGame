@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 m_vec3MoveDir;
     
     private bool m_bSprinting;
-    public float m_fJumpForce = 1.0f;
+    private float m_fBaseJumpForce = 5.0f;
+    public float m_fJumpForce = 5.0f;
     public float m_fGravityForce = 9.81f;
     
     public Camera PlayerCam;
@@ -20,23 +21,59 @@ public class PlayerController : MonoBehaviour
     
     public float m_fMoveSpeed;
     public float m_fSprintSpeed;
+    public float m_fAirResistance = 1.5f;
     public bool m_bCanMove = true;
+    
 
-    public AudioSource m_defaultAudioPlayer;
+    public AudioSource m_defaultAudioPlayer; 
     public AudioSource m_movementAudioPlayer;
     //public AudioSource m_shootAudioPlayer; <--- Moving to Gun.cs - August
     public AudioSource m_speedAudioPlayer;
     public AudioSource m_interactAudioPlayer;
 
     private LayerMask interactablesMask;
+
+    
+    //Public Ledge functions
+    public void EnteredLedge()
+    {
+        m_bCanMove = false;
+    }
+    
+    public void ExitedLedge()
+    {
+        m_bCanMove = true;
+    }
+
+    public void ApplyJumpForce(float _fJumpPadForce)
+    {
+        m_vec3MoveDir.y = _fJumpPadForce;
+    }
+
+    public void SetVelocity(Vector3 _velocity)
+    {
+        m_vec3MoveDir = _velocity;
+    }
+
+    public void AddVelocity(Vector3 _velocity)
+    {
+        m_vec3MoveDir += _velocity;
+    }
+
+    public void Jump()
+    {
+        m_vec3MoveDir.y = m_fJumpForce; 
+    }
     
     // Start is called before the first frame update
     void Start()
     {
+        //Establishing variables
         playerController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         interactablesMask = LayerMask.GetMask("Interactable");
+        m_fBaseJumpForce = m_fJumpForce;
     }
 
     // Update is called once per frame
@@ -51,44 +88,49 @@ public class PlayerController : MonoBehaviour
         float fXSpeed = m_bCanMove ? (m_bSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Vertical") : 0.0f;
         float fYSpeed = m_bCanMove ? (m_bSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Horizontal") : 0.0f;
         float fMoveDirY = m_vec3MoveDir.y;
-        m_vec3MoveDir = (forward * fXSpeed) + (right * fYSpeed);
+        
+        if (m_bCanMove)
+        {
+            //If not on ledge
+            m_vec3MoveDir = (forward * (playerController.isGrounded ? fXSpeed : (fXSpeed/m_fAirResistance)) + (right * (playerController.isGrounded ? fYSpeed : fYSpeed/m_fAirResistance)));
+        }
+        
         
         //Jump Controls
         if (Input.GetKey(KeyCode.Space) && m_bCanMove && playerController.isGrounded)
         {
-            m_vec3MoveDir.y = m_fJumpForce;
+            Jump();
         }
-        else
+        else if(m_bCanMove)
         {
             m_vec3MoveDir.y = fMoveDirY;
         }
         
         //Gravity
-        if(!playerController.isGrounded)
+        if(!playerController.isGrounded && m_bCanMove)
         {
             m_vec3MoveDir.y -= m_fGravityForce * Time.deltaTime;
         }
         playerController.Move(m_vec3MoveDir * Time.deltaTime);
+        
+        //Camera movement
+        rotationX += -Input.GetAxis("Mouse Y") * m_fSensitivity;
+        rotationX = Mathf.Clamp(rotationX, -m_fCamXLimit, m_fCamXLimit);
+        PlayerCam.transform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
+        transform.rotation *= Quaternion.Euler(0.0f, Input.GetAxis("Mouse X"), 0.0f);
 
-        if (m_bCanMove)
+        if (Input.GetKey(KeyCode.LeftControl))
         {
-            //Camera movement
-            rotationX += -Input.GetAxis("Mouse Y") * m_fSensitivity;
-            rotationX = Mathf.Clamp(rotationX, -m_fCamXLimit, m_fCamXLimit);
-            PlayerCam.transform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
-            transform.rotation *= Quaternion.Euler(0.0f, Input.GetAxis("Mouse X"), 0.0f);
-
-            if (Input.GetKey(KeyCode.LeftControl))
-            {
-                //Crouch - this can be implemented better
-                transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
-            }
-            else
-            {
-                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            }
+            //Crouch - this can be implemented better
+            transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
         }
-
+        else
+        {
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        
+        //Disabled sound effects cause it was getting annoying
+        /*
         if (Input.anyKeyDown)
         {
             //Input Sound Effects
@@ -108,7 +150,7 @@ public class PlayerController : MonoBehaviour
             {
                 m_shootAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
                 m_shootAudioPlayer.Play();
-            }*/
+            }
             else if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 m_speedAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
@@ -122,6 +164,6 @@ public class PlayerController : MonoBehaviour
                     m_interactAudioPlayer.Play();
                 }
             }
-        }
+        }*/
     }
 }
