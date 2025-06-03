@@ -155,6 +155,12 @@ public class AnnouncerAlgorithm : Singleton<AnnouncerAlgorithm>
     void FirstEventSequence()
     {
         StartCoroutine(PlayDialogueSequence(new int[3] { 0, 1, 2 }));
+        StartCoroutine(GetFirstKeyForAnchoringBias());
+    }
+
+    private IEnumerator GetFirstKeyForAnchoringBias()
+    {
+        KeyCode[] keysToCheck = { KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.Space, KeyCode.Mouse0, KeyCode.E };
     }
     #endregion
 }
