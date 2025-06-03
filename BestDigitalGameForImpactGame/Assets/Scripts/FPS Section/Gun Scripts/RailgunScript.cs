@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 // Handles gun behavior: shooting, reloading, and audio
-public class Gun : MonoBehaviour
+public class RailgunScript : MonoBehaviour
 {
     [SerializeField] GunData gunData;                         // ScriptableObject holding gun stats and state
     [SerializeField] GameObject projectilePrefab;             // Prefab to instantiate when shooting

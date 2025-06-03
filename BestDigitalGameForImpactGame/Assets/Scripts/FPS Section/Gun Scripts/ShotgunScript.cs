@@ -2,12 +2,15 @@ using UnityEngine;
 using System.Collections;
 
 // Handles gun behavior: shooting, reloading, and audio
-public class Gun : MonoBehaviour
+public class ShotgunScript : MonoBehaviour
 {
     [SerializeField] GunData gunData;                         // ScriptableObject holding gun stats and state
     [SerializeField] GameObject projectilePrefab;             // Prefab to instantiate when shooting
     [SerializeField] Transform projectileSpawnPoint;          // Where the projectile spawns from
     public AudioSource m_shootAudioPlayer;                    // Audio source for shooting sound
+    
+    [SerializeField] int m_iPelletCount = 8;                     // Number of pellets per shot
+    [SerializeField] float m_fSpreadAngle = 10.0f;               // Max angle of spread
 
     private float m_fTimeSinceLastShot;                       // Timer to manage fire rate
 
@@ -34,22 +37,29 @@ public class Gun : MonoBehaviour
     // Called when player attempts to shoot
     private void Shoot()
     {
-        // Only shoot if there is ammo and fire rate condition is met
         if (gunData.m_iCurrentAmmo <= 0 || !CanShoot()) return;
-        
-        // Instantiate projectile at spawn point and apply velocity
-        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-        Rigidbody projectileRigidBody = projectile.GetComponent<Rigidbody>();
-        projectileRigidBody.linearVelocity = projectileSpawnPoint.forward * gunData.m_fProjectileSpeed;
-        // ---
 
-        // Reduce ammo and reset shot timer
+        // Fire multiple pellets with random spread
+        for (int i = 0; i < m_iPelletCount; ++i)
+        {
+            // Random direction within a cone
+            Vector3 v3Spread = Quaternion.Euler(
+                Random.Range(-m_fSpreadAngle, m_fSpreadAngle),
+                Random.Range(-m_fSpreadAngle, m_fSpreadAngle),
+                0) * projectileSpawnPoint.forward;
+            // ---
+
+            GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.LookRotation(v3Spread));
+            Rigidbody RigidBodyProjectile = projectile.GetComponent<Rigidbody>();
+            RigidBodyProjectile.linearVelocity = v3Spread * gunData.m_fProjectileSpeed;
+        }
+
         --gunData.m_iCurrentAmmo;
         m_fTimeSinceLastShot = 0;
-        // ---
-        
-        OnGunShot(); // Play Effects
+
+        OnGunShot();
     }
+    // ---
 
     // Coroutine to handle reloading delay and state
     private IEnumerator Reload()
