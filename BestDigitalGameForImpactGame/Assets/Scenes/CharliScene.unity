@@ -202,6 +202,10 @@ MonoBehaviour:
     - Key: 0
       Value: Welcome, participant. Thank you for agreeing to take part in our new
         algorithm training program. Your participation is greatly appreciated.
+    - Key: 1
+      Value: Please choose a door.
+    - Key: 2
+      Value: Would you like a shooter, a puzzle, or a platformer?
 --- !u!1 &85536702
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +300,10 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value: {fileID: 8300000, guid: e6d9b15e71d413f428ab95c09668a9f3, type: 3}
+    - Key: 1
+      Value: {fileID: 8300000, guid: 256285ba34f22fa4c91e8c9eb7792589, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: ab2f1517e27be924db6786b9361a137f, type: 3}
   AnnouncerAudioSource: {fileID: 1285472011}
 --- !u!1 &248748529
 GameObject:
