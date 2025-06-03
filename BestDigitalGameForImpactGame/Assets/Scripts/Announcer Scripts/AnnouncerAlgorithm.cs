@@ -54,7 +54,7 @@ public class AnnouncerAlgorithm : Singleton<AnnouncerAlgorithm>
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayDialogue(0);
+        FirstEventSequence();
     }
 
     // Update is called once per frame
@@ -131,10 +131,31 @@ public class AnnouncerAlgorithm : Singleton<AnnouncerAlgorithm>
         StartCoroutine(AudioLengthTimer(m_DialogueAudios[_key].length));
     }
 
+    private IEnumerator PlayDialogueSequence(int[] _keys)
+    {
+        for (int i = 0; i < _keys.Length; i++)
+        {
+            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]]);
+            AnnouncerDialogue.Invoke(_keys[i]);
+
+            yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[_keys[i]].length));
+        }
+        
+    }
+
     private IEnumerator AudioLengthTimer(float _time)
     {
         yield return new WaitForSecondsRealtime(_time);
         DialogueEnded.Invoke();
     }
+
+
+    #region scripted event sequences
+    // Initial event sequence
+    void FirstEventSequence()
+    {
+        StartCoroutine(PlayDialogueSequence(new int[3] { 0, 1, 2 }));
+    }
+    #endregion
 }
 
