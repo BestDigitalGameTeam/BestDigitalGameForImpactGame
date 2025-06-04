@@ -122,11 +122,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             //Crouch - this can be implemented better
-            transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+            playerController.height = 0.5f;
         }
         else
         {
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            playerController.height = 2.0f;
         }
         
         //Disabled sound effects cause it was getting annoying

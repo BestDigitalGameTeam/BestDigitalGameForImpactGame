@@ -16,8 +16,8 @@ TagManager:
   - Interactable
   - Ledge
   - Platform
-  - 
-  - 
+  - Pickup
+  - Player
   - 
   - 
   - 
