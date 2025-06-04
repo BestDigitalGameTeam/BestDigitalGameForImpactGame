@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Projectile
   - MovingPlatform
+  - Receptacle
+  - PuzzleCube
+  - PuzzleSphere
+  - PuzzlePyramid
   layers:
   - Default
   - TransparentFX
