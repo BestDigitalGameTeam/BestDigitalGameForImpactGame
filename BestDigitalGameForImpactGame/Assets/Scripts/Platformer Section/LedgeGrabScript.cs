@@ -14,6 +14,7 @@ public class LedgeGrabScript : MonoBehaviour
     
     public float m_fLedgeDetectionLength;
     public float m_fLedgeCastRadius;
+    public float m_fLedgeCoolDown = 1.0f;
     private LayerMask LedgeMask;
 
     private Transform lastLedge;
@@ -31,7 +32,7 @@ public class LedgeGrabScript : MonoBehaviour
         
         float fDistanceToLedge = Vector3.Distance(transform.position, ledgeCast.transform.position);
 
-        if (ledgeCast.transform == lastLedge) return;
+        if (ledgeCast.transform.gameObject.transform == lastLedge) return;
         
         if (fDistanceToLedge < m_fMaxLedgeGrabDistance && !m_bOnLedge)
         {
@@ -72,7 +73,7 @@ public class LedgeGrabScript : MonoBehaviour
         Controller.ExitedLedge();
         
         //CoolDown on same ledge so cant just jump back on
-        Invoke("ResetLastLedge", 1f);
+        Invoke("ResetLastLedge", m_fLedgeCoolDown);
     }
 
     private void ResetLastLedge()
@@ -102,9 +103,6 @@ public class LedgeGrabScript : MonoBehaviour
 
             float dotProd = Vector2.Dot(InputDir.normalized, DirToLedge.normalized);
             
-            Debug.Log(dotProd);
-                
-                
             if (m_fTimeOnLedge >= m_fMinTimeOnLedge &&
                 ((dotProd<=0.5f && InputDir != Vector2.zero) || Input.GetKeyDown(KeyCode.Space)))
             {
