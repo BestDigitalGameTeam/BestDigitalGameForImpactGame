@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 60366846}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.40590668, y: 3.7450523, z: -9.849015}
+  m_LocalPosition: {x: -0.40590668, y: 2.15, z: -9.849015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -203,11 +203,15 @@ MonoBehaviour:
       Value: Welcome, participant. Thank you for agreeing to take part in our new
         algorithm training program. Your participation is greatly appreciated.
     - Key: 1
-      Value: Beinning evaluation...
+      Value: Beginning evaluation...
     - Key: 2
       Value: Please choose a door.
     - Key: 3
-      Value: Would you like a shooter, a puzzle, or a platformer?
+      Value: Based on your evaluation, I think you'd like a platformer game.
+    - Key: 4
+      Value: Based on your evaluation, I think you'd like a puzzle game.
+    - Key: 5
+      Value: Based on your evaluation, I think you'd like a shooter game.
 --- !u!1 &85536702
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,12 +304,22 @@ MonoBehaviour:
       m_Calls: []
   m_DialogueAudios:
     _serializedList:
+    - Key: 991
+      Value: {fileID: 8300000, guid: 4996000ade886cc44abd60494723c429, type: 3}
+    - Key: 995
+      Value: {fileID: 8300000, guid: ef5a419172de9cc448a5a37236648abf, type: 3}
     - Key: 0
       Value: {fileID: 8300000, guid: 256285ba34f22fa4c91e8c9eb7792589, type: 3}
     - Key: 1
       Value: {fileID: 8300000, guid: ab2f1517e27be924db6786b9361a137f, type: 3}
     - Key: 2
-      Value: {fileID: 8300000, guid: ab2f1517e27be924db6786b9361a137f, type: 3}
+      Value: {fileID: 8300000, guid: 78e8c32eac560df4e8326cdf08d73611, type: 3}
+    - Key: 3
+      Value: {fileID: 8300000, guid: 396a916305105a547b0448bf287e8b5e, type: 3}
+    - Key: 4
+      Value: {fileID: 8300000, guid: 0a23ec6f37373054491e61dc4210768d, type: 3}
+    - Key: 5
+      Value: {fileID: 8300000, guid: 3c9773b59be3c0e4fa4a4d068cf1fbd6, type: 3}
   AnnouncerAudioSource: {fileID: 1285472011}
 --- !u!1 &248748529
 GameObject:
@@ -2257,7 +2271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2109539593
 BoxCollider:
   m_ObjectHideFlags: 0

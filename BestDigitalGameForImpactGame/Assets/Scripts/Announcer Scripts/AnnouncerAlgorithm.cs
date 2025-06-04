@@ -49,6 +49,9 @@ public class AnnouncerAlgorithm : Singleton<AnnouncerAlgorithm>
 
     [SerializedDictionary("Audio Key, Audio Clip")] public SerializedDictionary<int, AudioClip> m_DialogueAudios;
     public AudioSource AnnouncerAudioSource;
+
+    // event-based variables
+    private int m_AnchBiasKey;
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -154,13 +157,42 @@ public class AnnouncerAlgorithm : Singleton<AnnouncerAlgorithm>
     // Initial event sequence
     void FirstEventSequence()
     {
-        StartCoroutine(PlayDialogueSequence(new int[3] { 0, 1, 2 }));
+        StartCoroutine(PlayDialogueSequence(new int[4] { 0, 1, 995, m_AnchBiasKey}));
         StartCoroutine(GetFirstKeyForAnchoringBias());
     }
 
     private IEnumerator GetFirstKeyForAnchoringBias()
     {
+        bool biasSet = false;
+        yield return new WaitForSecondsRealtime(6);
         KeyCode[] keysToCheck = { KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.Space, KeyCode.Mouse0, KeyCode.E };
+        while (!biasSet)
+        {
+            foreach (KeyCode key in keysToCheck)
+            {
+                if (Input.GetKeyDown(key))
+                {
+                    if (key == KeyCode.LeftControl || key == KeyCode.E)
+                    {
+                        SetInitialBias(GenreBias.Puzzle);
+                        m_AnchBiasKey = 4;
+                    }
+                    else if (key == KeyCode.Space)
+                    {
+                        SetInitialBias(GenreBias.Platformer);
+                        m_AnchBiasKey = 3;
+                    }
+                    else if (key == KeyCode.Mouse0 || key == KeyCode.LeftShift)
+                    {
+                        SetInitialBias(GenreBias.Shooter);
+                        m_AnchBiasKey = 5;
+                    }
+                    biasSet = true;
+                }
+            }
+            
+            yield return null;
+        }
     }
     #endregion
 }
