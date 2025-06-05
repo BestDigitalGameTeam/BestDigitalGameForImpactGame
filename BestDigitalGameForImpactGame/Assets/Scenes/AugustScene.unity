@@ -40862,6 +40862,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad938a4b8e7705848889bd4000254056, type: 3}
+--- !u!1 &771794570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914686013471482087, guid: ad938a4b8e7705848889bd4000254056, type: 3}
+  m_PrefabInstance: {fileID: 771794569}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &773449604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42912,6 +42917,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077931bf183ae174abdfd4965aa49346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guns:
+  - {fileID: 771794570}
+  - {fileID: 1839172467}
+  - {fileID: 1769795237}
   m_fJumpForce: 5
   m_fGravityForce: 9.81
   PlayerCam: {fileID: 1759652529}
@@ -95845,6 +95854,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72467d2f4f039c5458e8d9618eb45e1b, type: 3}
+--- !u!1 &1769795237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914686013471482087, guid: 72467d2f4f039c5458e8d9618eb45e1b, type: 3}
+  m_PrefabInstance: {fileID: 1769795236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1802686431
 GameObject:
   m_ObjectHideFlags: 0
@@ -96176,6 +96190,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23e465b24728bd74badbce396db584ec, type: 3}
+--- !u!1 &1839172467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914686013471482087, guid: 23e465b24728bd74badbce396db584ec, type: 3}
+  m_PrefabInstance: {fileID: 1839172466}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1855820016
 GameObject:
   m_ObjectHideFlags: 0
