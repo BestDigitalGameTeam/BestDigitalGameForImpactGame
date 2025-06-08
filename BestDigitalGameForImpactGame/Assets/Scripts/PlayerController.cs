@@ -77,6 +77,8 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         interactablesMask = LayerMask.GetMask("Interactable");
         m_fBaseJumpForce = m_fJumpForce;
+
+        DontDestroyOnLoad(gameObject);
         
         ActivateGun(m_iCurrentGunIndex);
     }
