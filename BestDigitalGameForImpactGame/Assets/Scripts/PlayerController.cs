@@ -6,6 +6,9 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject[] guns; // Assign guns in Inspector
+    private int m_iCurrentGunIndex = 0;
+    
     private CharacterController playerController;
     private Vector3 m_vec3MoveDir;
     
@@ -74,11 +77,38 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         interactablesMask = LayerMask.GetMask("Interactable");
         m_fBaseJumpForce = m_fJumpForce;
+
+        DontDestroyOnLoad(gameObject);
+        
+        ActivateGun(m_iCurrentGunIndex);
+    }
+
+    private void ActivateGun(int index)
+    {
+        for (int i = 0; i < guns.Length; i++)
+        {
+            guns[i].SetActive(i == index);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Scroll Selected Gun
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll > 0f)
+        {
+            m_iCurrentGunIndex = (m_iCurrentGunIndex + 1) % guns.Length;
+            ActivateGun(m_iCurrentGunIndex);
+        }
+        else if (scroll < 0f)
+        {
+            m_iCurrentGunIndex = (m_iCurrentGunIndex - 1 + guns.Length) % guns.Length;
+            ActivateGun(m_iCurrentGunIndex);
+        }
+        // ---
+        
         //Movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -122,11 +152,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             //Crouch - this can be implemented better
-            transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
+            playerController.height = 0.5f;
         }
         else
         {
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            playerController.height = 2.0f;
         }
         
         //Disabled sound effects cause it was getting annoying

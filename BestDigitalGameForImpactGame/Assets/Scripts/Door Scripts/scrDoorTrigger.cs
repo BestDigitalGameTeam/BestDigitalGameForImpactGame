@@ -1,22 +1,27 @@
+using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class scrDoorTrigger : MonoBehaviour
 {
     public string doorColor = "Red"; // Set this in Inspector
-    public GenreBias doorType = GenreBias.Shooter;
-    public InputTracking inputLogger;
+    public GenreBias doorType = GenreBias.None;
 
-    private void Start()
+    [SerializeField] private string[] m_LevelNames;
+
+    private void Awake()
     {
-        inputLogger = FindObjectOfType<InputTracking>();
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && inputLogger != null)
+        if (other.CompareTag("Player"))
         {
-            inputLogger.LogEvent("Entered " + doorColor + " door");
+            AnnouncerAlgorithm.Instance.IncreaseGenreBias(doorType, 1);
+            int levelKey = Random.Range(0, m_LevelNames.Length);
+            GameManager.Instance.LoadLevel.Invoke(m_LevelNames[levelKey]);
         }
-        AnnouncerAlgorithm.Instance.IncreaseGenreBias(doorType, 1);
     }
 }

@@ -9,11 +9,18 @@ public class FollowPlatformScript : MonoBehaviour
     private SplineFollower m_currentSpline;
     private GameObject m_currentPlatform;
     private CharacterController characterController;
+    private Rigidbody ObjectRigidBody;
 
     void Start()
     {
         platformMask = LayerMask.GetMask("Platform");
+        ObjectRigidBody = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
+        if (ObjectRigidBody == null && characterController == null)
+        {
+            ObjectRigidBody = gameObject.AddComponent<Rigidbody>();
+            ObjectRigidBody.useGravity = true;
+        }
     }
 
     void Update()
@@ -38,9 +45,14 @@ public class FollowPlatformScript : MonoBehaviour
     void LateUpdate()
     {
         //Moving player based on platform velocity
-        if (m_currentPlatform && m_currentSpline)
+        if (m_currentPlatform && m_currentSpline && characterController)
         {
+            //Is Player
             characterController.Move(m_currentSpline.GetDeltaPos());
+        }
+        else if (m_currentPlatform && m_currentSpline && ObjectRigidBody)
+        {
+            ObjectRigidBody.MovePosition(ObjectRigidBody.position+m_currentSpline.GetDeltaPos());
         }
         
     }
