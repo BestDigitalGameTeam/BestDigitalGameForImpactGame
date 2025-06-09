@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 // Detects when a Puzzle Object is placed into the receptacle
@@ -5,32 +6,32 @@ public class PuzzleReceptacle : MonoBehaviour
 {
     private enum ReceptacleType { Cube, Sphere, Pyramid }
     [SerializeField] private ReceptacleType eReceptacleType;
+    [SerializeField] private Gate gate;
 
-    [SerializeField] private bool bIsOccupied = false;
+    [SerializeField] private bool bIsOccupied;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (bIsOccupied)
-            return;
-
         // Check if the object's tag matches the receptacle type
-        if (other.CompareTag(GetExpectedTag()))
-        {
-            bIsOccupied = true;
-            Debug.Log($"{eReceptacleType} puzzle piece placed.");
+        if (bIsOccupied || !other.CompareTag(GetExpectedTag())) return;
 
-            SnapToCenter(other.transform); // Optional: Snap the object into place
-        }
+        bIsOccupied = true;
+        SnapToCenter(other.transform);
+        Debug.Log($"{eReceptacleType} puzzle piece placed.");
+
+        if (AllReceptaclesFilled())
+            gate.Open();
         // ---
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (bIsOccupied && other.CompareTag(GetExpectedTag()))
-        {
-            bIsOccupied = false;
-            Debug.Log($"{eReceptacleType} puzzle piece removed.");
-        }
+        if (!bIsOccupied || !other.CompareTag(GetExpectedTag())) return;
+        
+        bIsOccupied = false;
+        Debug.Log($"{eReceptacleType} puzzle piece removed.");
+
+        gate.Close();
     }
 
     // Optionally snap the cube's position to the center of the receptacle
@@ -51,7 +52,15 @@ public class PuzzleReceptacle : MonoBehaviour
             default: return "";
         }
     }
+    
+    private bool AllReceptaclesFilled()
+    {
+        PuzzleReceptacle[] allReceptacles = FindObjectsOfType<PuzzleReceptacle>();
+        return allReceptacles.All(receptacle => receptacle.gate != gate || receptacle.bIsOccupied);
+    }
 
+/*
     public bool IsOccupied() => bIsOccupied;
+*/
 }
 // ---
