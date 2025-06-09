@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// The base info about the weapon and weapon performance, to be applied to any gun type
 [CreateAssetMenu(fileName = "Gun", menuName = "Weapon/Gun")]
 public class GunData : ScriptableObject
 {
@@ -18,3 +19,4 @@ public class GunData : ScriptableObject
     public float m_fProjectileSpeed;
     [HideInInspector] public bool m_bReloading;
 }
+// ---
