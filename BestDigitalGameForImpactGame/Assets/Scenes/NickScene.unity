@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 144406720}
   - component: {fileID: 144406719}
   - component: {fileID: 144406721}
+  - component: {fileID: 144406722}
   m_Layer: 10
   m_Name: Capsule
   m_TagString: Player
@@ -234,6 +235,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &144406722
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144406716}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &447695204 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2192479074648827468, guid: 1c8251550e3f2a548be2a05e72ef7fa8, type: 3}
@@ -1106,6 +1134,8 @@ GameObject:
   - component: {fileID: 1554927961}
   - component: {fileID: 1554927960}
   - component: {fileID: 1554927964}
+  - component: {fileID: 1554927965}
+  - component: {fileID: 1554927966}
   m_Layer: 9
   m_Name: PickUp
   m_TagString: Untagged
@@ -1215,6 +1245,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fRayDist: 5
+--- !u!114 &1554927965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554927958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae50b26c297b59f4682d0a4777c92506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1554927966
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554927958}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1611486313
 GameObject:
   m_ObjectHideFlags: 0
