@@ -36,11 +36,11 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     public GenreBias m_CurrentBias = GenreBias.None;
 
     // how much the anchoring bias is affecting the AI's decision making
-    [SerializeField] private float m_fAnchoringBiasWeight = 5;
+    [SerializeField] private float m_fAnchoringBiasWeight = 5.0f;
     // how much confirmatin bias is affecting weighting
-    [SerializeField] private float m_fConfirmationBiasWeight = 2;
+    [SerializeField] private float m_fConfirmationBiasWeight = 2.0f;
 
-    [SerializeField] private float m_PlayerReinforcementAmount = 1;
+    [SerializeField] private float m_PlayerReinforcementAmount = 1.0f;
 
     [SerializeField] private GameObject ShooterDoor;
     [SerializeField] private GameObject PuzzleDoor;
@@ -59,16 +59,27 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
 
     // event-based variables
     private int m_AnchBiasKey;
+
+    private bool m_bReinforcementComplete = false;
+    private int m_iTimesDeniedThisVoid = 0;
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManager.Instance.VoidLoaded.AddListener(CalculateBiasWeightings);
+        GameManager.Instance.VoidLoaded.AddListener(EnterVoid);
+        GameManager.Instance.PlayerPressedReinforcementButton.AddListener(PlayerPressedButton);
         ShooterDoor.SetActive(false);
         PuzzleDoor.SetActive(false);
         PlatformerDoor.SetActive(false);
         FirstEventSequence();
+    }
+
+    private void EnterVoid()
+    {
+        m_iTimesDeniedThisVoid = 0;
+        CalculateBiasWeightings();
+        BeginEventSequence();
     }
 
     #region Algorithm weights and calculations
@@ -92,14 +103,14 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         if (m_GenreBiasList[0] == m_fGenreBias_Shooter) m_CurrentBias = GenreBias.Shooter;
         else if (m_GenreBiasList[0] == m_fGenreBias_Platformer) m_CurrentBias = GenreBias.Platformer;
         else if (m_GenreBiasList[0] == m_fGenreBias_Puzzle) m_CurrentBias = GenreBias.Puzzle;
-
     }
 
     // accessed from player/doors etc to increase/decrease AI bias
     public void IncreaseGenreBias(GenreBias _biasType, float _amt)
     {
         float confAmount = 0.0f;
-        if (_biasType == m_CurrentBias) confAmount = m_fConfirmationBiasWeight;
+        if (_biasType == m_CurrentBias && _amt > 0.0f) confAmount = m_fConfirmationBiasWeight;
+        else if (_biasType == m_CurrentBias && _amt < 0.0f) confAmount = -1.0f;
         switch (_biasType)
         {
             case GenreBias.Shooter:
@@ -146,18 +157,46 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     private void BeginEventSequence()
     {
         if (m_TimesVisitedVoid == 2) SecondEventSequence();
+        else if (m_TimesVisitedVoid > 2 && m_TimesVisitedVoid <= 5) // for visit times 3, 4, 5
+        {
+            // create the buttons, don't check
+        }
+        else if (m_TimesVisitedVoid > 5)
+        {
+            if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 5.0f)
+            {
+                // TODO: dialogue: "I don't know what you want! How am I supposed to make assumptions?"
+                // "What if... maybe every person is different?"
+                // Maybe I shouldn't be limiting myself and my perception of the world?
+                // We need to break out of the Echo Chamber
+                // Maybe the only way is effective communication and listening to different points of view?
+                // But the point of me, the algorithm, is to push content that you are already interacting with, to get the most attention possible
+                // If that is not productive, what is the point?
+
+                // ------- PLAYER SUCCESSFULLY MITIGATED BIAS
+                // End game or whatever
+            }
+            else if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 10.0f)
+            {
+                // TODO: dialogue: "I don't want to be wrong... why aren't you being more predictable?"
+                // "I need more attention, more interaction. I can't be wrong!
+
+                EnableDoors(true, true, true);
+            }
+        }
     }
 
     #endregion
 
     #region Actions and CoRoutines for general event use
     // play single dialogue based on single key (set in dictionary in editor, caption key must match in UI Manager
-    private void PlayDialogue(int _key)
+    // is a coroutine so it can be waited on
+    private IEnumerator PlayDialogue(int _key)
     {
         AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_key]);
         AnnouncerDialogue.Invoke(_key);
 
-        StartCoroutine(AudioLengthTimer(m_DialogueAudios[_key].length));
+        yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[_key].length));
     }
 
     // play sequence of dialogue with array of keys
@@ -284,6 +323,121 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         EnableDoors(_bShooter, _bPuzzle, _bPlatformer);
     }
 
+    #endregion
+
+    #region Bias Event Sequences (Scripted but chosen on weight)
+
+    // General event - tell player they liked the level
+    private IEnumerator AskPlayerIfLikedLevel()
+    {
+        yield return StartCoroutine(PlayDialogue(6)); // TODO: dialogue not entered yet "Would you like to see more of this content?"
+
+        // TODO: spawn the buttons
+
+        yield return new WaitUntil(() => m_bReinforcementComplete); m_bReinforcementComplete = false;
+    }
+
+    private void PlayerPressedButton(bool _reinforced)
+    {
+        if (_reinforced)
+        {
+            IncreaseGenreBias(m_CurrentBias, m_PlayerReinforcementAmount);
+
+            if (m_GenreBiasList[0] - m_GenreBiasList[1] >= 10.0f)
+            {
+                // TODO dialogue : "I'm glad you like it so much! Do it again." or something
+                EnableDoors(m_CurrentBias == GenreBias.Shooter, m_CurrentBias == GenreBias.Puzzle, m_CurrentBias == GenreBias.Platformer);
+            }
+            else
+            {
+                // TODO dialogue: "I knew I was right!"
+                // TODO: You can have two options. The two I think you might want. 
+                EnableDoors(m_GenreBiasList[0] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
+                            m_GenreBiasList[0] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
+                            m_GenreBiasList[0] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer);
+            }
+            m_bReinforcementComplete = true;
+        }
+        else
+        {
+            IncreaseGenreBias(m_CurrentBias, -m_PlayerReinforcementAmount);
+
+            switch (m_iTimesDeniedThisVoid)
+            {
+                case 0:
+                    {
+                        // TODO: dialogue "You don't want to show more of this content?"
+                        if (m_CurrentBias == m_InitialAnchorBias)
+                        {
+                            // TODO dialogue "But you liked this level first!"
+                            // "Lets try this again"
+                            // Show more of this content?
+                        }
+                        else
+                        {
+                            // Maybe I was right at first?
+                            // More of the content I first showed you?
+                            IncreaseGenreBias(m_CurrentBias, -m_fAnchoringBiasWeight);
+                        }
+                    }
+                    break;
+                case 1:
+                    {
+                        // TODO: "Still no?"
+
+                        if (m_GenreBiasList[0] - m_GenreBiasList[1] >= 10.0f)
+                        {
+                            // TODO: dialogue "But I was correct before!"
+
+                            // randomly either make ONLY top bias or only NOT top bias
+                            int onlyOne = Random.Range(0, 2);
+                            if (onlyOne == 0)
+                            {
+                                // TODO: "Fine! Have it your way!"
+                                EnableDoors(m_GenreBiasList[2] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
+                                            m_GenreBiasList[2] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
+                                            m_GenreBiasList[2] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer);
+                            }
+                            else
+                            {
+                                // TODO: No! You have to like it! There's no other option!
+                                // You just need more of what you liked! More content! 
+                                EnableDoors(m_GenreBiasList[0] == m_fGenreBias_Shooter, m_GenreBiasList[0] == m_fGenreBias_Puzzle, m_GenreBiasList[0] == m_fGenreBias_Platformer); // make it spawn lots all the same if time
+                            }
+                        }
+                        else
+                        {
+                            // TODO: I don't believe you! You should try it again, then you'll see that I'm right!
+                            // The pattern is what I believe it is! You can't change my mind.
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        // TODO: This is getting out of hand!
+                        // If I am wrong, what is the pattern then?
+
+                        if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 10.0f)
+                        {
+                            // TODO: Fine, have all the options.
+
+                            EnableDoors(true, true, true);
+                        }
+                        else
+                        {
+                            // TODO: You can have two options. The two I think you might want. 
+
+                            EnableDoors(m_GenreBiasList[0] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
+                            m_GenreBiasList[0] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
+                            m_GenreBiasList[0] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer);
+                        }
+                    }
+                    break;
+            }
+
+            CalculateBiasWeightings();
+        }
+    }
     #endregion
 }
 

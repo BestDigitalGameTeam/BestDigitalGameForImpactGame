@@ -1270,6 +1270,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7733707836949860747, guid: c7fda00f1c586d74483f88db07af5d4c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8359788750577585139, guid: c7fda00f1c586d74483f88db07af5d4c, type: 3}
       propertyPath: m_Name
       value: ShooterDoorPrefabV
@@ -1921,6 +1925,9 @@ MonoBehaviour:
   VoidLoaded:
     m_PersistentCalls:
       m_Calls: []
+  PlayerPressedReinforcementButton:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1870208429
 Transform:
   m_ObjectHideFlags: 0
@@ -1979,6 +1986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077931bf183ae174abdfd4965aa49346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guns: []
   m_fJumpForce: 5
   m_fGravityForce: 9.81
   PlayerCam: {fileID: 1336333355}
