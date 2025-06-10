@@ -9,6 +9,7 @@ public class GameManager : SingletonPersistent<GameManager>
     public UnityEvent<string> LoadLevel;
     public UnityEvent VoidLoaded;
     public UnityEvent<bool> PlayerPressedReinforcementButton;
+    public UnityEvent ActivateReinforcementButtons;
 
     private void Start()
     {

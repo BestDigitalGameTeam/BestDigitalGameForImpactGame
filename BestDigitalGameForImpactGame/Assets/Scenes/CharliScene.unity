@@ -204,14 +204,38 @@ MonoBehaviour:
         algorithm training program. Your participation is greatly appreciated.
     - Key: 1
       Value: Beginning evaluation...
-    - Key: 2
-      Value: Please choose a door.
-    - Key: 3
+    - Key: 11
       Value: Based on your evaluation, I think you'd like a platformer game.
-    - Key: 4
+    - Key: 12
       Value: Based on your evaluation, I think you'd like a puzzle game.
-    - Key: 5
+    - Key: 13
       Value: Based on your evaluation, I think you'd like a shooter game.
+    - Key: 20
+      Value: I'm glad you enjoyed your first level.
+    - Key: 21
+      Value: Please choose a door.
+    - Key: 30
+      Value: Would you like to see more of this content?
+    - Key: 40
+      Value: I'm glad you liked it so much. Now you can do it again!
+    - Key: 41
+      Value: I knew I was right!
+    - Key: 42
+      Value: You can have two options.
+    - Key: 43
+      Value: These two are the ones you want.
+    - Key: 50
+      Value: You don't want to show more of this content?
+    - Key: 61
+      Value: But you liked this one first!
+    - Key: 62
+      Value: Let's try that again.
+    - Key: 65
+      Value: I was probably right the first time.
+    - Key: 66
+      Value: How about I give you more of what I first gave you?
+    - Key: 70
+      Value: Still no?!
 --- !u!1 &85536702
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,14 +340,38 @@ MonoBehaviour:
       Value: {fileID: 8300000, guid: 256285ba34f22fa4c91e8c9eb7792589, type: 3}
     - Key: 1
       Value: {fileID: 8300000, guid: ab2f1517e27be924db6786b9361a137f, type: 3}
-    - Key: 2
+    - Key: 11
+      Value: {fileID: 8300000, guid: c67a761e01343b14a8b3766f7277968f, type: 3}
+    - Key: 12
+      Value: {fileID: 8300000, guid: e2c3b6c11c3b0a2419660777d29a9975, type: 3}
+    - Key: 13
+      Value: {fileID: 8300000, guid: 5f82db08d575f46449e692927abfbc15, type: 3}
+    - Key: 20
+      Value: {fileID: 8300000, guid: da6c92f68eb8cfd4289b8bd17775f6c5, type: 3}
+    - Key: 21
       Value: {fileID: 8300000, guid: 78e8c32eac560df4e8326cdf08d73611, type: 3}
-    - Key: 3
-      Value: {fileID: 8300000, guid: 396a916305105a547b0448bf287e8b5e, type: 3}
-    - Key: 4
-      Value: {fileID: 8300000, guid: 0a23ec6f37373054491e61dc4210768d, type: 3}
-    - Key: 5
-      Value: {fileID: 8300000, guid: 3c9773b59be3c0e4fa4a4d068cf1fbd6, type: 3}
+    - Key: 30
+      Value: {fileID: 8300000, guid: 27a4ec94ff4bcd2448b08a66fde5259f, type: 3}
+    - Key: 40
+      Value: {fileID: 8300000, guid: b0669db3cedefbd47ab7d77e42354bff, type: 3}
+    - Key: 41
+      Value: {fileID: 8300000, guid: dfe649ae3a06cf843a2f8804b63be150, type: 3}
+    - Key: 42
+      Value: {fileID: 8300000, guid: 07bf0b4ea85ea9248808ece619ae073c, type: 3}
+    - Key: 43
+      Value: {fileID: 8300000, guid: de1331fe6fe69ac4e811f0419323d15f, type: 3}
+    - Key: 50
+      Value: {fileID: 8300000, guid: 887e238cab5524a4fa1b9dd88f7668ed, type: 3}
+    - Key: 61
+      Value: {fileID: 8300000, guid: d18866414e1ec1d47bbdda455ab6608c, type: 3}
+    - Key: 62
+      Value: {fileID: 8300000, guid: 1a62dde096884be41ba8502c96313584, type: 3}
+    - Key: 65
+      Value: {fileID: 8300000, guid: 29e7573e8c3e05b4a89b49f5cdb29c77, type: 3}
+    - Key: 66
+      Value: {fileID: 8300000, guid: 5a2f5a2b61979d643807fb660d7f48a3, type: 3}
+    - Key: 70
+      Value: {fileID: 8300000, guid: a034c62289b25d34a9bbeac2faaed36b, type: 3}
   AnnouncerAudioSource: {fileID: 1285472011}
 --- !u!1 &248748529
 GameObject:
@@ -357,6 +405,130 @@ Transform:
   - {fileID: 1161648464}
   m_Father: {fileID: 1336333357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &343959511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343959515}
+  - component: {fileID: 343959514}
+  - component: {fileID: 343959513}
+  - component: {fileID: 343959512}
+  - component: {fileID: 343959516}
+  m_Layer: 0
+  m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!136 &343959512
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343959511}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!23 &343959513
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343959511}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9be2bab888a9f0b4b96141ec5615f827, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &343959514
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343959511}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &343959515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343959511}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.95, y: 0.8, z: -11.61}
+  m_LocalScale: {x: 2, y: 0.2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &343959516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343959511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdb61ac33d42924a980119cf978dea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bIsPositive: 1
 --- !u!1 &424300020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,6 +2100,9 @@ MonoBehaviour:
   PlayerPressedReinforcementButton:
     m_PersistentCalls:
       m_Calls: []
+  ActivateReinforcementButtons:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1870208429
 Transform:
   m_ObjectHideFlags: 0
@@ -2227,3 +2402,4 @@ SceneRoots:
   - {fileID: 2020943581}
   - {fileID: 671464937}
   - {fileID: 1870208429}
+  - {fileID: 343959515}

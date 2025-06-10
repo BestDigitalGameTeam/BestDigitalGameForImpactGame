@@ -160,6 +160,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         else if (m_TimesVisitedVoid > 2 && m_TimesVisitedVoid <= 5) // for visit times 3, 4, 5
         {
             // create the buttons, don't check
+            AskPlayerIfLikedLevel();
         }
         else if (m_TimesVisitedVoid > 5)
         {
@@ -269,8 +270,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     // event sequence after first level
     void SecondEventSequence()
     {
-        // play dialogue "I hope you enjoyed your first level"
-        PlayDialogueSequence(new int[1] { 2 }); // add other dialogue in front when its made
+        PlayDialogueSequence(new int[2] { 20, 21 });
         EnableDoorsAfterTime(true, true, true, 10.0f);
     }
 
@@ -290,17 +290,17 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                     if (key == KeyCode.LeftControl || key == KeyCode.E)
                     {
                         SetInitialBias(GenreBias.Puzzle);
-                        m_AnchBiasKey = 4;
+                        m_AnchBiasKey = 11;
                     }
                     else if (key == KeyCode.Space)
                     {
                         SetInitialBias(GenreBias.Platformer);
-                        m_AnchBiasKey = 3;
+                        m_AnchBiasKey = 12;
                     }
                     else if (key == KeyCode.Mouse0 || key == KeyCode.LeftShift)
                     {
                         SetInitialBias(GenreBias.Shooter);
-                        m_AnchBiasKey = 5;
+                        m_AnchBiasKey = 13;
                     }
                     biasSet = true;
                 }
@@ -330,11 +330,13 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     // General event - tell player they liked the level
     private IEnumerator AskPlayerIfLikedLevel()
     {
-        yield return StartCoroutine(PlayDialogue(6)); // TODO: dialogue not entered yet "Would you like to see more of this content?"
+        yield return StartCoroutine(PlayDialogue(31)); 
 
         // TODO: spawn the buttons
+        GameManager.Instance.ActivateReinforcementButtons.Invoke();
 
         yield return new WaitUntil(() => m_bReinforcementComplete); m_bReinforcementComplete = false;
+        GameManager.Instance.ActivateReinforcementButtons.Invoke();
     }
 
     private void PlayerPressedButton(bool _reinforced)
@@ -345,16 +347,18 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
 
             if (m_GenreBiasList[0] - m_GenreBiasList[1] >= 10.0f)
             {
-                // TODO dialogue : "I'm glad you like it so much! Do it again." or something
-                EnableDoors(m_CurrentBias == GenreBias.Shooter, m_CurrentBias == GenreBias.Puzzle, m_CurrentBias == GenreBias.Platformer);
+                // Glad you liked it so much! Do it again
+                PlayDialogue(40);
+                EnableDoorsAfterTime(m_CurrentBias == GenreBias.Shooter, m_CurrentBias == GenreBias.Puzzle, m_CurrentBias == GenreBias.Platformer, m_DialogueAudios[40].length);
             }
             else
             {
-                // TODO dialogue: "I knew I was right!"
-                // TODO: You can have two options. The two I think you might want. 
-                EnableDoors(m_GenreBiasList[0] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
+                // I knew I was right!
+                // Two options, you want these two
+                PlayDialogueSequence(new int[3] { 41, 42, 43 });
+                EnableDoorsAfterTime(m_GenreBiasList[0] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
                             m_GenreBiasList[0] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
-                            m_GenreBiasList[0] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer);
+                            m_GenreBiasList[0] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer, 10.0f);
             }
             m_bReinforcementComplete = true;
         }
@@ -366,17 +370,20 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
             {
                 case 0:
                     {
-                        // TODO: dialogue "You don't want to show more of this content?"
+                        PlayDialogue(50);
+                        
                         if (m_CurrentBias == m_InitialAnchorBias)
                         {
-                            // TODO dialogue "But you liked this level first!"
+                            // "But you liked this level first!"
                             // "Lets try this again"
                             // Show more of this content?
+                            PlayDialogueSequence(new int[4] { 995, 61, 62, 30 });
                         }
                         else
                         {
                             // Maybe I was right at first?
                             // More of the content I first showed you?
+                            PlayDialogueSequence(new int[3] { 995, 65, 66 });
                             IncreaseGenreBias(m_CurrentBias, -m_fAnchoringBiasWeight);
                         }
                     }
@@ -425,15 +432,17 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                         }
                         else
                         {
-                            // TODO: You can have two options. The two I think you might want. 
+                            // You can have two options. The two I think you might want. 
+                            PlayDialogueSequence(new int[2] { 42, 43 });
 
-                            EnableDoors(m_GenreBiasList[0] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
+                            EnableDoorsAfterTime(m_GenreBiasList[0] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
                             m_GenreBiasList[0] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
-                            m_GenreBiasList[0] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer);
+                            m_GenreBiasList[0] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer, 7.0f);
                         }
                     }
                     break;
             }
+            m_bReinforcementComplete = true;
 
             CalculateBiasWeightings();
         }
