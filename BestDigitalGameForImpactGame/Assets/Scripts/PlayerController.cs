@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : SingletonPersistent<PlayerController>
 {
     [SerializeField] private GameObject[] guns; // Assign guns in Inspector
     private int m_iCurrentGunIndex = 0;
@@ -77,8 +77,6 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         interactablesMask = LayerMask.GetMask("Interactable");
         m_fBaseJumpForce = m_fJumpForce;
-
-        DontDestroyOnLoad(gameObject);
         
         ActivateGun(m_iCurrentGunIndex);
     }
