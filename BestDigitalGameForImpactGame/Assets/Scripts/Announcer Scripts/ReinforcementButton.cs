@@ -3,12 +3,13 @@ using UnityEngine;
 public class ReinforcementButton : MonoBehaviour
 {
     [SerializeField] private bool m_bIsPositive;
-    private bool m_bIsActive;
+    [SerializeField] private bool m_bIsActive = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GameManager.Instance.ActivateReinforcementButtons.AddListener(Activate);
+        GameManager.Instance.PlayerPressedReinforcementButton.AddListener(DeActivate);
     }
 
     // Update is called once per frame
@@ -21,13 +22,18 @@ public class ReinforcementButton : MonoBehaviour
     {
         if (m_bIsActive)
         {
-            GameManager.Instance.PlayerPressedReinforcementButton.Invoke(m_bIsPositive);
             m_bIsActive = false;
+            GameManager.Instance.PlayerPressedReinforcementButton.Invoke(m_bIsPositive);
         }
     }
 
     private void Activate()
     {
         m_bIsActive = true;
+    }
+
+    private void DeActivate(bool _b)
+    {
+        m_bIsActive = false;
     }
 }
