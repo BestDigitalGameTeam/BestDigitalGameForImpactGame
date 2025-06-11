@@ -29,10 +29,6 @@ public class PlayerController : SingletonPersistent<PlayerController>
     
 
     public AudioSource m_defaultAudioPlayer; 
-    public AudioSource m_movementAudioPlayer;
-    //public AudioSource m_shootAudioPlayer; <--- Moving to Gun.cs - August
-    public AudioSource m_speedAudioPlayer;
-    public AudioSource m_interactAudioPlayer;
 
     private LayerMask interactablesMask;
 

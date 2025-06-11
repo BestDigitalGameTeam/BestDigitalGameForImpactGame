@@ -217,7 +217,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     // is a coroutine so it can be waited on
     private IEnumerator PlayDialogue(int _key)
     {
-        AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_key]);
+        AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_key], GameManager.Instance.MasterVolume * GameManager.Instance.DialogueVolume);
         AnnouncerDialogue.Invoke(_key);
 
         yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[_key].length));
@@ -228,7 +228,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     {
         for (int i = 0; i < _keys.Length; i++)
         {
-            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]]);
+            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]], GameManager.Instance.MasterVolume * GameManager.Instance.DialogueVolume);
             AnnouncerDialogue.Invoke(_keys[i]);
 
             yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[_keys[i]].length));
@@ -242,13 +242,13 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     {
         for (int i = 0; i < _keys.Length; i++)
         {
-            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]]);
+            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]], GameManager.Instance.MasterVolume * GameManager.Instance.DialogueVolume);
             AnnouncerDialogue.Invoke(_keys[i]);
 
             yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[_keys[i]].length));
         }
         int key = _getKey();
-        AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[key]);
+        AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[key], GameManager.Instance.MasterVolume * GameManager.Instance.DialogueVolume);
         AnnouncerDialogue.Invoke(key);
 
         yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[key].length));
