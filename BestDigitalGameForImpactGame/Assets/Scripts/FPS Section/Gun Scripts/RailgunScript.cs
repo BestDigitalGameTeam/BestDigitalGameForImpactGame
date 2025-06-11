@@ -2,15 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 // Handles gun behavior: shooting, reloading, and audio
-public class RailgunScript : MonoBehaviour
+public class RailgunScript : Gun
 {
-    [SerializeField] GunData gunData;                         // ScriptableObject holding gun stats and state
-    [SerializeField] GameObject projectilePrefab;             // Prefab to instantiate when shooting
-    [SerializeField] Transform projectileSpawnPoint;          // Where the projectile spawns from
-    public AudioSource m_shootAudioPlayer;                    // Audio source for shooting sound
-
-    private float m_fTimeSinceLastShot;                       // Timer to manage fire rate
-
     private void Start()
     {
         PlayerShoot.ShootInput += Shoot; // Subscribe Shoot method to player shooting input
@@ -64,16 +57,6 @@ public class RailgunScript : MonoBehaviour
         gunData.m_iCurrentAmmo = gunData.m_iClipSize;
         gunData.m_bReloading = false;
         Debug.Log("Reload complete.");
-        // ---
-    }
-    // ---
-
-    // Can be used to play effects
-    private void OnGunShot()
-    {
-        // Plays shooting sound with random pitch for variation
-        m_shootAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
-        m_shootAudioPlayer.Play();
         // ---
     }
     // ---
