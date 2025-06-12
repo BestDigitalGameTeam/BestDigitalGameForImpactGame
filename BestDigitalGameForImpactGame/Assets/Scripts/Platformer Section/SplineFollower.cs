@@ -79,6 +79,7 @@ public class SplineFollower : MonoBehaviour
         switch (SplineEasing)
         {
             case Easing.None:
+                transform.position = FollowedSpline.Spline.EvaluatePosition(m_fTime) + (float3)transform.parent.transform.position;
                 break;
             case Easing.EaseIn:
                 transform.position = FollowedSpline.Spline.EvaluatePosition(EaseInCalc(m_fTime)) + (float3)transform.parent.transform.position;

@@ -3,15 +3,13 @@ using UnityEngine;
 public class PressurePad : MonoBehaviour
 {
     [SerializeField] private Gate gate;  // Reference to gate script
-    private int m_iObjectsOnPad = 0;
+    private int m_iObjectsOnPad;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.attachedRigidbody != null)
-        {
-            m_iObjectsOnPad++;
-            gate.Open();
-        }
+        if (!other.CompareTag("Player") && !other.attachedRigidbody) return;
+        m_iObjectsOnPad++;
+        gate.Open();
     }
 
     private void OnTriggerExit(Collider other)

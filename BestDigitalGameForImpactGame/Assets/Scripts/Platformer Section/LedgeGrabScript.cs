@@ -10,7 +10,7 @@ public class LedgeGrabScript : MonoBehaviour
     public float m_fMaxLedgeGrabDistance;
     public float m_fMinTimeOnLedge;
     private float m_fTimeOnLedge;
-    private bool m_bOnLedge;
+    public bool m_bOnLedge;
     
     public float m_fLedgeDetectionLength;
     public float m_fLedgeCastRadius;
@@ -62,7 +62,7 @@ public class LedgeGrabScript : MonoBehaviour
             Controller.SetVelocity(dirToLedge.normalized * (m_fMoveToLedgeSpeed * Time.deltaTime));
         }
         
-        if(distToLedge>m_fMaxLedgeGrabDistance) ExitLedge();
+        //if(distToLedge>m_fMaxLedgeGrabDistance) ExitLedge();
     }
 
     private void ExitLedge()

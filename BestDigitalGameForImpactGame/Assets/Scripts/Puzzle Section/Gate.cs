@@ -3,11 +3,11 @@ using UnityEngine;
 public class Gate : MonoBehaviour
 {
     [SerializeField] private Vector3 m_v3OpenOffset = new Vector3(0, 5, 0);
-    [SerializeField] private float m_fSpeed = 2f;
+    [SerializeField] private float m_fSpeed = 2.0f;
 
     private Vector3 m_v3ClosedPosition;
     private Vector3 m_v3OpenPosition;
-    private bool m_bIsOpening = false;
+    private bool m_bIsOpening;
 
     private void Start()
     {

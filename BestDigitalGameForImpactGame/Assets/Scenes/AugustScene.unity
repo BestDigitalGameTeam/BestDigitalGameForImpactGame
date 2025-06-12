@@ -29681,7 +29681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2046469164929045092, guid: 67978c9813c12ca448bd68285d325f51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.50000095
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2046469164929045092, guid: 67978c9813c12ca448bd68285d325f51, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29718,6 +29718,10 @@ PrefabInstance:
     - target: {fileID: 3606548782116340582, guid: 67978c9813c12ca448bd68285d325f51, type: 3}
       propertyPath: m_Name
       value: PuzzleSphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 3606548782116340582, guid: 67978c9813c12ca448bd68285d325f51, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42217,6 +42221,11 @@ Transform:
   - {fileID: 1118002815}
   m_Father: {fileID: 660835280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &859909141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9184154553450596901, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
+  m_PrefabInstance: {fileID: 5983717935939377946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &895142009
 GameObject:
   m_ObjectHideFlags: 0
@@ -53485,6 +53494,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!143 &1119947691 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 8677435913892434438, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
+  m_PrefabInstance: {fileID: 5983717935939377946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1136228068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116712,9 +116726,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 530554606027616091, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548460991793543872, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3633222660248086224, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079615630243033513, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
+      propertyPath: CamTrans
+      value: 
+      objectReference: {fileID: 859909141}
+    - target: {fileID: 5079615630243033513, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
+      propertyPath: CharController
+      value: 
+      objectReference: {fileID: 1119947691}
+    - target: {fileID: 6791139569508723893, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

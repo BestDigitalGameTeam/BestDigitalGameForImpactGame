@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : SingletonPersistent<PlayerController>
 {
     [SerializeField] private GameObject[] guns; // Assign guns in Inspector
     private int m_iCurrentGunIndex = 0;
@@ -29,10 +29,6 @@ public class PlayerController : MonoBehaviour
     
 
     public AudioSource m_defaultAudioPlayer; 
-    public AudioSource m_movementAudioPlayer;
-    //public AudioSource m_shootAudioPlayer; <--- Moving to Gun.cs - August
-    public AudioSource m_speedAudioPlayer;
-    public AudioSource m_interactAudioPlayer;
 
     private LayerMask interactablesMask;
 
@@ -77,8 +73,6 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         interactablesMask = LayerMask.GetMask("Interactable");
         m_fBaseJumpForce = m_fJumpForce;
-
-        DontDestroyOnLoad(gameObject);
         
         ActivateGun(m_iCurrentGunIndex);
     }

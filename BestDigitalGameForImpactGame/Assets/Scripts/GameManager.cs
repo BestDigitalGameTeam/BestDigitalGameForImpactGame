@@ -8,6 +8,12 @@ public class GameManager : SingletonPersistent<GameManager>
 {
     public UnityEvent<string> LoadLevel;
     public UnityEvent VoidLoaded;
+    public UnityEvent<bool> PlayerPressedReinforcementButton;
+    public UnityEvent ActivateReinforcementButtons;
+
+    public float MasterVolume = 1.0f;
+    public float EffectsVolume = 1.0f;
+    public float DialogueVolume = 1.0f;
 
     private void Start()
     {
@@ -27,4 +33,18 @@ public class GameManager : SingletonPersistent<GameManager>
         while (!asyncLoad.isDone) { yield return null; }
         if (_LevelName == "Void") VoidLoaded.Invoke();
     }
+
+    public void SetMasterVolume(System.Single _vol)
+    {
+        MasterVolume = _vol;
+    }
+    public void SetEffectsVolume(System.Single _vol)
+    {
+        EffectsVolume = _vol;
+    }
+    public void SetDialogueVolume(System.Single _vol)
+    {
+        DialogueVolume = _vol;
+    }
 }
+
