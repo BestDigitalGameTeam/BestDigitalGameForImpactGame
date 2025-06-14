@@ -165,13 +165,13 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
             case GenreBias.Platformer:
                 {
                     m_fGenreBias_Platformer += m_fAnchoringBiasWeight;
-                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "TestingScene", 15.0f));
+                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PlatformerLevel_0", 15.0f));
                 }
                 break;
             case GenreBias.Puzzle:
                 { 
                     m_fGenreBias_Puzzle += m_fAnchoringBiasWeight; 
-                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "TestingScene", 15.0f));
+                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PuzzleLevel_0", 15.0f));
                 }
                 break;
         }

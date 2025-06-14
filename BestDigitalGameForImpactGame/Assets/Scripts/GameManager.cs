@@ -17,6 +17,7 @@ public class GameManager : SingletonPersistent<GameManager>
     public float EffectsVolume = 1.0f;
     public float DialogueVolume = 1.0f;
 
+
     private void Start()
     {
         LoadLevel.AddListener(LoadScene);
@@ -33,11 +34,16 @@ public class GameManager : SingletonPersistent<GameManager>
 
         Debug.Log("Loading Level");
         while (!asyncLoad.isDone) { yield return null; }
-        SpawnPos.position = GameObject.Find("Spawn").transform.position;
+        SpawnPos = GameObject.Find("Spawn").transform;
+
+        GameObject player = GameObject.FindWithTag("Player");
+        CharacterController controller = player.GetComponent<CharacterController>();
+        // Temporarily disable CharacterController to avoid physics glitches
+        controller.enabled = false;
+        player.transform.position = SpawnPos.position;
+        controller.enabled = true;
+
         if (_LevelName == "Void") VoidLoaded.Invoke();
-        if(_LevelName == "Platform" && SpawnPos) GameObject.Find("DeathPlane").GetComponent<DeathPlaneScript>().SpawnPos.position = SpawnPos.position;
-        
-        
     }
 
     public void SetMasterVolume(System.Single _vol)

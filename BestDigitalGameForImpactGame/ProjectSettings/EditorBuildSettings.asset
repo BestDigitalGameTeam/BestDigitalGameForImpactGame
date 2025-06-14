@@ -7,16 +7,16 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Level Scenes/Void.unity
-    guid: dd9bb9688eaa4434b84f0d6d221b5de0
+    guid: d2e8040658103344cbf5fcfbc3416a8d
   - enabled: 1
     path: Assets/Scenes/Level Scenes/FPS Levels/ShooterLevel_0.unity
     guid: b3a19e69a427bc04aa2d246700c08e0f
   - enabled: 1
     path: Assets/Scenes/Level Scenes/Platformer Levels/PlatformerLevel_0.unity
-    guid: c93159849630cce47a6de33904ae2f79
+    guid: fbb07ce05dbc9684caeb23e75eade8d5
   - enabled: 1
     path: Assets/Scenes/Level Scenes/Puzzle Levels/PuzzleLevel_0.unity
-    guid: d98e9e9b2f25e1d418ca82002a6318b1
+    guid: 07976c8794394ce4aaa79b5c3a00a8c0
   - enabled: 1
     path: Assets/Scenes/AugustScene.unity
     guid: 7d1272be0d7a80a47974242bbd63edd6

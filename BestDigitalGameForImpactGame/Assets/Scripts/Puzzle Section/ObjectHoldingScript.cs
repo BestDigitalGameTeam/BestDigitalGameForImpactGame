@@ -35,38 +35,48 @@ public class ObjectHoldingScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)  && !HeldObject && Physics.Raycast(transform.position,CameraTrans.forward,out objectHit,fRayDist,PickupAbleMask))
+        if (!HeldObject && Physics.Raycast(transform.position, CameraTrans.forward, out objectHit, fRayDist, PickupAbleMask))
         {
-            HeldObject = objectHit.transform.gameObject;
-            HeldRB = HeldObject.GetComponent<Rigidbody>();
-            if (!HeldRB)
+            UIManager.Instance.ShowInteractUI.Invoke();
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.LogError("Object Tagged Pickup without Rigidbody");
-            }
-            HeldRB.useGravity = false;
-            HeldRB.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-            HeldRB.interpolation = RigidbodyInterpolation.Interpolate;
-            HeldRB.freezeRotation = true;
+                HeldObject = objectHit.transform.gameObject;
+                HeldRB = HeldObject.GetComponent<Rigidbody>();
+                if (!HeldRB)
+                {
+                    Debug.LogError("Object Tagged Pickup without Rigidbody");
+                }
+                HeldRB.useGravity = false;
+                HeldRB.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                HeldRB.interpolation = RigidbodyInterpolation.Interpolate;
+                HeldRB.freezeRotation = true;
 
-            FixedJoint joint = HoldTrans.gameObject.AddComponent<FixedJoint>();
-            joint.connectedBody = HeldRB;
-            joint.breakForce = Mathf.Infinity;
-            joint.breakTorque = Mathf.Infinity;
-            joint.enableCollision = true;
+                FixedJoint joint = HoldTrans.gameObject.AddComponent<FixedJoint>();
+                joint.connectedBody = HeldRB;
+                joint.breakForce = Mathf.Infinity;
+                joint.breakTorque = Mathf.Infinity;
+                joint.enableCollision = true;
+
+                UIManager.Instance.HideInteractUI.Invoke();
+            }
         }
-        else if (HeldObject )
+        else if (HeldObject)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 DropObject();
             }
-            else if(characterController.isGrounded && Physics.Raycast(transform.position,-transform.up,out objectHit,10f,PickupAbleMask))
+            else if (characterController.isGrounded && Physics.Raycast(transform.position, -transform.up, out objectHit, 10f, PickupAbleMask))
             {
                 if (objectHit.collider.gameObject == HeldObject)
                 {
                     DropObject();
                 }
             }
+        }
+        else
+        {
+            if (UIManager.Instance.IntActive) UIManager.Instance.HideInteractUI.Invoke();
         }
         
     }
