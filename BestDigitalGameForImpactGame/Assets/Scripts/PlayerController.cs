@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float m_fSprintSpeed;
     public float m_fAirResistance = 1.5f;
     public bool m_bCanMove = true;
+    public bool m_bWasSprinting;
     
 
     public AudioSource m_defaultAudioPlayer; 
@@ -65,7 +66,11 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        m_vec3MoveDir.y = m_fJumpForce; 
+        m_vec3MoveDir.y = m_fJumpForce;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            m_bWasSprinting = true;
+        }
     }
     
     // Start is called before the first frame update
@@ -109,14 +114,21 @@ public class PlayerController : MonoBehaviour
         }
         // ---
         
+        
         //Movement
+
+        if (m_bWasSprinting && playerController.isGrounded)
+        {
+            m_bWasSprinting = false;
+        }
+        
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         
         m_bSprinting = Input.GetKey(KeyCode.LeftShift);
 
-        float fXSpeed = m_bCanMove ? (m_bSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Vertical") : 0.0f;
-        float fYSpeed = m_bCanMove ? (m_bSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Horizontal") : 0.0f;
+        float fXSpeed = m_bCanMove ? (m_bSprinting && playerController.isGrounded ? m_fSprintSpeed : m_bWasSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Vertical") : 0.0f;
+        float fYSpeed = m_bCanMove ? (m_bSprinting && playerController.isGrounded ? m_fSprintSpeed : m_bWasSprinting ? m_fSprintSpeed : m_fMoveSpeed) * Input.GetAxis("Horizontal") : 0.0f;
         float fMoveDirY = m_vec3MoveDir.y;
         
         if (m_bCanMove)
