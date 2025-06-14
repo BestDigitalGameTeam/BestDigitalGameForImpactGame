@@ -223,7 +223,7 @@ MonoBehaviour:
   - {fileID: 6791139569508723893}
   - {fileID: 548460991793543872}
   m_fJumpForce: 5
-  m_fGravityForce: 15
+  m_fGravityForce: 13
   PlayerCam: {fileID: 411770963696239002}
   m_fSensitivity: 2
   m_fMoveSpeed: 6
@@ -276,13 +276,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a826617bca32c347b8d036e0b8fc714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CamTrans: {fileID: 0}
-  CharController: {fileID: 0}
-  m_fMoveToLedgeSpeed: 300
+  CamTrans: {fileID: 9184154553450596901}
+  CharController: {fileID: 8677435913892434438}
+  m_fMoveToLedgeSpeed: 1000
   m_fMaxLedgeGrabDistance: 1
   m_fMinTimeOnLedge: 0.25
+  m_bOnLedge: 0
   m_fLedgeDetectionLength: 3
-  m_fLedgeCastRadius: 0.5
+  m_fLedgeCastRadius: 1
   m_fLedgeCoolDown: 1
 --- !u!114 &177393041796097315
 MonoBehaviour:
@@ -897,7 +898,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -920,7 +921,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
