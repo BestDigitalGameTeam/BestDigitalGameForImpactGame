@@ -2740,7 +2740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1828396784255898736, guid: 57a435fa522086944812246a6885345c, type: 3}
       propertyPath: m_Name
-      value: objTelportDestination
+      value: Spawn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

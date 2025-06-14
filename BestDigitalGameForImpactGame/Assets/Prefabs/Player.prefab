@@ -258,6 +258,7 @@ MonoBehaviour:
   m_fSprintSpeed: 12
   m_fAirResistance: 1.5
   m_bCanMove: 1
+  m_bWasSprinting: 0
   m_defaultAudioPlayer: {fileID: 1431092018179262778}
 --- !u!114 &4215232813362147330
 MonoBehaviour:
@@ -554,7 +555,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 45
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

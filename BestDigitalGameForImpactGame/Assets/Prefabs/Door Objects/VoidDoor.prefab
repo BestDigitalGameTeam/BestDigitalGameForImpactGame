@@ -65,7 +65,8 @@ PrefabInstance:
       value: VoidDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4325106384714401618, guid: db565005444411846b228b548e41cc50, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db565005444411846b228b548e41cc50, type: 3}
