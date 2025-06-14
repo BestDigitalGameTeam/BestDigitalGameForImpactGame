@@ -8,6 +8,7 @@ public class GameManager : SingletonPersistent<GameManager>
 {
     public UnityEvent<string> LoadLevel;
     public UnityEvent VoidLoaded;
+    public Transform SpawnPos;
 
     private void Start()
     {
@@ -25,6 +26,10 @@ public class GameManager : SingletonPersistent<GameManager>
 
         Debug.Log("Loading Level");
         while (!asyncLoad.isDone) { yield return null; }
+        SpawnPos.position = GameObject.Find("Spawn").transform.position;
         if (_LevelName == "Void") VoidLoaded.Invoke();
+        if(_LevelName == "Platform" && SpawnPos) GameObject.Find("DeathPlane").GetComponent<DeathPlaneScript>().SpawnPos.position = SpawnPos.position;
+        
+        
     }
 }
