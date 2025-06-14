@@ -6,7 +6,6 @@ public class ObjectHoldingScript : MonoBehaviour
     private RaycastHit objectHit;
     private LayerMask PickupAbleMask;
     private LayerMask nullMask;
-    private LayerMask PlayerMask;
     public Transform CameraTrans;
     public Transform HoldTrans;
     public float fRayDist = 10.0f;
@@ -17,22 +16,20 @@ public class ObjectHoldingScript : MonoBehaviour
     private CharacterController characterController;
 
 
-    private void MoveObj()
+    private void DropObject()
     {
-        if (Vector3.Distance(HeldObject.transform.position, HoldTrans.position) > fSlowRadius)
-        {
-            HeldRB.AddForce((HoldTrans.position-HeldObject.transform.position) * fMoveForce);
-        }
-        else
-        {
-            HeldRB.linearVelocity = Vector3.zero;
-        }
+        FixedJoint joint = HoldTrans.GetComponent<FixedJoint>();
+        if (joint) Destroy(joint);
         
+        HeldRB.useGravity = true;
+        HeldRB.freezeRotation = false;
+        HeldRB.linearVelocity = characterController.velocity;
+        HeldRB = null;
+        HeldObject = null;
     }
     private void Start()
     {
         PickupAbleMask = LayerMask.GetMask("Pickup");
-        PlayerMask = LayerMask.GetMask("Player");
         characterController = GetComponent<CharacterController>();
     }
 
@@ -42,26 +39,35 @@ public class ObjectHoldingScript : MonoBehaviour
         {
             HeldObject = objectHit.transform.gameObject;
             HeldRB = HeldObject.GetComponent<Rigidbody>();
+            if (!HeldRB)
+            {
+                Debug.LogError("Object Tagged Pickup without Rigidbody");
+            }
             HeldRB.useGravity = false;
-            HeldRB.transform.parent = HoldTrans;
+            HeldRB.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            HeldRB.interpolation = RigidbodyInterpolation.Interpolate;
             HeldRB.freezeRotation = true;
-            nullMask = HeldRB.excludeLayers;
-            HeldRB.excludeLayers = PlayerMask;
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && HeldObject)
-        {
-            HeldRB.useGravity = true;
-            HeldRB.transform.parent = null;
-            HeldRB.freezeRotation = false;
-            HeldRB.excludeLayers = nullMask;
-            HeldRB.linearVelocity = characterController.velocity;
-            HeldObject = null;
-            HeldRB = null;
-        }
 
-        if (HeldRB)
-        {
-            MoveObj();
+            FixedJoint joint = HoldTrans.gameObject.AddComponent<FixedJoint>();
+            joint.connectedBody = HeldRB;
+            joint.breakForce = Mathf.Infinity;
+            joint.breakTorque = Mathf.Infinity;
+            joint.enableCollision = true;
         }
+        else if (HeldObject )
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                DropObject();
+            }
+            else if(characterController.isGrounded && Physics.Raycast(transform.position,-transform.up,out objectHit,10f,PickupAbleMask))
+            {
+                if (objectHit.collider.gameObject == HeldObject)
+                {
+                    DropObject();
+                }
+            }
+        }
+        
     }
 }
