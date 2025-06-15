@@ -19,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Player died.");
             // Handle player death
+            // Load death hud
+            // reload level
         }
     }
 }

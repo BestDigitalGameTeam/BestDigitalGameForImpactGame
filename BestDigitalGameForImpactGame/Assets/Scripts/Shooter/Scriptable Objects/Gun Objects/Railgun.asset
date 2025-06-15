@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: Railgun
   m_EditorClassIdentifier: 
   m_sWeaponName: Railgun
-  m_fDamage: 120
-  m_fRange: 300
-  m_iCurrentAmmo: 6
-  m_iClipSize: 6
-  m_fFireRate: 100
+  m_iCurrentAmmo: 0
+  m_iClipSize: 40
+  m_fFireRate: 600
   m_fReloadTime: 2.3
-  m_fProjectileSpeed: 450
+  m_fProjectileSpeed: 300
   m_bReloading: 0

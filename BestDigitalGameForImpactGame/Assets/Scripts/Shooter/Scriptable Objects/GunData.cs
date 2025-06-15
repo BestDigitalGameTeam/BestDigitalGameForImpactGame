@@ -8,8 +8,8 @@ public class GunData : ScriptableObject
     public new string m_sWeaponName;
     
     [Header("Shooting")]
-    public float m_fDamage;
-    public float m_fRange;
+    //public float m_fDamage;
+    //public float m_fRange;
 
     [Header("Reloading")] 
     public int m_iCurrentAmmo;

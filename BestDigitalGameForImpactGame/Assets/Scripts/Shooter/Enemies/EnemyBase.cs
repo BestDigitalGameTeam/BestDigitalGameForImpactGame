@@ -13,14 +13,14 @@ public abstract class EnemyBase : MonoBehaviour
     protected Transform m_PlayerTransform;      // Cached reference to player
     protected NavMeshAgent m_NavAgent;          // Handles pathfinding
     protected float m_fAttackTimer;             // Cooldown countdown
-    protected int m_iCurrentHealth;             // Current health value
+    protected float m_fCurrentHealth;             // Current health value
 
     // Called when enemy is created
     protected virtual void Start()
     {
         m_NavAgent = GetComponent<NavMeshAgent>();
         m_PlayerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
-        m_iCurrentHealth = m_iMaxHealth;
+        m_fCurrentHealth = m_iMaxHealth;
     }
     // ---
 
@@ -53,11 +53,12 @@ public abstract class EnemyBase : MonoBehaviour
     protected abstract void TryAttack();
 
     // Called when the enemy receives damage
-    public virtual void TakeDamage(int _iDamage)
+    public virtual void TakeDamage(float _fDamage)
     {
-        m_iCurrentHealth -= _iDamage;
+        m_fCurrentHealth -= _fDamage;
+        Debug.Log($"{gameObject.name} Current Health: {m_fCurrentHealth}.");
 
-        if (m_iCurrentHealth <= 0)
+        if (m_fCurrentHealth <= 0)
             Die();
     }
     // ---

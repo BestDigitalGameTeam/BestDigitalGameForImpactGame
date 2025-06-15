@@ -27,9 +27,7 @@ public class EnemyRanged : EnemyBase
 
         Vector3 v3Direction = (m_PlayerTransform.position - m_FirePoint.position).normalized;
         Rigidbody pRigidBodyProjectile = pProjectile.GetComponent<Rigidbody>();
-
-        if (pRigidBodyProjectile)
-            pRigidBodyProjectile.linearVelocity = v3Direction * m_fProjectileSpeed;
+        pRigidBodyProjectile.linearVelocity = v3Direction * m_fProjectileSpeed;
 
         Debug.Log("Ranged Enemy fires projectile.");
     }
