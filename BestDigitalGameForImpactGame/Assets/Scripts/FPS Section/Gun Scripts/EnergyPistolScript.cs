@@ -6,8 +6,8 @@ public class EnergyPistolScript : Gun
 {
     private void Start()
     {
+        base.Start();
         PlayerShoot.ShootInput += Shoot; // Subscribe Shoot method to player shooting input
-        
         gunData.m_iCurrentAmmo = gunData.m_iClipSize; // Fill ammo to clip size at start
     }
 

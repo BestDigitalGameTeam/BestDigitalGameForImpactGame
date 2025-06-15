@@ -7,7 +7,7 @@ using UnityEngine.UI;
 // Manages UI etc
 // Including dialogue subtitles
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : SingletonPersistent<UIManager>
 {
     private TextMeshProUGUI m_SubtitleText;
     [SerializedDictionary("Key", "Text")] public SerializedDictionary<int, string> AnnouncerDialogueSubtitles;
@@ -26,12 +26,6 @@ public class UIManager : Singleton<UIManager>
 
         ShowInteractUI.AddListener(ShowInteractText);
         HideInteractUI.AddListener(HideInteractText);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void ShowDialogueSubtitle(int _key)

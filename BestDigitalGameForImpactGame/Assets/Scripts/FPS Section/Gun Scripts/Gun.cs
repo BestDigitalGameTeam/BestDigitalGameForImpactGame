@@ -12,11 +12,9 @@ public class Gun : MonoBehaviour
 
     protected float m_fTimeSinceLastShot;                       // Timer to manage fire rate
 
-    private void Start()
+    protected void Start()
     {
-        PlayerShoot.ShootInput += Shoot; // Subscribe Shoot method to player shooting input
-        
-        gunData.m_iCurrentAmmo = gunData.m_iClipSize; // Fill ammo to clip size at start
+        PlayerController.Instance.SwitchWeapon.AddListener(OnSwitchWeapons);
     }
 
     private void Update()
@@ -78,5 +76,11 @@ public class Gun : MonoBehaviour
         // ---
     }
     // ---
+
+    protected void OnSwitchWeapons()
+    {
+        StopAllCoroutines();
+        gunData.m_bReloading = false;
+    }
 }
 // ---
