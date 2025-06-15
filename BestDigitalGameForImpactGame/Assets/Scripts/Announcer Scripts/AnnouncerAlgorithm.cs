@@ -286,7 +286,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     // Initial event sequence
     void FirstEventSequence()
     {
-        StartCoroutine(PlayDialogueSequence(new int[3] { 0, 1, 991}, () => m_AnchBiasKey));
+        StartCoroutine(PlayDialogueSequence(new int[3] { 0, 1, 9910}, () => m_AnchBiasKey));
         StartCoroutine(GetFirstKeyForAnchoringBias());
     }
 
@@ -419,7 +419,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                         {
                             // Maybe I was right at first?
                             // More of the content I first showed you?
-                            StartCoroutine(PlayDialogueSequence(new int[3] { 995, 65, 66 }));
+                            StartCoroutine(PlayDialogueSequence(new int[3] { 991, 65, 66 }));
                             IncreaseGenreBias(m_CurrentBias, -m_fAnchoringBiasWeight);
                             CalculateBiasWeightings();
                             StartCoroutine(InvokeEventAfterTime(GameManager.Instance.ActivateReinforcementButtons, 7.0f));
@@ -429,16 +429,20 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                 case 1:
                     {
                         // TODO: "Still no?"
+                        StartCoroutine(PlayDialogue(70));
 
                         if (m_GenreBiasList[0] - m_GenreBiasList[1] >= 10.0f)
                         {
                             // TODO: dialogue "But I was correct before!"
+                            StartCoroutine(PlayDialogueSequence(new int[3] { 991, 71, 991 }));
 
                             // randomly either make ONLY top bias or only NOT top bias
                             int onlyOne = Random.Range(0, 2);
                             if (onlyOne == 0)
                             {
                                 // TODO: "Fine! Have it your way!"
+                                StartCoroutine(PlayDialogue(72));
+                                
                                 EnableDoors(m_GenreBiasList[2] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
                                             m_GenreBiasList[2] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
                                             m_GenreBiasList[2] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer);
@@ -447,6 +451,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                             {
                                 // TODO: No! You have to like it! There's no other option!
                                 // You just need more of what you liked! More content! 
+                                StartCoroutine(PlayDialogueSequence(new int[2] { 73, 74 }));
                                 EnableDoors(m_GenreBiasList[0] == m_fGenreBias_Shooter, m_GenreBiasList[0] == m_fGenreBias_Puzzle, m_GenreBiasList[0] == m_fGenreBias_Platformer); // make it spawn lots all the same if time
                             }
                         }
@@ -454,6 +459,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                         {
                             // TODO: I don't believe you! You should try it again, then you'll see that I'm right!
                             // The pattern is what I believe it is! You can't change my mind.
+                            StartCoroutine(PlayDialogueSequence(new int[2] { 75, 76 }));
 
                             StartCoroutine(InvokeEventAfterTime(GameManager.Instance.ActivateReinforcementButtons, 6.0f));
                         }
@@ -463,6 +469,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                     {
                         // TODO: This is getting out of hand!
                         // If I am wrong, what is the pattern then?
+                        StartCoroutine(PlayDialogueSequence(new int[2] { 80, 81 }));
 
                         if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 10.0f)
                         {

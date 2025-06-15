@@ -448,8 +448,10 @@ MonoBehaviour:
       m_Calls: []
   m_DialogueAudios:
     _serializedList:
-    - Key: 991
+    - Key: 9910
       Value: {fileID: 8300000, guid: 4996000ade886cc44abd60494723c429, type: 3}
+    - Key: 991
+      Value: {fileID: 8300000, guid: 46cd4a96c2dcfcf4088c89b2bbac099e, type: 3}
     - Key: 995
       Value: {fileID: 8300000, guid: ef5a419172de9cc448a5a37236648abf, type: 3}
     - Key: 0
@@ -488,6 +490,22 @@ MonoBehaviour:
       Value: {fileID: 8300000, guid: 5a2f5a2b61979d643807fb660d7f48a3, type: 3}
     - Key: 70
       Value: {fileID: 8300000, guid: a034c62289b25d34a9bbeac2faaed36b, type: 3}
+    - Key: 71
+      Value: {fileID: 8300000, guid: 041b1f2abbce09645b18fd52d331ede5, type: 3}
+    - Key: 72
+      Value: {fileID: 8300000, guid: 311ddef7c4d778242ad3ec506f92215b, type: 3}
+    - Key: 73
+      Value: {fileID: 8300000, guid: 42da94b5fceeda74eb5475700e00e25d, type: 3}
+    - Key: 74
+      Value: {fileID: 8300000, guid: 7a9f93d66b1794b4b9d7f235bd8eb77c, type: 3}
+    - Key: 75
+      Value: {fileID: 8300000, guid: ec14a5b8ee0f7084e806b6c84b7fddde, type: 3}
+    - Key: 76
+      Value: {fileID: 8300000, guid: bc28ff8fde07b2c43afec755c07efa4a, type: 3}
+    - Key: 80
+      Value: {fileID: 8300000, guid: e08046bbb58774c418b2f130a217a6cd, type: 3}
+    - Key: 81
+      Value: {fileID: 8300000, guid: ccf0c6be0e30128469a0c123498e864d, type: 3}
   AnnouncerAudioSource: {fileID: 1285472011}
 --- !u!1 &367997409
 GameObject:
