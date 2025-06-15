@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CharacterController))]
@@ -32,6 +33,8 @@ public class PlayerController : SingletonPersistent<PlayerController>
     public AudioSource m_defaultAudioPlayer; 
 
     private LayerMask interactablesMask;
+
+    public UnityEvent SwitchWeapon; // to cancel the reload when swapping weapon to fix soft locking all guns
 
     
     //Public Ledge functions
@@ -98,11 +101,14 @@ public class PlayerController : SingletonPersistent<PlayerController>
 
         if (scroll > 0f)
         {
+            SwitchWeapon.Invoke();
             m_iCurrentGunIndex = (m_iCurrentGunIndex + 1) % guns.Length;
+
             ActivateGun(m_iCurrentGunIndex);
         }
         else if (scroll < 0f)
         {
+            SwitchWeapon.Invoke();
             m_iCurrentGunIndex = (m_iCurrentGunIndex - 1 + guns.Length) % guns.Length;
             ActivateGun(m_iCurrentGunIndex);
         }

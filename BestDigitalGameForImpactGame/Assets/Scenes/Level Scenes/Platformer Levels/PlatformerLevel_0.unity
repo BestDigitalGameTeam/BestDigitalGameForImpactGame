@@ -6926,6 +6926,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5187087003021913873, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
+      propertyPath: m_fSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187087003021913873, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
       propertyPath: SplineEasing
       value: 0
       objectReference: {fileID: 0}
