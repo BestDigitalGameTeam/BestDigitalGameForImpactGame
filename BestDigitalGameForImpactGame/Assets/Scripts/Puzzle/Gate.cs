@@ -7,7 +7,7 @@ public class Gate : MonoBehaviour
 
     private Vector3 m_v3ClosedPosition;
     private Vector3 m_v3OpenPosition;
-    private bool m_bIsOpening;
+    [SerializeField] private bool m_bIsOpening = false;
 
     private void Start()
     {
