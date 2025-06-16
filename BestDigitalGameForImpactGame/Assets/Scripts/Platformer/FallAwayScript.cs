@@ -4,6 +4,8 @@ using UnityEngine;
 public class FallAwayScript : MonoBehaviour
 {
     public float m_fDelay = 1.0f;
+    public bool m_bRespawn = false;
+    public float m_fRespawnTimer = 0.0f;
     private bool m_bDisabled;
 
     private MeshRenderer m_renderer;
@@ -32,6 +34,7 @@ public class FallAwayScript : MonoBehaviour
         m_renderer.enabled = false;
         m_collider.enabled = false;
         m_trigger.enabled = false;
+        if(m_bRespawn) Invoke(nameof(Enable),m_fRespawnTimer);
     }
 
     public void Enable()
