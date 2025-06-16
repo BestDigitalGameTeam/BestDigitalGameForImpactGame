@@ -159,19 +159,19 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
             case GenreBias.Shooter:
                 { 
                     m_fGenreBias_Shooter += m_fAnchoringBiasWeight;
-                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "ShooterLevelWorking", 15.0f));
+                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "ShooterLevel1", 15.0f));
                 }
                 break;
             case GenreBias.Platformer:
                 {
                     m_fGenreBias_Platformer += m_fAnchoringBiasWeight;
-                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PlatformerLevel_0", 15.0f));
+                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PlatformerLevel1", 15.0f));
                 }
                 break;
             case GenreBias.Puzzle:
                 { 
                     m_fGenreBias_Puzzle += m_fAnchoringBiasWeight; 
-                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PuzzleLevel_0", 15.0f));
+                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PuzzleLevel1", 15.0f));
                 }
                 break;
         }
@@ -258,26 +258,26 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     // used by UI Manager to remove captions/subtitles off screen
     private IEnumerator AudioLengthTimer(float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         DialogueEnded.Invoke();
     }
 
     private IEnumerator InvokeEventAfterTime(UnityEvent _event, float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         _event.Invoke();
     }
 
     // overloaded for event with parameters
     private IEnumerator InvokeEventAfterTime<T>(UnityEvent<T> _event, T _args, float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         _event.Invoke(_args);
     }
 
     private IEnumerator RunFunctionAfterTime<T>(System.Action<T> _func, T _args, float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         _func.Invoke(_args);
     }
     #endregion
@@ -298,10 +298,10 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     }
 
     // coroutine for getting players first action
-    // does not start straight away, has a short wait (WaitForSecondsRealtime)
+    // does not start straight away, has a short wait (WaitForSeconds)
     private IEnumerator GetFirstKeyForAnchoringBias()
     {
-        yield return new WaitForSecondsRealtime(5.0f);
+        yield return new WaitForSeconds(5.0f);
         KeyCode[] keysToCheck = { KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.Space, KeyCode.Mouse0, KeyCode.E , KeyCode.R};
 
         float shooter = 0.0f;
@@ -353,7 +353,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
 
     private IEnumerator EnableDoorsAfterTime(bool _bShooter, bool _bPuzzle, bool _bPlatformer, float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         EnableDoors(_bShooter, _bPuzzle, _bPlatformer);
     }
 

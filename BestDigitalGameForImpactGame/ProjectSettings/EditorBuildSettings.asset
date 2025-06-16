@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TestingScene.unity
     guid: 5a5c9e6bb9476204997a8c3b3ca209d9
   - enabled: 1
-    path: Assets/Scenes/Level Scenes/FPS Levels/ShooterLevelWorking.unity
+    path: Assets/Scenes/Level Scenes/FPS Levels/ShooterLevel1.unity
     guid: b1cf74570ff778b4c84b4685ffb88c71
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

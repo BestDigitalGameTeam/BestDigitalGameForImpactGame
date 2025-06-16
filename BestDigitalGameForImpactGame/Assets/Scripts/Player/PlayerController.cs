@@ -96,6 +96,9 @@ public class PlayerController : SingletonPersistent<PlayerController>
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        { GameManager.Instance.PauseGame.Invoke(!GameManager.Instance.isPaused); }
+
         // Scroll Selected Gun
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
@@ -158,21 +161,24 @@ public class PlayerController : SingletonPersistent<PlayerController>
         {
             playerController.Move(m_vec3MoveDir * Time.deltaTime);
         }
-        
-        //Camera movement
-        rotationX += -Input.GetAxis("Mouse Y") * m_fSensitivity;
-        rotationX = Mathf.Clamp(rotationX, -m_fCamXLimit, m_fCamXLimit);
-        PlayerCam.transform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
-        transform.rotation *= Quaternion.Euler(0.0f, Input.GetAxis("Mouse X"), 0.0f);
 
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Time.timeScale > 0)
         {
-            //Crouch - this can be implemented better
-            playerController.height = 0.5f;
-        }
-        else
-        {
-            playerController.height = 2.0f;
+            //Camera movement
+            rotationX += -Input.GetAxis("Mouse Y") * m_fSensitivity;
+            rotationX = Mathf.Clamp(rotationX, -m_fCamXLimit, m_fCamXLimit);
+            PlayerCam.transform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
+            transform.rotation *= Quaternion.Euler(0.0f, Input.GetAxis("Mouse X"), 0.0f);
+
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                //Crouch - this can be implemented better
+                playerController.height = 0.5f;
+            }
+            else
+            {
+                playerController.height = 2.0f;
+            }
         }
         
         //Disabled sound effects cause it was getting annoying
