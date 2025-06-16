@@ -17,6 +17,7 @@ public class UIManager : SingletonPersistent<UIManager>
     public bool IntActive = false;
     [SerializeField] Image InteractImage; // change to text?
     [SerializeField] Canvas PauseCanvas;
+    public AudioSource m_AudioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -74,5 +75,10 @@ public class UIManager : SingletonPersistent<UIManager>
         {
             PauseCanvas.enabled = false;
         }
+    }
+
+    public void PlayUIAudio(AudioClip _audio)
+    {
+        m_AudioSource.PlayOneShot(_audio, GameManager.Instance.EffectsVolume);
     }
 }

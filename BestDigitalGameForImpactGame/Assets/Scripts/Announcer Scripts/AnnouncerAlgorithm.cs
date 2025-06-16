@@ -75,6 +75,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     {
         GameManager.Instance.VoidLoaded.AddListener(EnterVoid);
         GameManager.Instance.PlayerPressedReinforcementButton.AddListener(PlayerPressedButton);
+        GameManager.Instance.PauseGame.AddListener(PauseDialogue);
 
         ShooterDoor = Instantiate(ShooterDoorPrefab, new Vector3(10.0f, 0.0f, -5.0f), new Quaternion());
         PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(10.0f, 0.0f, 0.0f), new Quaternion());
@@ -342,6 +343,12 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
             SetInitialBias(GenreBias.Puzzle);
             m_AnchBiasKey = 11;
         }
+    }
+
+    private void PauseDialogue(bool _paused)
+    {
+        if (_paused) AnnouncerAudioSource.Pause();
+        else AnnouncerAudioSource.UnPause();
     }
 
     private void EnableDoors(bool _bShooter, bool _bPuzzle, bool _bPlatformer)

@@ -9,10 +9,13 @@ public class PlayerShoot : MonoBehaviour
     // Called once per frame
     private void Update()
     {
-        // Check if the left mouse button is held down
-        if (Input.GetMouseButton(0)) // 0 = Left Mouse Button
-            ShootInput?.Invoke(); // Invoke the ShootInput event if it has subscribers (null-safe)
-        // ---
+        if (Time.timeScale > 0)
+        {
+            // Check if the left mouse button is held down
+            if (Input.GetMouseButton(0)) // 0 = Left Mouse Button
+                ShootInput?.Invoke(); // Invoke the ShootInput event if it has subscribers (null-safe)
+                                      // ---
+        }
     }
     // ---
 }
