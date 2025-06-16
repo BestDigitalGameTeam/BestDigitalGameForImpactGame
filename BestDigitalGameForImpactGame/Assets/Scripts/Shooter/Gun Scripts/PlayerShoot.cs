@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 // Handles player shooting input
-public class PlayerShoot : MonoBehaviour
+/*public class PlayerShoot : MonoBehaviour
 {
     public static Action ShootInput; // Static event to notify when the player attempts to shoot
 
@@ -15,5 +15,27 @@ public class PlayerShoot : MonoBehaviour
         // ---
     }
     // ---
+}*/
+public class PlayerShoot : MonoBehaviour
+{
+    private WeaponManager m_weaponManager;
+
+    private void Start()
+    {
+        m_weaponManager = GetComponentInChildren<WeaponManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(0)) // 0 = Left Mouse Button
+            m_weaponManager.CurrentGunScript?.Shoot();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            var gun = m_weaponManager.CurrentGunScript;
+            if (gun != null && !gun.IsReloading() && !gun.IsAmmoFull())
+                gun.StartReload();
+        }
+    }
 }
 // ---

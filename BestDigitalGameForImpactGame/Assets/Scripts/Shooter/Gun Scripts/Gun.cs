@@ -7,10 +7,15 @@ public class Gun : MonoBehaviour
     [SerializeField] protected GunData gunData;                         // ScriptableObject holding gun stats and state
     [SerializeField] protected GameObject projectilePrefab;             // Prefab to instantiate when shooting
     [SerializeField] protected Transform projectileSpawnPoint;          // Where the projectile spawns from
-    public AudioSource m_shootAudioPlayer;                    // Audio source for shooting sound
+    public AudioSource m_shootAudioPlayer;                              // Audio source for shooting sound
     [SerializeField] protected AudioClip m_ShootAudio;
 
-    protected float m_fTimeSinceLastShot;                       // Timer to manage fire rate
+    protected float m_fTimeSinceLastShot;                               // Timer to manage fire rate
+    
+    public virtual bool IsReloading() => gunData.m_bReloading;
+    public virtual bool IsAmmoFull() => gunData.m_iCurrentAmmo >= gunData.m_iClipSize;
+    public virtual void StartReload() => StartCoroutine(Reload());
+
 
     protected void Start()
     {
@@ -22,8 +27,8 @@ public class Gun : MonoBehaviour
         m_fTimeSinceLastShot += Time.deltaTime; // Increment time since last shot
 
         // Check for reload input (R key), only reload if not full and not already reloading
-        if (Input.GetKeyDown(KeyCode.R) && !gunData.m_bReloading && gunData.m_iCurrentAmmo < gunData.m_iClipSize)
-            StartCoroutine(Reload());
+        /*if (Input.GetKeyDown(KeyCode.R) && !gunData.m_bReloading && gunData.m_iCurrentAmmo < gunData.m_iClipSize)
+            StartCoroutine(Reload());*/
         // ---
     }
 
@@ -31,7 +36,7 @@ public class Gun : MonoBehaviour
     private bool CanShoot() => !gunData.m_bReloading && m_fTimeSinceLastShot >= 60.0f / gunData.m_fFireRate;
 
     // Called when player attempts to shoot
-    private void Shoot()
+    public virtual void Shoot()
     {
         // Only shoot if there is ammo and fire rate condition is met
         if (gunData.m_iCurrentAmmo <= 0 || !CanShoot()) return;

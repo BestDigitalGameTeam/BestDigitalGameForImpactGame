@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using System.Collections;
 
 // Handles gun behavior: shooting, reloading, and audio
@@ -29,7 +29,7 @@ public class EnergyPistolScript : Gun
     {
         // Only shoot if there is ammo and fire rate condition is met
         if (gunData.m_iCurrentAmmo <= 0 || !CanShoot()) return;
-        
+
         // Instantiate projectile at spawn point and apply velocity
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
         Rigidbody projectileRigidBody = projectile.GetComponent<Rigidbody>();
@@ -40,7 +40,7 @@ public class EnergyPistolScript : Gun
         --gunData.m_iCurrentAmmo;
         m_fTimeSinceLastShot = 0;
         // ---
-        
+
         OnGunShot(); // Play Effects
     }
 
@@ -61,4 +61,48 @@ public class EnergyPistolScript : Gun
     }
     // ---
 }
-// ---
+// ---*/
+
+using UnityEngine;
+using System.Collections;
+
+// Inherit from WeaponBase or your Gun class
+public class EnergyPistolScript : Gun
+{
+    private void Start()
+    {
+        gunData.m_iCurrentAmmo = gunData.m_iClipSize;
+    }
+
+    private void Update()
+    {
+        m_fTimeSinceLastShot += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.R) && !gunData.m_bReloading && gunData.m_iCurrentAmmo < gunData.m_iClipSize)
+            StartCoroutine(Reload());
+    }
+
+    public override void Shoot()
+    {
+        if (gunData.m_iCurrentAmmo <= 0 || !CanShoot()) return;
+
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+        Rigidbody projectileRigidBody = projectile.GetComponent<Rigidbody>();
+        projectileRigidBody.linearVelocity = projectileSpawnPoint.forward * gunData.m_fProjectileSpeed;
+
+        --gunData.m_iCurrentAmmo;
+        m_fTimeSinceLastShot = 0;
+
+        OnGunShot();
+    }
+
+    private bool CanShoot() => !gunData.m_bReloading && m_fTimeSinceLastShot >= 60.0f / gunData.m_fFireRate;
+
+    private IEnumerator Reload()
+    {
+        gunData.m_bReloading = true;
+        yield return new WaitForSeconds(gunData.m_fReloadTime);
+        gunData.m_iCurrentAmmo = gunData.m_iClipSize;
+        gunData.m_bReloading = false;
+    }
+}
