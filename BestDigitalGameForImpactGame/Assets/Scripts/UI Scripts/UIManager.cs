@@ -21,8 +21,16 @@ public class UIManager : SingletonPersistent<UIManager>
     void Start()
     {
         m_SubtitleText = GetComponentInChildren<TextMeshProUGUI>(true);
-        AnnouncerAlgorithm.Instance.AnnouncerDialogue.AddListener(ShowDialogueSubtitle);
-        AnnouncerAlgorithm.Instance.DialogueEnded.AddListener(HideDialogueSubtitle);
+        if (AnnouncerAlgorithm.Instance)
+        {
+            AnnouncerAlgorithm.Instance.AnnouncerDialogue.AddListener(ShowDialogueSubtitle);
+            AnnouncerAlgorithm.Instance.DialogueEnded.AddListener(HideDialogueSubtitle);
+        }
+        else
+        {
+            Debug.LogWarning("AnnouncerAlgorithm Not Set");
+        }
+        
 
         ShowInteractUI.AddListener(ShowInteractText);
         HideInteractUI.AddListener(HideInteractText);

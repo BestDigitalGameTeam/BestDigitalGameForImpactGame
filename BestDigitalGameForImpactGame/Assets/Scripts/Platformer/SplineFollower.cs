@@ -9,7 +9,6 @@ public class SplineFollower : MonoBehaviour
     public enum SplineLoopType
     {
         //How the platform should loop on the spline
-        Once,
         Continuous,
         PingPong,
     }
@@ -27,8 +26,10 @@ public class SplineFollower : MonoBehaviour
     public Easing SplineEasing;
     public SplineLoopType LoopType;
     public float m_fSpeed = 0.2f;
-    private float m_fTime = 0.0f;
-    private float m_fLoopMultiplier = 0.0f;
+    public float m_fStartDelay;
+    public bool m_bReversed;
+    private float m_fTime;
+    private float m_fLoopMultiplier;
 
     private Vector3 lastPos;
     private Vector3 deltaPos;
@@ -41,19 +42,22 @@ public class SplineFollower : MonoBehaviour
 
     public void StartMovement()
     {
-        //Start Movement on platform (only works on SplineLoopType.Once platforms)
-        if (LoopType != SplineLoopType.Once)
+        if (m_bReversed)
         {
-            //if called on platform that isn't a one time platform
-            Debug.LogError("Start Movement called on non-SplineLoopType.Once Moving Platform");
+            m_fLoopMultiplier = -1.0f;
         }
-
-        m_fLoopMultiplier = 1.0f;
+        else
+        {
+            m_fLoopMultiplier = 1.0f;
+        }
     }
     
     void Start()
     {
         lastPos = transform.position;
+        if (m_bReversed) m_fTime = 1.0f;
+        CalculatePosition();
+        Invoke(nameof(StartMovement), m_fStartDelay);
     }
 
     private float EaseInCalc(float _fX)
@@ -71,11 +75,8 @@ public class SplineFollower : MonoBehaviour
         return (float)-(Math.Cos(Math.PI * _fX) - 1) / 2;
     }
 
-    void Update()
+    private void CalculatePosition()
     {
-        //Updating Platform Position based on loop type and easing
-        m_fTime += m_fSpeed * m_fLoopMultiplier * Time.deltaTime;
-        
         switch (SplineEasing)
         {
             case Easing.None:
@@ -93,44 +94,43 @@ public class SplineFollower : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
 
-        switch (LoopType)
+    void Update()
+    {
+        if (m_fLoopMultiplier != 0.0f)
         {
-            case SplineLoopType.Once:
-                if (m_fTime > 1.0f)
-                {
-                    m_fLoopMultiplier = 0.0f;
-                }
-                else
-                {
-                    m_fLoopMultiplier = 1.0f;
-                }
-                break;
-            case SplineLoopType.Continuous:
-                m_fLoopMultiplier = 1.0f;
-                if (m_fTime > 1.0f)
-                {
-                    m_fTime = 0.0f;
-                }
-                break;
-            case SplineLoopType.PingPong:
-                
-                if (m_fTime >= 1.0f)
-                {
-                    m_fLoopMultiplier = -1.0f;
-                }
-                else if (m_fTime <= 0.0f)
-                {
-                    m_fLoopMultiplier = 1.0f;
-                }
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            //Updating Platform Position based on loop type and easing
+            m_fTime += m_fSpeed * m_fLoopMultiplier * Time.deltaTime;
+            
+            CalculatePosition();
+    
+            switch (LoopType)
+            {
+                case SplineLoopType.Continuous:
+                    if (m_fTime > 1.0f)
+                    {
+                        m_fTime = 0.0f;
+                    }
+                    break;
+                case SplineLoopType.PingPong:
+                    
+                    if (m_fTime >= 1.0f)
+                    {
+                        m_fLoopMultiplier = -1.0f;
+                    }
+                    else if (m_fTime <= 0.0f)
+                    {
+                        m_fLoopMultiplier = 1.0f;
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            deltaPos = transform.position - lastPos;
+            lastPos = transform.position;
         }
-        
-        
-        deltaPos = transform.position - lastPos;
-        lastPos = transform.position;
     }
 }
 

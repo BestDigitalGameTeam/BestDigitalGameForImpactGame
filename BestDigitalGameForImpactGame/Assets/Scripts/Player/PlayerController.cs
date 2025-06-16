@@ -153,7 +153,11 @@ public class PlayerController : SingletonPersistent<PlayerController>
         {
             m_vec3MoveDir.y -= m_fGravityForce * Time.deltaTime;
         }
-        playerController.Move(m_vec3MoveDir * Time.deltaTime);
+
+        if (playerController.enabled)
+        {
+            playerController.Move(m_vec3MoveDir * Time.deltaTime);
+        }
         
         //Camera movement
         rotationX += -Input.GetAxis("Mouse Y") * m_fSensitivity;
