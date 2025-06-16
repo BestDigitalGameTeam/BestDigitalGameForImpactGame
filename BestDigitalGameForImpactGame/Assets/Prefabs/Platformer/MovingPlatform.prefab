@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 1361571074050690425}
   - component: {fileID: 4711933117834595782}
   m_Layer: 0
-  m_Name: Spline
+  m_Name: MovingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

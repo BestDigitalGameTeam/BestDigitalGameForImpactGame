@@ -7,7 +7,11 @@ public class DeathPlaneScript : MonoBehaviour
 
     private void Start()
     {
-        SpawnPos = GameManager.Instance.SpawnPos;
+        if (!SpawnPos)
+        {
+            //If not preset use gameManager spawn
+            SpawnPos = GameManager.Instance.SpawnPos;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -15,7 +19,7 @@ public class DeathPlaneScript : MonoBehaviour
         {
             if (!SpawnPos) SpawnPos = GameManager.Instance.SpawnPos;
             CharacterController controller = other.GetComponent<CharacterController>();
-            if (controller != null)
+            if (controller)
             {
                 // Temporarily disable CharacterController to avoid physics glitches
                 controller.enabled = false;
@@ -26,6 +30,11 @@ public class DeathPlaneScript : MonoBehaviour
             else
             {
                 other.transform.position = SpawnPos.position;
+            }
+
+            foreach (FallAwayScript tempPlatForm in FindObjectsByType<FallAwayScript>(FindObjectsSortMode.None))
+            {
+                tempPlatForm.Enable();
             }
         }
     }
