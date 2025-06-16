@@ -184,7 +184,8 @@ GameObject:
   - component: {fileID: 5218572395662045524}
   - component: {fileID: 5079615630243033513}
   - component: {fileID: 177393041796097315}
-  m_Layer: 0
+  - component: {fileID: 3426326203811024321}
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -260,6 +261,9 @@ MonoBehaviour:
   m_bCanMove: 1
   m_bWasSprinting: 0
   m_defaultAudioPlayer: {fileID: 1431092018179262778}
+  SwitchWeapon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4215232813362147330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +327,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317c7daf05037784ab26b91b027e22ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fRayDist: 5
+  m_fRayDist: 2
+--- !u!114 &3426326203811024321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633222660248086224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffa83e67b725c64cbd4392bb38ae862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_iMaxHealth: 100
 --- !u!1 &5860549773269497548
 GameObject:
   m_ObjectHideFlags: 0

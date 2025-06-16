@@ -10,6 +10,7 @@ TagManager:
   - PuzzleCube
   - PuzzleSphere
   - PuzzlePyramid
+  - Enemy
   layers:
   - Default
   - TransparentFX
