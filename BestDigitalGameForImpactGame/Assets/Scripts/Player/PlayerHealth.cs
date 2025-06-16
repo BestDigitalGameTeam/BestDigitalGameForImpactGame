@@ -3,19 +3,19 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int m_iMaxHealth = 100;
-    private int m_iCurrentHealth;
+    private float m_fCurrentHealth;
 
     private void Start()
     {
-        m_iCurrentHealth = m_iMaxHealth;
+        m_fCurrentHealth = m_iMaxHealth;
     }
 
-    public void TakeDamage(int _iDamage)
+    public void TakeDamage(float _fDamage)
     {
-        m_iCurrentHealth -= _iDamage;
-        Debug.Log("Player HP: " + m_iCurrentHealth);
+        m_fCurrentHealth -= _fDamage;
+        Debug.Log("Player HP: " + m_fCurrentHealth);
 
-        if (m_iCurrentHealth <= 0)
+        if (m_fCurrentHealth <= 0)
         {
             Debug.Log("Player died.");
             // Handle player death

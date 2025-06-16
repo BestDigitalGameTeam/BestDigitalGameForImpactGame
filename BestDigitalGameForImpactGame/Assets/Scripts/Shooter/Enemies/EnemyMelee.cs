@@ -10,7 +10,7 @@ public class EnemyMelee : EnemyBase
             Debug.Log("Melee Enemy attacks!");
 
             // Apply damage to player
-            m_PlayerTransform.GetComponent<PlayerHealth>()?.TakeDamage(m_iDamage);
+            m_PlayerTransform.GetComponent<PlayerHealth>()?.TakeDamage(m_fDamage);
 
             // Reset attack cooldown
             m_fAttackTimer = m_fAttackCooldown;

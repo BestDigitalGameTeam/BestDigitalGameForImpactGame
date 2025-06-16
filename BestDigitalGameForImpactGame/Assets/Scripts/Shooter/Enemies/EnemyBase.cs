@@ -1,73 +1,225 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public abstract class EnemyBase : MonoBehaviour
+// Enumeration for enemy behavior states
+public enum EnemyState
 {
-    [Header("Common Settings")]
-    [SerializeField] protected float m_fAttackRange = 2f;       // Distance required to attack
-    [SerializeField] protected float m_fAttackCooldown = 1.5f;  // Time between attacks
-    [SerializeField] protected int m_iDamage = 10;              // Damage dealt to the player
-    [SerializeField] protected int m_iMaxHealth = 100;          // Enemy's max health
+    Idle,
+    Chasing,
+    Attacking
+}
 
-    protected Transform m_PlayerTransform;      // Cached reference to player
-    protected NavMeshAgent m_NavAgent;          // Handles pathfinding
-    protected float m_fAttackTimer;             // Cooldown countdown
-    protected float m_fCurrentHealth;             // Current health value
+// Base enemy behavior script
+public class EnemyBase : MonoBehaviour
+{
+    [Header("Combat")] [SerializeField] protected float m_fMaxHealth = 100.0f;  // Total health
+    [SerializeField] protected float m_fAttackRange = 2.0f;                     // Distance required to attack
+    [SerializeField] protected float m_fAttackCooldown = 1.5f;                  // Time between attacks
+    [SerializeField] protected float m_fVisionRange = 20.0f;                    // How far the enemy can see
+    [SerializeField] protected float m_fVisionAngle = 60.0f;                    // Cone angle for vision
+    [SerializeField] protected float m_fDamage = 10.0f;                         // Damage dealt to the player
 
-    // Called when enemy is created
+    [Header("Idle Wandering")] [SerializeField]
+    private float m_fIdleWanderRadius = 5.0f;                                   // How far to wander during idle
+
+    [SerializeField] private float m_fIdleWaitTime = 3.0f;                      // Wait time before picking next spot
+
+    private float m_fIdleTimer;                                                 // Countdown for next idle movement
+
+    protected float m_fCurrentHealth;                                           // Current HP
+    protected Transform m_PlayerTransform;                                      // Reference to the player
+    protected NavMeshAgent m_Agent;                                             // Pathfinding agent
+    protected float m_fAttackTimer;                                             // Cooldown timer
+    protected EnemyState m_State = EnemyState.Idle;                             // Current state
+
+    // Initialization
     protected virtual void Start()
     {
-        m_NavAgent = GetComponent<NavMeshAgent>();
+        m_fCurrentHealth = m_fMaxHealth;
         m_PlayerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
-        m_fCurrentHealth = m_iMaxHealth;
+        m_Agent = GetComponent<NavMeshAgent>();
     }
     // ---
 
-    // Handles movement and attack range checks
+    // Called every frame
     protected virtual void Update()
+    {
+        m_fAttackTimer -= Time.deltaTime;
+
+        // State machine logic
+        switch (m_State)
+        {
+            case EnemyState.Idle:
+                IdleWander(); // Wander randomly
+                LookForPlayer(); // Check for player
+                break;
+
+            case EnemyState.Chasing:
+                MoveToPlayer(); // Move toward player
+                break;
+
+            case EnemyState.Attacking:
+                TryAttack(); // Try to attack
+                break;
+        }
+    }
+    // ---
+
+    // Handles random wandering during idle state
+    private void IdleWander()
+    {
+        m_fIdleTimer -= Time.deltaTime;
+
+        // If not currently moving and timer expired
+        if (!m_Agent.pathPending && m_Agent.remainingDistance <= m_Agent.stoppingDistance)
+        {
+            if (!(m_fIdleTimer <= 0f)) return;
+            Vector3 v3NewPos;
+            // Try to find a random reachable point on the NavMesh
+            if (GetRandomNavMeshLocation(transform.position, m_fIdleWanderRadius, out v3NewPos))
+            {
+                m_Agent.SetDestination(v3NewPos);
+                m_fIdleTimer = m_fIdleWaitTime;
+            }
+            // ---
+        }
+        // ---
+    }
+    // ---
+
+    // Detects the player if within the enemy's vision cone
+    protected void LookForPlayer()
     {
         if (!m_PlayerTransform) return;
 
-        float fDist = Vector3.Distance(transform.position, m_PlayerTransform.position);
+        Vector3 v3ToPlayer = m_PlayerTransform.position - transform.position;
+        float fAngle = Vector3.Angle(transform.forward, v3ToPlayer);
+        float fDistance = v3ToPlayer.magnitude;
 
-        // Move toward player if out of attack range
-        if (fDist > m_fAttackRange)
+        // Check angle and distance to detect player
+        if (fDistance <= m_fVisionRange && fAngle <= m_fVisionAngle / 2f)
         {
-            m_NavAgent.isStopped = false;
-            m_NavAgent.SetDestination(m_PlayerTransform.position);
+            m_State = EnemyState.Chasing;
+        }
+    }
+
+    // Moves the enemy toward the player
+    protected void MoveToPlayer()
+    {
+        if (!m_PlayerTransform) return;
+
+        m_Agent.SetDestination(m_PlayerTransform.position);
+
+        // If close enough to attack, switch states
+        float fDistance = Vector3.Distance(transform.position, m_PlayerTransform.position);
+        if (!(fDistance <= m_fAttackRange)) return;
+        m_Agent.ResetPath();
+        m_State = EnemyState.Attacking;
+        // ---
+    }
+
+    // Handles enemy attack logic
+    protected virtual void TryAttack()
+    {
+        if (!m_PlayerTransform) return;
+
+        float fDistance = Vector3.Distance(transform.position, m_PlayerTransform.position);
+
+        // If player moved out of range, chase again
+        if (fDistance > m_fAttackRange)
+        {
+            m_State = EnemyState.Chasing;
+            return;
         }
         // ---
-        
-        else // In range to attack
-        {
-            m_NavAgent.isStopped = true;
-            TryAttack();
-        }
 
-        m_fAttackTimer -= Time.deltaTime;
+        // If cooldown expired, perform attack
+        if (!(m_fAttackTimer <= 0f)) return;
+        Debug.Log("Enemy attacks player!");
+        m_fAttackTimer = m_fAttackCooldown;
+        // Apply damage to player here
+        // ---
     }
-    // ---
 
-    // Implemented by child classes to define specific attack behavior
-    protected abstract void TryAttack();
-
-    // Called when the enemy receives damage
+    // Applies damage to the enemy
     public virtual void TakeDamage(float _fDamage)
     {
         m_fCurrentHealth -= _fDamage;
-        Debug.Log($"{gameObject.name} Current Health: {m_fCurrentHealth}.");
 
         if (m_fCurrentHealth <= 0)
             Die();
+        else
+            m_State = EnemyState.Chasing; // Respond aggressively
     }
     // ---
 
-    // Handles enemy death
+    // Handles death behavior
     protected virtual void Die()
     {
-        Debug.Log($"{gameObject.name} died.");
-        Destroy(gameObject); // Remove from scene
+        Destroy(gameObject);
     }
     // ---
+
+    // Finds a random valid position on the NavMesh
+    private bool GetRandomNavMeshLocation(Vector3 _origin, float _radius, out Vector3 _result)
+    {
+        for (int i = 0; i < 10; i++) // Try up to 10 random points
+        {
+            Vector3 v3Random = _origin + Random.insideUnitSphere * _radius;
+
+            // Check if position is on NavMesh
+            if (!NavMesh.SamplePosition(v3Random, out NavMeshHit hit, 1.0f, NavMesh.AllAreas)) continue;
+            _result = hit.position;
+            return true;
+            // ---
+        }
+
+        // Fallback: stay at current position
+        _result = _origin;
+        return false;
+    }
+    // ---
+
+    private void OnDrawGizmosSelected()
+    {
+        // Draw vision radius
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, m_fVisionRange);
+        // ---
+
+        // Draw vision angle boundaries
+        Vector3 forward = transform.forward;
+        Vector3 leftBoundary = Quaternion.Euler(0, -m_fVisionAngle / 2f, 0) * forward;
+        Vector3 rightBoundary = Quaternion.Euler(0, m_fVisionAngle / 2f, 0) * forward;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(transform.position, transform.position + leftBoundary * m_fVisionRange);
+        Gizmos.DrawLine(transform.position, transform.position + rightBoundary * m_fVisionRange);
+        // ---
+
+#if UNITY_EDITOR
+        // Show player detection line if player exists
+        if (Application.isPlaying && m_PlayerTransform)
+        {
+            Vector3 v3ToPlayer = m_PlayerTransform.position - transform.position;
+            float fAngle = Vector3.Angle(transform.forward, v3ToPlayer);
+            float fDistance = v3ToPlayer.magnitude;
+
+            // Check if within cone
+            bool bInVision = fDistance <= m_fVisionRange && fAngle <= m_fVisionAngle / 2f;
+
+            Gizmos.color = bInVision ? Color.green : Color.red;
+            Gizmos.DrawLine(transform.position, m_PlayerTransform.position);
+            // ---
+
+            // Draw a label
+            UnityEditor.Handles.Label(
+                transform.position + Vector3.up * 2,
+                bInVision ? "Player Detected" : "Player Not Detected"
+            );
+            // ---
+        }
+        // ---
+#endif
+    }
 }
