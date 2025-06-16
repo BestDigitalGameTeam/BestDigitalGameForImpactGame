@@ -16,7 +16,7 @@ public class PuzzleReceptacle : MonoBehaviour
         if (bIsOccupied || !other.CompareTag(GetExpectedTag())) return;
 
         bIsOccupied = true;
-        SnapToCenter(other.transform);
+        //SnapToCenter(other.transform); // <--- Uncomment to re-enable snapping to center
         Debug.Log($"{eReceptacleType} puzzle piece placed.");
 
         if (AllReceptaclesFilled())
