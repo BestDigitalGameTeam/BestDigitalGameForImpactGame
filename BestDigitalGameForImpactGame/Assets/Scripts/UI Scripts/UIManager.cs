@@ -16,6 +16,8 @@ public class UIManager : SingletonPersistent<UIManager>
     public UnityEvent HideInteractUI;
     public bool IntActive = false;
     [SerializeField] Image InteractImage; // change to text?
+    [SerializeField] Canvas PauseCanvas;
+    public AudioSource m_AudioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +36,8 @@ public class UIManager : SingletonPersistent<UIManager>
 
         ShowInteractUI.AddListener(ShowInteractText);
         HideInteractUI.AddListener(HideInteractText);
+        GameManager.Instance.PauseGame.AddListener(ShowPauseMenu);
+        PauseCanvas.enabled = false;
     }
 
     private void ShowDialogueSubtitle(int _key)
@@ -59,5 +63,22 @@ public class UIManager : SingletonPersistent<UIManager>
     {
         IntActive = false;
         InteractImage.enabled = false;
+    }
+
+    private void ShowPauseMenu(bool _show)
+    {
+        if (_show)
+        {
+            PauseCanvas.enabled = true;
+        }
+        else
+        {
+            PauseCanvas.enabled = false;
+        }
+    }
+
+    public void PlayUIAudio(AudioClip _audio)
+    {
+        m_AudioSource.PlayOneShot(_audio, GameManager.Instance.EffectsVolume);
     }
 }

@@ -35,7 +35,7 @@ public class ObjectHoldingScript : MonoBehaviour
 
     private void Update()
     {
-        if (!HeldObject && Physics.Raycast(transform.position, CameraTrans.forward, out objectHit, fRayDist, PickupAbleMask))
+        if (!HeldObject && Physics.Raycast(CameraTrans.position, CameraTrans.forward, out objectHit, fRayDist, PickupAbleMask))
         {
             UIManager.Instance.ShowInteractUI.Invoke();
             if (Input.GetKeyDown(KeyCode.E))
