@@ -10,11 +10,6 @@ public class scrDoorTrigger : MonoBehaviour
 
     [SerializeField] private string[] m_LevelNames;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

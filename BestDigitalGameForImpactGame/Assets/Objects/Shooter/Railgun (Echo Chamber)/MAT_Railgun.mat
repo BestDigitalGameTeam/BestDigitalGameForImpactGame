@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MAT_Railgun
+  m_Shader: {fileID: -6465566751694194690, guid: 0e573e39f044fc849ac6cbfdfbe0bb83, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_6035c8a9c987426d845ae15a3d3664dc_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c7e4a1306988c1043805fd1c3040d9c4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_75338d999dcb45d985f43ec700066b41_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 38a661ae0d774ce4093314f6cfc502c4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7d61fa124dfb41cab70a6d06e2a70c12_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 8f0aad3fef2aa7b40bbdb8fef822e160, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_977113cddeba49ee8e68e6b2133d10d4_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: e7441cd32c6da8e448d3f99b35a83dc8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d0d42df928684c979f06bda4e9801404_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: b006330f8c37967469de2d2e26d343d9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_f5319a94baf14dd9ae0575035ceec7bb_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: b006330f8c37967469de2d2e26d343d9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    m_Colors: []
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &7315664694262474969
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0

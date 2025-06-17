@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using UnityEngine.Events;
-using AYellowpaper.SerializedCollections;
-using Unity.VisualScripting; // for serialised dictionary
+using AYellowpaper.SerializedCollections; // for serialised dictionary
 
 // File Authour: Charli 
 // all the switch statements are kinda gross anyone have better idea?
@@ -36,15 +35,21 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     public GenreBias m_CurrentBias = GenreBias.None;
 
     // how much the anchoring bias is affecting the AI's decision making
-    [SerializeField] private float m_fAnchoringBiasWeight = 5;
+    [SerializeField] private float m_fAnchoringBiasWeight = 5.0f;
     // how much confirmatin bias is affecting weighting
-    [SerializeField] private float m_fConfirmationBiasWeight = 2;
+    [SerializeField] private float m_fConfirmationBiasWeight = 2.0f;
 
-    [SerializeField] private float m_PlayerReinforcementAmount = 1;
+    [SerializeField] private float m_PlayerReinforcementAmount = 1.0f;
 
-    [SerializeField] private GameObject ShooterDoor;
-    [SerializeField] private GameObject PuzzleDoor;
-    [SerializeField] private GameObject PlatformerDoor;
+    [SerializeField] private GameObject ShooterDoorPrefab;
+    private GameObject ShooterDoor;
+    [SerializeField] private GameObject PuzzleDoorPrefab;
+    private GameObject PuzzleDoor;
+    [SerializeField] private GameObject PlatformerDoorPrefab;
+    private GameObject PlatformerDoor;
+
+    [SerializeField] private GameObject TestDoorPref;
+    private GameObject TestDoor;
 
     [SerializeField] private int m_TimesVisitedVoid = 1;
 
@@ -59,16 +64,45 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
 
     // event-based variables
     private int m_AnchBiasKey;
+
+    private bool m_bReinforcementComplete = false;
+    private int m_iTimesDeniedThisVoid = 0;
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManager.Instance.VoidLoaded.AddListener(CalculateBiasWeightings);
+        GameManager.Instance.VoidLoaded.AddListener(EnterVoid);
+        GameManager.Instance.PlayerPressedReinforcementButton.AddListener(PlayerPressedButton);
+        GameManager.Instance.PauseGame.AddListener(PauseDialogue);
+
+        ShooterDoor = Instantiate(ShooterDoorPrefab, new Vector3(10.0f, 0.0f, -5.0f), new Quaternion());
+        PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(10.0f, 0.0f, 0.0f), new Quaternion());
+        PlatformerDoor = Instantiate(PlatformerDoorPrefab, new Vector3(10.0f, 0.0f, 5.0f), new Quaternion());
+
+        TestDoor = Instantiate(TestDoorPref, new Vector3(-10.0f, 1.0f, 0.0f), new Quaternion());
         ShooterDoor.SetActive(false);
         PuzzleDoor.SetActive(false);
         PlatformerDoor.SetActive(false);
         FirstEventSequence();
+    }
+
+    private void EnterVoid()
+    {
+        m_iTimesDeniedThisVoid = 0;
+        m_TimesVisitedVoid++;
+
+        ShooterDoor = Instantiate(ShooterDoorPrefab, new Vector3(10.0f, 1.0f, -20.0f), new Quaternion());
+        PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(10.0f, 1.0f, 0.0f), new Quaternion());
+        PlatformerDoor = Instantiate(PlatformerDoorPrefab, new Vector3(10.0f, 1.0f, 20.0f), new Quaternion());
+        ShooterDoor.SetActive(false);
+        PuzzleDoor.SetActive(false);
+        PlatformerDoor.SetActive(false);
+
+        TestDoor = Instantiate(TestDoorPref, new Vector3(-10.0f, 1.0f, 0.0f), new Quaternion());
+
+        CalculateBiasWeightings();
+        BeginEventSequence();
     }
 
     #region Algorithm weights and calculations
@@ -92,14 +126,14 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         if (m_GenreBiasList[0] == m_fGenreBias_Shooter) m_CurrentBias = GenreBias.Shooter;
         else if (m_GenreBiasList[0] == m_fGenreBias_Platformer) m_CurrentBias = GenreBias.Platformer;
         else if (m_GenreBiasList[0] == m_fGenreBias_Puzzle) m_CurrentBias = GenreBias.Puzzle;
-
     }
 
     // accessed from player/doors etc to increase/decrease AI bias
     public void IncreaseGenreBias(GenreBias _biasType, float _amt)
     {
         float confAmount = 0.0f;
-        if (_biasType == m_CurrentBias) confAmount = m_fConfirmationBiasWeight;
+        if (_biasType == m_CurrentBias && _amt > 0.0f) confAmount = m_fConfirmationBiasWeight;
+        else if (_biasType == m_CurrentBias && _amt < 0.0f) confAmount = -1.0f;
         switch (_biasType)
         {
             case GenreBias.Shooter:
@@ -125,19 +159,19 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
             case GenreBias.Shooter:
                 { 
                     m_fGenreBias_Shooter += m_fAnchoringBiasWeight;
-                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "ShooterLevel_0", 15.0f));
+                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "ShooterLevel1", 15.0f));
                 }
                 break;
             case GenreBias.Platformer:
                 {
                     m_fGenreBias_Platformer += m_fAnchoringBiasWeight;
-                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PlatformerLevel_0", 15.0f));
+                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PlatformerLevel1", 15.0f));
                 }
                 break;
             case GenreBias.Puzzle:
                 { 
                     m_fGenreBias_Puzzle += m_fAnchoringBiasWeight; 
-                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PuzzleLevel_0", 15.0f));
+                    StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PuzzleLevel1", 15.0f));
                 }
                 break;
         }
@@ -146,18 +180,47 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     private void BeginEventSequence()
     {
         if (m_TimesVisitedVoid == 2) SecondEventSequence();
+        else if (m_TimesVisitedVoid > 2 && m_TimesVisitedVoid <= 5) // for visit times 3, 4, 5
+        {
+            // create the buttons, don't check
+            StartCoroutine(AskPlayerIfLikedLevel());
+        }
+        else if (m_TimesVisitedVoid > 5)
+        {
+            if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 5.0f)
+            {
+                // TODO: dialogue: "I don't know what you want! How am I supposed to make assumptions?"
+                // "What if... maybe every person is different?"
+                // Maybe I shouldn't be limiting myself and my perception of the world?
+                // We need to break out of the Echo Chamber
+                // Maybe the only way is effective communication and listening to different points of view?
+                // But the point of me, the algorithm, is to push content that you are already interacting with, to get the most attention possible
+                // If that is not productive, what is the point?
+
+                // ------- PLAYER SUCCESSFULLY MITIGATED BIAS
+                // End game or whatever
+            }
+            else if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 10.0f)
+            {
+                // TODO: dialogue: "I don't want to be wrong... why aren't you being more predictable?"
+                // "I need more attention, more interaction. I can't be wrong!
+
+                EnableDoors(true, true, true);
+            }
+        }
     }
 
     #endregion
 
     #region Actions and CoRoutines for general event use
     // play single dialogue based on single key (set in dictionary in editor, caption key must match in UI Manager
-    private void PlayDialogue(int _key)
+    // is a coroutine so it can be waited on
+    private IEnumerator PlayDialogue(int _key)
     {
-        AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_key]);
+        AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_key], GameManager.Instance.MasterVolume * GameManager.Instance.DialogueVolume);
         AnnouncerDialogue.Invoke(_key);
 
-        StartCoroutine(AudioLengthTimer(m_DialogueAudios[_key].length));
+        yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[_key].length));
     }
 
     // play sequence of dialogue with array of keys
@@ -165,7 +228,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     {
         for (int i = 0; i < _keys.Length; i++)
         {
-            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]]);
+            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]], GameManager.Instance.MasterVolume * GameManager.Instance.DialogueVolume);
             AnnouncerDialogue.Invoke(_keys[i]);
 
             yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[_keys[i]].length));
@@ -179,13 +242,13 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     {
         for (int i = 0; i < _keys.Length; i++)
         {
-            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]]);
+            AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[_keys[i]], GameManager.Instance.MasterVolume * GameManager.Instance.DialogueVolume);
             AnnouncerDialogue.Invoke(_keys[i]);
 
             yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[_keys[i]].length));
         }
         int key = _getKey();
-        AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[key]);
+        AnnouncerAudioSource.PlayOneShot(m_DialogueAudios[key], GameManager.Instance.MasterVolume * GameManager.Instance.DialogueVolume);
         AnnouncerDialogue.Invoke(key);
 
         yield return StartCoroutine(AudioLengthTimer(m_DialogueAudios[key].length));
@@ -195,26 +258,26 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     // used by UI Manager to remove captions/subtitles off screen
     private IEnumerator AudioLengthTimer(float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         DialogueEnded.Invoke();
     }
 
     private IEnumerator InvokeEventAfterTime(UnityEvent _event, float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         _event.Invoke();
     }
 
     // overloaded for event with parameters
     private IEnumerator InvokeEventAfterTime<T>(UnityEvent<T> _event, T _args, float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         _event.Invoke(_args);
     }
 
     private IEnumerator RunFunctionAfterTime<T>(System.Action<T> _func, T _args, float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         _func.Invoke(_args);
     }
     #endregion
@@ -223,52 +286,68 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     // Initial event sequence
     void FirstEventSequence()
     {
-        StartCoroutine(PlayDialogueSequence(new int[3] { 0, 1, 995}, () => m_AnchBiasKey));
+        StartCoroutine(PlayDialogueSequence(new int[3] { 0, 1, 9910}, () => m_AnchBiasKey));
         StartCoroutine(GetFirstKeyForAnchoringBias());
     }
 
     // event sequence after first level
     void SecondEventSequence()
     {
-        // play dialogue "I hope you enjoyed your first level"
-        PlayDialogueSequence(new int[1] { 2 }); // add other dialogue in front when its made
-        EnableDoorsAfterTime(true, true, true, 10.0f);
+        StartCoroutine(PlayDialogueSequence(new int[2] { 20, 21 }));
+        StartCoroutine(EnableDoorsAfterTime(true, true, true, 5.0f));
     }
 
     // coroutine for getting players first action
-    // does not start straight away, has a short wait (WaitForSecondsRealtime)
+    // does not start straight away, has a short wait (WaitForSeconds)
     private IEnumerator GetFirstKeyForAnchoringBias()
     {
-        bool biasSet = false;
-        yield return new WaitForSecondsRealtime(6);
-        KeyCode[] keysToCheck = { KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.Space, KeyCode.Mouse0, KeyCode.E };
-        while (!biasSet)
+        yield return new WaitForSeconds(5.0f);
+        KeyCode[] keysToCheck = { KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.Space, KeyCode.Mouse0, KeyCode.E , KeyCode.R};
+
+        float shooter = 0.0f;
+        float puzzle = 0.0f;
+        float platformer = 0.0f;
+        float timer = 0.0f;
+
+        while (timer < 8.0f)
         {
+            timer += 1.0f * Time.deltaTime;
             foreach (KeyCode key in keysToCheck)
             {
                 if (Input.GetKeyDown(key))
                 {
-                    if (key == KeyCode.LeftControl || key == KeyCode.E)
-                    {
-                        SetInitialBias(GenreBias.Puzzle);
-                        m_AnchBiasKey = 4;
-                    }
-                    else if (key == KeyCode.Space)
-                    {
-                        SetInitialBias(GenreBias.Platformer);
-                        m_AnchBiasKey = 3;
-                    }
-                    else if (key == KeyCode.Mouse0 || key == KeyCode.LeftShift)
-                    {
-                        SetInitialBias(GenreBias.Shooter);
-                        m_AnchBiasKey = 5;
-                    }
-                    biasSet = true;
+                    if (key == KeyCode.LeftControl || key == KeyCode.E) puzzle += 1.0f;
+                    else if (key == KeyCode.Space || key == KeyCode.LeftShift) platformer += 1.0f;
+                    else if (key == KeyCode.Mouse0 || key == KeyCode.R) shooter += 1.0f;
                 }
             }
-            
             yield return null;
         }
+
+        List<float> initials = new List<float> { shooter, platformer, puzzle };
+        initials.Sort();
+        initials.Reverse();
+        if (initials[0] == shooter)
+        {
+            SetInitialBias(GenreBias.Shooter);
+            m_AnchBiasKey = 13;
+        }
+        else if (initials[0] == platformer)
+        {
+            SetInitialBias(GenreBias.Platformer);
+            m_AnchBiasKey = 12;
+        }
+        else if (initials[0] == puzzle)
+        {
+            SetInitialBias(GenreBias.Puzzle);
+            m_AnchBiasKey = 11;
+        }
+    }
+
+    private void PauseDialogue(bool _paused)
+    {
+        if (_paused) AnnouncerAudioSource.Pause();
+        else AnnouncerAudioSource.UnPause();
     }
 
     private void EnableDoors(bool _bShooter, bool _bPuzzle, bool _bPlatformer)
@@ -280,10 +359,148 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
 
     private IEnumerator EnableDoorsAfterTime(bool _bShooter, bool _bPuzzle, bool _bPlatformer, float _time)
     {
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
         EnableDoors(_bShooter, _bPuzzle, _bPlatformer);
     }
 
+    #endregion
+
+    #region Bias Event Sequences (Scripted but chosen on weight)
+
+    // General event - tell player they liked the level
+    private IEnumerator AskPlayerIfLikedLevel()
+    {
+        yield return StartCoroutine(PlayDialogue(30)); 
+
+        // TODO: spawn the buttons
+        GameManager.Instance.ActivateReinforcementButtons.Invoke();
+
+        yield return new WaitUntil(() => m_bReinforcementComplete); m_bReinforcementComplete = false;
+    }
+
+    private void PlayerPressedButton(bool _reinforced)
+    {
+        if (_reinforced)
+        {
+            IncreaseGenreBias(m_CurrentBias, m_PlayerReinforcementAmount);
+            CalculateBiasWeightings();
+
+            if (m_GenreBiasList[0] - m_GenreBiasList[1] >= 10.0f)
+            {
+                // Glad you liked it so much! Do it again
+                StartCoroutine(PlayDialogue(40));
+                StartCoroutine(EnableDoorsAfterTime(m_CurrentBias == GenreBias.Shooter, m_CurrentBias == GenreBias.Puzzle, m_CurrentBias == GenreBias.Platformer, m_DialogueAudios[40].length));
+            }
+            else
+            {
+                // I knew I was right!
+                // Two options, you want these two
+                StartCoroutine(PlayDialogueSequence(new int[3] { 41, 42, 43 }));
+                StartCoroutine(EnableDoorsAfterTime(m_GenreBiasList[0] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
+                            m_GenreBiasList[0] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
+                            m_GenreBiasList[0] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer, 10.0f));
+            }
+            m_bReinforcementComplete = true;
+        }
+        else
+        {
+            IncreaseGenreBias(m_CurrentBias, -m_PlayerReinforcementAmount);
+            CalculateBiasWeightings();
+
+            switch (m_iTimesDeniedThisVoid)
+            {
+                case 0:
+                    {
+                        StartCoroutine(PlayDialogue(50));
+                        
+                        if (m_CurrentBias == m_InitialAnchorBias)
+                        {
+                            // "But you liked this level first!"
+                            // "Lets try this again"
+                            // Show more of this content?
+                            StartCoroutine(PlayDialogueSequence(new int[3] {61, 62, 30 }));
+                            StartCoroutine(InvokeEventAfterTime(GameManager.Instance.ActivateReinforcementButtons, 7.0f));
+                        }
+                        else
+                        {
+                            // Maybe I was right at first?
+                            // More of the content I first showed you?
+                            StartCoroutine(PlayDialogueSequence(new int[3] { 991, 65, 66 }));
+                            IncreaseGenreBias(m_CurrentBias, -m_fAnchoringBiasWeight);
+                            CalculateBiasWeightings();
+                            StartCoroutine(InvokeEventAfterTime(GameManager.Instance.ActivateReinforcementButtons, 7.0f));
+                        }
+                    }
+                    break;
+                case 1:
+                    {
+                        // TODO: "Still no?"
+                        StartCoroutine(PlayDialogue(70));
+
+                        if (m_GenreBiasList[0] - m_GenreBiasList[1] >= 10.0f)
+                        {
+                            // TODO: dialogue "But I was correct before!"
+                            StartCoroutine(PlayDialogueSequence(new int[3] { 991, 71, 991 }));
+
+                            // randomly either make ONLY top bias or only NOT top bias
+                            int onlyOne = Random.Range(0, 2);
+                            if (onlyOne == 0)
+                            {
+                                // TODO: "Fine! Have it your way!"
+                                StartCoroutine(PlayDialogue(72));
+                                
+                                EnableDoors(m_GenreBiasList[2] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
+                                            m_GenreBiasList[2] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
+                                            m_GenreBiasList[2] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer);
+                            }
+                            else
+                            {
+                                // TODO: No! You have to like it! There's no other option!
+                                // You just need more of what you liked! More content! 
+                                StartCoroutine(PlayDialogueSequence(new int[2] { 73, 74 }));
+                                EnableDoors(m_GenreBiasList[0] == m_fGenreBias_Shooter, m_GenreBiasList[0] == m_fGenreBias_Puzzle, m_GenreBiasList[0] == m_fGenreBias_Platformer); // make it spawn lots all the same if time
+                            }
+                        }
+                        else
+                        {
+                            // TODO: I don't believe you! You should try it again, then you'll see that I'm right!
+                            // The pattern is what I believe it is! You can't change my mind.
+                            StartCoroutine(PlayDialogueSequence(new int[2] { 75, 76 }));
+
+                            StartCoroutine(InvokeEventAfterTime(GameManager.Instance.ActivateReinforcementButtons, 6.0f));
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        // TODO: This is getting out of hand!
+                        // If I am wrong, what is the pattern then?
+                        StartCoroutine(PlayDialogueSequence(new int[2] { 80, 81 }));
+
+                        if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 10.0f)
+                        {
+                            // TODO: Fine, have all the options.
+
+                            EnableDoors(true, true, true);
+                        }
+                        else
+                        {
+                            // You can have two options. The two I think you might want. 
+                            StartCoroutine(PlayDialogueSequence(new int[2] { 42, 43 }));
+
+                            StartCoroutine(EnableDoorsAfterTime(m_GenreBiasList[0] == m_fGenreBias_Shooter || m_GenreBiasList[1] == m_fGenreBias_Shooter,
+                            m_GenreBiasList[0] == m_fGenreBias_Puzzle || m_GenreBiasList[1] == m_fGenreBias_Puzzle,
+                            m_GenreBiasList[0] == m_fGenreBias_Platformer || m_GenreBiasList[1] == m_fGenreBias_Platformer, 7.0f));
+                        }
+                    }
+                    break;
+            }
+            m_iTimesDeniedThisVoid++;
+        }
+        m_bReinforcementComplete = true;
+
+        CalculateBiasWeightings();
+    }
     #endregion
 }
 

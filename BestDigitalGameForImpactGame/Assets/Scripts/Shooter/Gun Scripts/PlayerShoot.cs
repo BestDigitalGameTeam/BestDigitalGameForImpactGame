@@ -1,0 +1,44 @@
+using System;
+using UnityEngine;
+
+// Handles player shooting input
+/*public class PlayerShoot : MonoBehaviour
+{
+    public static Action ShootInput; // Static event to notify when the player attempts to shoot
+
+    // Called once per frame
+    private void Update()
+    {
+        if (Time.timeScale > 0)
+        {
+            // Check if the left mouse button is held down
+            if (Input.GetMouseButton(0)) // 0 = Left Mouse Button
+                ShootInput?.Invoke(); // Invoke the ShootInput event if it has subscribers (null-safe)
+                                      // ---
+        }
+    }
+    // ---
+}*/
+public class PlayerShoot : MonoBehaviour
+{
+    private WeaponManager m_weaponManager;
+
+    private void Start()
+    {
+        m_weaponManager = GetComponentInChildren<WeaponManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(0)) // 0 = Left Mouse Button
+            m_weaponManager.CurrentGunScript?.Shoot();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            var gun = m_weaponManager.CurrentGunScript;
+            if (gun != null && !gun.IsReloading() && !gun.IsAmmoFull())
+                gun.StartReload();
+        }
+    }
+}
+// ---
