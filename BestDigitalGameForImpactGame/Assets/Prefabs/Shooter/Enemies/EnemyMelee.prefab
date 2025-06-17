@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7f926621b48faf94c85f81b3fa49b3f6, type: 2}
+  - {fileID: 2100000, guid: adc8d96456d92c84c9b6d5dbd32f3e53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 8677435913892434438}
   - component: {fileID: 4396690640067596950}
   - component: {fileID: 7447892133702303289}
+  - component: {fileID: -516965545361337492}
   m_Layer: 0
   m_Name: EnemyMelee
   m_TagString: Enemy
@@ -204,7 +205,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be368271020f7084faefa0355112e10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fMaxHealth: 100
   m_fAttackRange: 2
   m_fAttackCooldown: 1.5
-  m_iDamage: 10
-  m_iMaxHealth: 100
+  m_fVisionRange: 20
+  m_fVisionAngle: 60
+  m_fDamage: 10
+  m_fIdleWanderRadius: 5
+  m_fIdleWaitTime: 3
+  m_MaterialNormal: {fileID: 2100000, guid: adc8d96456d92c84c9b6d5dbd32f3e53, type: 2}
+  m_MaterialAlert: {fileID: 2100000, guid: 6052e152830e717458a22eaf16b513f5, type: 2}
+  m_MaterialAttack: {fileID: 2100000, guid: 1fc2058c706be1548a9982cf928f8f65, type: 2}
+--- !u!136 &-516965545361337492
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633222660248086224}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

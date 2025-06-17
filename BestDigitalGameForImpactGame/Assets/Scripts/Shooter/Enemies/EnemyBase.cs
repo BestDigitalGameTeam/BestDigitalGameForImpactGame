@@ -31,6 +31,15 @@ public class EnemyBase : MonoBehaviour
     protected NavMeshAgent m_Agent;                                             // Pathfinding agent
     protected float m_fAttackTimer;                                             // Cooldown timer
     protected EnemyState m_State = EnemyState.Idle;                             // Current state
+    
+    [Header("Materials")]
+    [SerializeField] private Material m_MaterialNormal;
+    [SerializeField] private Material m_MaterialAlert;
+    [SerializeField] private Material m_MaterialAttack;
+
+    private Renderer m_Renderer;
+    private bool m_bPlayerVisible = false;
+
 
     // Initialization
     protected virtual void Start()
@@ -38,6 +47,10 @@ public class EnemyBase : MonoBehaviour
         m_fCurrentHealth = m_fMaxHealth;
         m_PlayerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
         m_Agent = GetComponent<NavMeshAgent>();
+        
+        m_Renderer = GetComponentInChildren<Renderer>();
+        if (m_Renderer && m_MaterialNormal)
+            m_Renderer.material = m_MaterialNormal;
     }
     // ---
 
@@ -50,15 +63,21 @@ public class EnemyBase : MonoBehaviour
         switch (m_State)
         {
             case EnemyState.Idle:
+                if (m_Renderer && m_MaterialAlert)
+                    m_Renderer.material = m_MaterialNormal;
                 IdleWander(); // Wander randomly
                 LookForPlayer(); // Check for player
                 break;
 
             case EnemyState.Chasing:
+                if (m_Renderer && m_MaterialAlert)
+                    m_Renderer.material = m_MaterialAlert;
                 MoveToPlayer(); // Move toward player
                 break;
 
             case EnemyState.Attacking:
+                if (m_Renderer && m_MaterialAlert)
+                    m_Renderer.material = m_MaterialAttack;
                 TryAttack(); // Try to attack
                 break;
         }
@@ -96,8 +115,8 @@ public class EnemyBase : MonoBehaviour
         float fAngle = Vector3.Angle(transform.forward, v3ToPlayer);
         float fDistance = v3ToPlayer.magnitude;
 
-        // Check angle and distance to detect player
-        if (fDistance <= m_fVisionRange && fAngle <= m_fVisionAngle / 2f)
+        // Check if player is within vision cone
+        if (fDistance <= m_fVisionRange && fAngle <= m_fVisionAngle / 2.0f)
         {
             m_State = EnemyState.Chasing;
         }
@@ -145,6 +164,8 @@ public class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(float _fDamage)
     {
         m_fCurrentHealth -= _fDamage;
+        
+        m_Renderer.material = m_MaterialNormal;
 
         if (m_fCurrentHealth <= 0)
             Die();
