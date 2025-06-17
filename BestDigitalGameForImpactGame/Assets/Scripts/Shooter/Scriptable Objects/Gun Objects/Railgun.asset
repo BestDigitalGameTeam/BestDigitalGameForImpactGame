@@ -16,6 +16,6 @@ MonoBehaviour:
   m_iCurrentAmmo: 0
   m_iClipSize: 40
   m_fFireRate: 600
-  m_fReloadTime: 2.3
+  m_fReloadTime: 1.3
   m_fProjectileSpeed: 300
   m_bReloading: 0

@@ -195,6 +195,9 @@ MonoBehaviour:
       m_Calls: []
   IntActive: 0
   InteractImage: {fileID: 1682419392}
+  PauseCanvas: {fileID: 0}
+  m_AudioSource: {fileID: 0}
+  m_FPSHUD: {fileID: 0}
 --- !u!224 &33844609
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3021,86 +3024,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 398777279155384946, guid: 606bb9fb9c58eba4db0a4a693bb35d35, type: 3}
   m_PrefabInstance: {fileID: 705690210}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &721336011
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398777279155384946, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 548460991793543872, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3633222660248086224, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6368330533566938557, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: 'guns.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6368330533566938557, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: 'guns.Array.data[1]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6368330533566938557, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: 'guns.Array.data[2]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6791139569508723893, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 548460991793543872, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-    - {fileID: 6791139569508723893, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-    - {fileID: 530554606027616091, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
 --- !u!1001 &722085044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3315,6 +3238,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ActivateReinforcementButtons:
+    m_PersistentCalls:
+      m_Calls: []
+  PauseGame:
     m_PersistentCalls:
       m_Calls: []
   MasterVolume: 1
@@ -8719,7 +8645,6 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 721336011}
   - {fileID: 1450952746}
   - {fileID: 799789055}
   - {fileID: 33844609}

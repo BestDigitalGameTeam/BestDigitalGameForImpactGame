@@ -17,5 +17,6 @@ public class WeaponManager : MonoBehaviour
         m_goCurrentWeapon.transform.localRotation = Quaternion.identity;
 
         CurrentGunScript = m_goCurrentWeapon.GetComponent<Gun>();
+        UIManager.Instance.ChangeWeapon(m_goCurrentWeapon);
     }
 }
