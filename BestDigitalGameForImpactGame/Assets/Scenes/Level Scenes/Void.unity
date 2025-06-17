@@ -1453,6 +1453,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451897521}
   m_CullTransparentMesh: 1
+--- !u!1 &519101125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 519101126}
+  m_Layer: 0
+  m_Name: YesButtonEndPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &519101126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519101125}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5, y: -0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &553015912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,6 +1685,14 @@ PrefabInstance:
     - target: {fileID: 2415720040968550134, guid: ee1505520bcb7324a894898e7c69691b, type: 3}
       propertyPath: m_Name
       value: NoButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421897548548935974, guid: ee1505520bcb7324a894898e7c69691b, type: 3}
+      propertyPath: m_EndTrans
+      value: 
+      objectReference: {fileID: 979875216}
+    - target: {fileID: 4421897548548935974, guid: ee1505520bcb7324a894898e7c69691b, type: 3}
+      propertyPath: m_fAnimationSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8724080362466161909, guid: ee1505520bcb7324a894898e7c69691b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2079,6 +2118,7 @@ MonoBehaviour:
   - {fileID: 451897523}
   - {fileID: 890568253}
   - {fileID: 1363389146}
+  DeathCover: {fileID: 0}
 --- !u!1 &784799221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2706,6 +2746,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921908476}
   m_CullTransparentMesh: 1
+--- !u!1 &979875215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 979875216}
+  m_Layer: 0
+  m_Name: NoButtonEndPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &979875216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979875215}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: -0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1023605364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4703,17 +4774,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: YesButton
       objectReference: {fileID: 0}
-    - target: {fileID: 6531300652780606938, guid: 65c78a1685046184593df50644220806, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 5761069658411274101, guid: 65c78a1685046184593df50644220806, type: 3}
+      propertyPath: m_EndTrans
+      value: 
+      objectReference: {fileID: 519101126}
     - target: {fileID: 6957137687292676377, guid: 65c78a1685046184593df50644220806, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6957137687292676377, guid: 65c78a1685046184593df50644220806, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6957137687292676377, guid: 65c78a1685046184593df50644220806, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5514,7 +5585,9 @@ SceneRoots:
   - {fileID: 77902116}
   - {fileID: 60366847}
   - {fileID: 1887488787}
+  - {fileID: 519101126}
   - {fileID: 572349562}
+  - {fileID: 979875216}
   - {fileID: 880910951}
   - {fileID: 2048597717}
   - {fileID: 372311231}
