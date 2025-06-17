@@ -197,7 +197,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dde2141a774b220498de12978bc4d57d, type: 2}
+  - {fileID: -876546973899608171, guid: 75221801a6fffda46883b41741762dfb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -620,7 +620,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dde2141a774b220498de12978bc4d57d, type: 2}
+  - {fileID: -876546973899608171, guid: 75221801a6fffda46883b41741762dfb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2093,6 +2093,7 @@ MonoBehaviour:
   InteractImage: {fileID: 1121374688}
   PauseCanvas: {fileID: 0}
   m_AudioSource: {fileID: 0}
+  m_FPSHUD: {fileID: 0}
 --- !u!224 &735811528
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2854,7 +2855,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dde2141a774b220498de12978bc4d57d, type: 2}
+  - {fileID: -876546973899608171, guid: 75221801a6fffda46883b41741762dfb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
