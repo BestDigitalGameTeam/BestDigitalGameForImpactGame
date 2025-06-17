@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7880220330670808963
+--- !u!1001 &184044586547894201
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,35 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: doorType
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: m_LevelNames.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: 'm_LevelNames.Array.data[0]'
-      value: PuzzleLevel1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
-      propertyPath: 'm_LevelNames.Array.data[1]'
-      value: PuzzleLevel2
-      objectReference: {fileID: 0}
-    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
-      propertyPath: 'm_LevelNames.Array.data[2]'
-      value: PuzzleLevel3
-      objectReference: {fileID: 0}
-    - target: {fileID: 436722643706367496, guid: db565005444411846b228b548e41cc50, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 436722643706367496, guid: db565005444411846b228b548e41cc50, type: 3}
-      propertyPath: m_Color.g
-      value: 0.86571336
-      objectReference: {fileID: 0}
-    - target: {fileID: 436722643706367496, guid: db565005444411846b228b548e41cc50, type: 3}
-      propertyPath: m_Color.r
-      value: 1
+      value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 1161260472395947340, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -82,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1828396784255898736, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: m_Name
-      value: PuzzleDoorPrefabV
+      value: MainMenuDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

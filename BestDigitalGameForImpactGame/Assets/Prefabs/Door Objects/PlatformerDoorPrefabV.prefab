@@ -14,11 +14,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: m_LevelNames.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: 'm_LevelNames.Array.data[0]'
       value: PlatformerLevel1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: 'm_LevelNames.Array.data[1]'
+      value: PlatformerLevel2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: 'm_LevelNames.Array.data[2]'
+      value: PlatformerLevel3
       objectReference: {fileID: 0}
     - target: {fileID: 436722643706367496, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: m_Color.b

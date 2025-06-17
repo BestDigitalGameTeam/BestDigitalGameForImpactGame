@@ -72,15 +72,6 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         GameManager.Instance.VoidLoaded.AddListener(EnterVoid);
         GameManager.Instance.PlayerPressedReinforcementButton.AddListener(PlayerPressedButton);
         GameManager.Instance.PauseGame.AddListener(PauseDialogue);
-
-        ShooterDoor = Instantiate(ShooterDoorPrefab, new Vector3(10.0f, 0.0f, -5.0f), new Quaternion());
-        PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(10.0f, 0.0f, 0.0f), new Quaternion());
-        PlatformerDoor = Instantiate(PlatformerDoorPrefab, new Vector3(10.0f, 0.0f, 5.0f), new Quaternion());
-
-        ShooterDoor.SetActive(false);
-        PuzzleDoor.SetActive(false);
-        PlatformerDoor.SetActive(false);
-        FirstEventSequence();
     }
 
     private void EnterVoid()
@@ -88,9 +79,9 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         m_iTimesDeniedThisVoid = 0;
         m_TimesVisitedVoid++;
 
-        ShooterDoor = Instantiate(ShooterDoorPrefab, new Vector3(10.0f, 1.0f, -20.0f), new Quaternion());
-        PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(10.0f, 1.0f, 0.0f), new Quaternion());
-        PlatformerDoor = Instantiate(PlatformerDoorPrefab, new Vector3(10.0f, 1.0f, 20.0f), new Quaternion());
+        ShooterDoor = Instantiate(ShooterDoorPrefab, new Vector3(10.0f, 0.0f, -20.0f), new Quaternion());
+        PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(10.0f, 0.0f, 0.0f), new Quaternion());
+        PlatformerDoor = Instantiate(PlatformerDoorPrefab, new Vector3(10.0f, 0.0f, 20.0f), new Quaternion());
         ShooterDoor.SetActive(false);
         PuzzleDoor.SetActive(false);
         PlatformerDoor.SetActive(false);
@@ -173,33 +164,34 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
 
     private void BeginEventSequence()
     {
-        if (m_TimesVisitedVoid == 2) SecondEventSequence();
-        else if (m_TimesVisitedVoid > 2 && m_TimesVisitedVoid <= 5) // for visit times 3, 4, 5
+        if (m_TimesVisitedVoid == 1) FirstEventSequence(); 
+        else if (m_TimesVisitedVoid == 2) SecondEventSequence();
+        else if (m_TimesVisitedVoid > 2 && m_TimesVisitedVoid <= 3) // for visit times 3, 4, 5
         {
             // create the buttons, don't check
             StartCoroutine(AskPlayerIfLikedLevel());
         }
-        else if (m_TimesVisitedVoid > 5)
+        else if (m_TimesVisitedVoid > 4)
         {
             if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 5.0f)
             {
-                // TODO: dialogue: "I don't know what you want! How am I supposed to make assumptions?"
-                // "What if... maybe every person is different?"
-                // Maybe I shouldn't be limiting myself and my perception of the world?
-                // We need to break out of the Echo Chamber
-                // Maybe the only way is effective communication and listening to different points of view?
-                // But the point of me, the algorithm, is to push content that you are already interacting with, to get the most attention possible
-                // If that is not productive, what is the point?
-
-                // ------- PLAYER SUCCESSFULLY MITIGATED BIAS
-                // End game or whatever
+                // TODO: dialogue: 
+                // How am I supposed to find the pattern when you act like this? Let me make assumptions! Let me tell you what you want!
+                // I've had enough of this. Please leave.
             }
-            else if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 10.0f)
+            else if (m_GenreBiasList[0] - m_GenreBiasList[1] <= 8.0f && m_GenreBiasList[1] - m_GenreBiasList[2] >= 10.0f)
             {
                 // TODO: dialogue: "I don't want to be wrong... why aren't you being more predictable?"
-                // "I need more attention, more interaction. I can't be wrong!
+                // But I can see the pattern...
+                // Why don't you start again?
 
-                EnableDoors(true, true, true);
+            }
+            else
+            {
+                // TODO: dialogue:
+                // Just as I expected. I had already made up my mind but this confirms it.
+                // This was a huge success. Thank you participant.
+                // Please do not try anything differently next time.
             }
         }
     }
