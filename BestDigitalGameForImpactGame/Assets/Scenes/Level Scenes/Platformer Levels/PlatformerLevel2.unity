@@ -3194,6 +3194,9 @@ MonoBehaviour:
   ActivateReinforcementButtons:
     m_PersistentCalls:
       m_Calls: []
+  PauseGame:
+    m_PersistentCalls:
+      m_Calls: []
   MasterVolume: 1
   EffectsVolume: 1
   DialogueVolume: 1
@@ -5161,6 +5164,8 @@ MonoBehaviour:
       m_Calls: []
   IntActive: 0
   InteractImage: {fileID: 84522155}
+  PauseCanvas: {fileID: 0}
+  m_AudioSource: {fileID: 0}
 --- !u!224 &1811477762
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5191,7 +5196,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5.1
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalScale.y
@@ -5199,11 +5204,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 72.06
+      value: 0.05999756
       objectReference: {fileID: 0}
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5211,7 +5216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -42.22
+      value: 2.7799988
       objectReference: {fileID: 0}
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalRotation.w

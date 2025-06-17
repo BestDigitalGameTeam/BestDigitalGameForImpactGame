@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   m_sWeaponName: Shotgun
-  m_fDamage: 20
-  m_fRange: 20
-  m_iCurrentAmmo: 8
+  m_iCurrentAmmo: 7
   m_iClipSize: 8
   m_fFireRate: 120
-  m_fReloadTime: 4
+  m_fReloadTime: 2
   m_fProjectileSpeed: 120
   m_bReloading: 0

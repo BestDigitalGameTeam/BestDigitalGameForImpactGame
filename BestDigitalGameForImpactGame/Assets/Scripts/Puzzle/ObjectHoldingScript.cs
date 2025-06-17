@@ -8,7 +8,7 @@ public class ObjectHoldingScript : MonoBehaviour
     private LayerMask nullMask;
     public Transform CameraTrans;
     public Transform HoldTrans;
-    public float fRayDist = 10.0f;
+    public float fRayDist = 5.0f;
     public float fMoveForce = 1.0f;
     public float fSlowRadius = 1.0f;
     public GameObject HeldObject;
@@ -41,6 +41,8 @@ public class ObjectHoldingScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 HeldObject = objectHit.transform.gameObject;
+                HeldObject.transform.position = HoldTrans.position;
+
                 HeldRB = HeldObject.GetComponent<Rigidbody>();
                 if (!HeldRB)
                 {

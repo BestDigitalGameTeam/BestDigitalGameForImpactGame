@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8550080484145884629}
   - component: {fileID: 351548593379933488}
   - component: {fileID: 917460730773754027}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 1990972382907151099}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: -0.2, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -150,7 +150,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990972382907151099}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -248,10 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077931bf183ae174abdfd4965aa49346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guns:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  guns: []
   m_fJumpForce: 5
   m_fGravityForce: 13
   PlayerCam: {fileID: 411770963696239002}
@@ -291,9 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraTrans: {fileID: 9184154553450596901}
   HoldTrans: {fileID: 8977171105784678358}
-  fRayDist: 10
-  fMoveForce: 1
-  fSlowRadius: 1
+  fRayDist: 5
   HeldObject: {fileID: 0}
 --- !u!114 &5079615630243033513
 MonoBehaviour:
@@ -342,6 +337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_iMaxHealth: 100
+  PlayerHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6288850967838752487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,7 +581,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
