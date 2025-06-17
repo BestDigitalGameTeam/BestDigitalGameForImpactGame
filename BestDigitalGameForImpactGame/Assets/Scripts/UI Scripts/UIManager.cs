@@ -108,4 +108,9 @@ public class UIManager : SingletonPersistent<UIManager>
         m_FPSHUD.gameObject.SetActive(true);
         m_FPSHUD.ChangeAmmoCount(_ammo);
     }
+
+    public void PlayerDied()
+    {
+        m_FPSHUD.Died();
+    }
 }
