@@ -51,7 +51,7 @@ public class GameManager : SingletonPersistent<GameManager>
         Debug.Log("Loading Level");
         while (!asyncLoad.isDone) { yield return null; }
         SpawnPos = GameObject.Find("Spawn").transform;
-
+        
         GameObject player = GameObject.FindWithTag("Player");
         CharacterController controller = player.GetComponent<CharacterController>();
         // Temporarily disable CharacterController to avoid physics glitches
