@@ -39,6 +39,11 @@ public class GameManager : SingletonPersistent<GameManager>
         LoadScene("Void");
     }
 
+    public void ShowOptions()
+    {
+        m_UIManager.ShowPauseMenu(true);
+    }
+
     private IEnumerator LoadSceneAsync(string _LevelName)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_LevelName);

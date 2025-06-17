@@ -70,7 +70,7 @@ public class UIManager : SingletonPersistent<UIManager>
         InteractImage.enabled = false;
     }
 
-    private void ShowPauseMenu(bool _show)
+    public void ShowPauseMenu(bool _show)
     {
         if (_show)
         {

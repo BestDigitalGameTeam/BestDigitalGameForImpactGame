@@ -48,7 +48,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     [SerializeField] private GameObject PlatformerDoorPrefab;
     private GameObject PlatformerDoor;
 
-    [SerializeField] private int m_TimesVisitedVoid = 1;
+    [SerializeField] private int m_TimesVisitedVoid = 0;
 
     #endregion
 
