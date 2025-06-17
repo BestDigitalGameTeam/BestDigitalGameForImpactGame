@@ -17,6 +17,7 @@ public class UIManager : SingletonPersistent<UIManager>
     public bool IntActive = false;
     [SerializeField] Image InteractImage; // change to text?
     [SerializeField] Canvas PauseCanvas;
+    [SerializeField] Canvas MainMenuCanvas;
     public AudioSource m_AudioSource;
 
     public ShooterHUD m_FPSHUD;
@@ -69,7 +70,7 @@ public class UIManager : SingletonPersistent<UIManager>
         InteractImage.enabled = false;
     }
 
-    private void ShowPauseMenu(bool _show)
+    public void ShowPauseMenu(bool _show)
     {
         if (_show)
         {
@@ -81,6 +82,16 @@ public class UIManager : SingletonPersistent<UIManager>
         }
     }
 
+    public void ShowMainMenu()
+    {
+        MainMenuCanvas.enabled = true;
+    }
+
+    public void HideMainMenu()
+    {
+        MainMenuCanvas.enabled = false;
+    }
+    
     public void PlayUIAudio(AudioClip _audio)
     {
         m_AudioSource.PlayOneShot(_audio, GameManager.Instance.EffectsVolume);
@@ -96,5 +107,10 @@ public class UIManager : SingletonPersistent<UIManager>
     {
         m_FPSHUD.gameObject.SetActive(true);
         m_FPSHUD.ChangeAmmoCount(_ammo);
+    }
+
+    public void PlayerDied()
+    {
+        m_FPSHUD.Died();
     }
 }

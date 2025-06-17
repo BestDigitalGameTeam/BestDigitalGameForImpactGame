@@ -5,12 +5,17 @@ public class PlayerHealth : SingletonPersistent<PlayerHealth>
 {
     [SerializeField] private int m_iMaxHealth = 100;
     private float m_fCurrentHealth;
+    [SerializeField] private Transform SpawnPos;
 
     public UnityEvent<float> PlayerHealthChanged;
 
     private void Start()
     {
         m_fCurrentHealth = m_iMaxHealth;
+        if (!SpawnPos)
+        {
+            SpawnPos = GameManager.Instance.SpawnPos;
+        }
     }
 
     public void TakeDamage(float _fDamage)
@@ -22,6 +27,9 @@ public class PlayerHealth : SingletonPersistent<PlayerHealth>
         if (m_fCurrentHealth <= 0)
         {
             Debug.Log("Player died.");
+            m_fCurrentHealth = m_iMaxHealth;
+            transform.position = SpawnPos.position;
+            UIManager.Instance.PlayerDied();
             // Handle player death
             // Load death hud
             // reload level

@@ -5,12 +5,11 @@ public class ObjectHoldingScript : MonoBehaviour
 {
     private RaycastHit objectHit;
     private LayerMask PickupAbleMask;
+    private LayerMask PlayerMask;
     private LayerMask nullMask;
     public Transform CameraTrans;
     public Transform HoldTrans;
     public float fRayDist = 5.0f;
-    public float fMoveForce = 1.0f;
-    public float fSlowRadius = 1.0f;
     public GameObject HeldObject;
     private Rigidbody HeldRB;
     private CharacterController characterController;
@@ -24,6 +23,7 @@ public class ObjectHoldingScript : MonoBehaviour
         HeldRB.useGravity = true;
         HeldRB.freezeRotation = false;
         HeldRB.linearVelocity = characterController.velocity;
+        HeldRB.excludeLayers = nullMask;
         HeldRB = null;
         HeldObject = null;
     }
@@ -31,6 +31,8 @@ public class ObjectHoldingScript : MonoBehaviour
     {
         PickupAbleMask = LayerMask.GetMask("Pickup");
         characterController = GetComponent<CharacterController>();
+        PlayerMask = LayerMask.GetMask("Player");
+        nullMask = LayerMask.GetMask();
     }
 
     private void Update()
@@ -48,6 +50,8 @@ public class ObjectHoldingScript : MonoBehaviour
                 {
                     Debug.LogError("Object Tagged Pickup without Rigidbody");
                 }
+
+                HeldRB.excludeLayers = PlayerMask;
                 HeldRB.useGravity = false;
                 HeldRB.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
                 HeldRB.interpolation = RigidbodyInterpolation.Interpolate;
@@ -67,13 +71,6 @@ public class ObjectHoldingScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 DropObject();
-            }
-            else if (characterController.isGrounded && Physics.Raycast(transform.position, -transform.up, out objectHit, 10f, PickupAbleMask))
-            {
-                if (objectHit.collider.gameObject == HeldObject)
-                {
-                    DropObject();
-                }
             }
         }
         else
