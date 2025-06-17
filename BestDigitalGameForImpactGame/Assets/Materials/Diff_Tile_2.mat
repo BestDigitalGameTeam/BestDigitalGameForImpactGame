@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: prototype_512x512_grey3
-  m_Shader: {fileID: -6465566751694194690, guid: 75221801a6fffda46883b41741762dfb, type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: 75221801a6fffda46883b41741762dfb, type: 3}
+  m_Name: Diff_Tile_2
+  m_Shader: {fileID: -6465566751694194690, guid: 125ee1a4745cf1045bb8418f9664ed70, type: 3}
+  m_Parent: {fileID: -876546973899608171, guid: 125ee1a4745cf1045bb8418f9664ed70, type: 3}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -23,12 +23,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Triplanar_867d8a4a01eb4fd7af8c7f66dfe60a08_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 9dfb8310d51601f4ab94e0ed21d28cf9, type: 3}
+    - _Triplanar_9d876f0b20eb42d9b3c22b3e8d2a1340_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: a3466723cb2c97b47a9360b31fadca36, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_c8a51f5fabd64edb9c06f640eb03121f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: a3466723cb2c97b47a9360b31fadca36, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Triplanar_c96be405d2714e35842971c2a4d04694_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: e9ba1d4fd6a90ee43aea642883f990c6, type: 3}
+        m_Texture: {fileID: 2800000, guid: d5e7ebe06c5342f429671eed6ab43b38, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -36,7 +40,7 @@ Material:
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &5752009828163517719
+--- !u!114 &283820592497843435
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
