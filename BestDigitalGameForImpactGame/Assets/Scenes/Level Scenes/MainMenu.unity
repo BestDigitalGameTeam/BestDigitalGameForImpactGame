@@ -218,7 +218,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172541767}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cb42d467d573934aba035d80f6c2bba, type: 3}
   m_Name: 
@@ -254,6 +254,7 @@ MonoBehaviour:
   - {fileID: 318743279}
   - {fileID: 231213552}
   - {fileID: 1027492494}
+  DeathCover: {fileID: 0}
 --- !u!224 &172541769
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2672,7 +2673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6067935210975624471, guid: 939f1ad1c45011145968fe432e2ee221, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6067935210975624471, guid: 939f1ad1c45011145968fe432e2ee221, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -2681,7 +2682,7 @@ PrefabInstance:
     - target: {fileID: 6067935210975624471, guid: 939f1ad1c45011145968fe432e2ee221, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 405015223}
+      objectReference: {fileID: 263073843}
     - target: {fileID: 6067935210975624471, guid: 939f1ad1c45011145968fe432e2ee221, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2692,7 +2693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6067935210975624471, guid: 939f1ad1c45011145968fe432e2ee221, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowPauseMenu
+      value: ResumeButtonClick
       objectReference: {fileID: 0}
     - target: {fileID: 6067935210975624471, guid: 939f1ad1c45011145968fe432e2ee221, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -2700,7 +2701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6067935210975624471, guid: 939f1ad1c45011145968fe432e2ee221, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6067935210975624471, guid: 939f1ad1c45011145968fe432e2ee221, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName

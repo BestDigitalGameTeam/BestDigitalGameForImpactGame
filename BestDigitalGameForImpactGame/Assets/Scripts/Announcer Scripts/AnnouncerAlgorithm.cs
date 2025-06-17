@@ -87,7 +87,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         PlatformerDoor.SetActive(false);
 
         CalculateBiasWeightings();
-        BeginEventSequence();
+        StartCoroutine(BeginEventSequence());
     }
 
     #region Algorithm weights and calculations
@@ -162,8 +162,10 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         }
     }
 
-    private void BeginEventSequence()
+    private IEnumerator BeginEventSequence()
     {
+        yield return new WaitForSeconds(1.0f);
+
         if (m_TimesVisitedVoid == 1) FirstEventSequence(); 
         else if (m_TimesVisitedVoid == 2) SecondEventSequence();
         else if (m_TimesVisitedVoid > 2 && m_TimesVisitedVoid <= 3) // for visit times 3, 4, 5
