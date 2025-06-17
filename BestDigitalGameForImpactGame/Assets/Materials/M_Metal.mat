@@ -39,6 +39,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: 41cafad62a299f94988f30521289c9be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Triplanar_864f9721f20e4365978ddfe7b023094f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 356b17b4e9e0611478399d6307895f59, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_e8ac01f339e140dab2acbac744a81399_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 9447e856e040dd843a6c884da287373e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
