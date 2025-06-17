@@ -6338,6 +6338,7 @@ MonoBehaviour:
   IntActive: 0
   InteractImage: {fileID: 1440553566}
   PauseCanvas: {fileID: 0}
+  MainMenuCanvas: {fileID: 0}
   m_AudioSource: {fileID: 0}
   m_FPSHUD: {fileID: 0}
 --- !u!224 &1092651191
@@ -7290,7 +7291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5187087003021913873, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
       propertyPath: LoopType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5187087003021913873, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
       propertyPath: m_fSpeed
@@ -7338,6 +7339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fc479e70845f54c87267d64e9d5acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_UIManager: {fileID: 0}
   LoadLevel:
     m_PersistentCalls:
       m_Calls: []
@@ -8009,6 +8011,10 @@ PrefabInstance:
       value: Spline
       objectReference: {fileID: 0}
     - target: {fileID: 4711933117834595782, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Closed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711933117834595782, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[0].Position.x
       value: -1
       objectReference: {fileID: 0}
@@ -8039,6 +8045,10 @@ PrefabInstance:
     - target: {fileID: 4711933117834595782, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[3].Position.z
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187087003021913873, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
+      propertyPath: LoopType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5187087003021913873, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
       propertyPath: SplineEasing
@@ -9663,6 +9673,10 @@ PrefabInstance:
     - target: {fileID: 4711933117834595782, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[3].Rotation.value.y
       value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187087003021913873, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
+      propertyPath: LoopType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5187087003021913873, guid: 7c8210d72edc4d74b8d3dae0bebf9ba9, type: 3}
       propertyPath: m_fSpeed
