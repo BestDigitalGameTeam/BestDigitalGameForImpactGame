@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Color = System.Drawing.Color;
 
 public class ShooterHUD : SingletonPersistent<ShooterHUD>
 {
@@ -11,6 +12,8 @@ public class ShooterHUD : SingletonPersistent<ShooterHUD>
     [SerializeField, Range(0, 0.25f)] private float AnimationDuration = 0.1f;
     public TMP_Text AmmoCountText;
     [SerializeField] private Image[] WeaponImages;
+    [SerializeField] private Image DeathCover;
+    private float m_fDeathCoverValue = 1.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -65,5 +68,29 @@ public class ShooterHUD : SingletonPersistent<ShooterHUD>
     public void ChangeAmmoCount(int _amt)
     {
         AmmoCountText.SetText(_amt.ToString());
+    }
+
+    public void Died()
+    {
+        StartCoroutine(nameof(DeathAnimation));
+    }
+
+    private IEnumerator DeathAnimation()
+    {
+        while (m_fDeathCoverValue <= 1.0f && m_fDeathCoverValue >= 0.0f)
+        {
+            m_fDeathCoverValue -= 0.016666f;
+            DeathCover.color = new UnityEngine.Color(0.0f,0.0f,0.0f,m_fDeathCoverValue);
+            yield return null;
+        }
+
+        m_fDeathCoverValue = 0.0f;
+        
+        while (m_fDeathCoverValue >= 0.0f && m_fDeathCoverValue <= 1.0f)
+        {
+            m_fDeathCoverValue += 0.016666f;
+            DeathCover.color = new UnityEngine.Color(0.0f,0.0f,0.0f,m_fDeathCoverValue);
+            yield return null;
+        }
     }
 }
