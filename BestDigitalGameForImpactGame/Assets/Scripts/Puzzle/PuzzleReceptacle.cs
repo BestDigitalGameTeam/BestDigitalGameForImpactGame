@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -5,15 +6,22 @@ using UnityEngine;
 public class PuzzleReceptacle : MonoBehaviour
 {
     private enum ReceptacleType { Cube, Sphere, Pyramid }
+
+    private ObjectHoldingScript PlayerHolderRef;
     [SerializeField] private ReceptacleType eReceptacleType;
     [SerializeField] private Gate gate;
 
     [SerializeField] private bool bIsOccupied;
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
+    {
+        PlayerHolderRef = FindFirstObjectByType<ObjectHoldingScript>();
+    }
+    
+    private void OnTriggerStay(Collider other) // Changed to be slightly less optimised but smoother for the player
     {
         // Check if the object's tag matches the receptacle type
-        if (bIsOccupied || !other.CompareTag(GetExpectedTag())) return;
+        if (bIsOccupied || !other.CompareTag(GetExpectedTag()) || other.gameObject == PlayerHolderRef.HeldObject) return;
 
         bIsOccupied = true;
         //SnapToCenter(other.transform); // <--- Uncomment to re-enable snapping to center

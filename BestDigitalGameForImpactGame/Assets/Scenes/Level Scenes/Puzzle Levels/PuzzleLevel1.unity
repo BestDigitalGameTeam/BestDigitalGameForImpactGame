@@ -2328,11 +2328,6 @@ Transform:
   - {fileID: 1202240567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1065093846 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9184154553450596901, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-  m_PrefabInstance: {fileID: 1657720047}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1099117477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,6 +2809,8 @@ MonoBehaviour:
       m_Calls: []
   IntActive: 0
   InteractImage: {fileID: 790822022}
+  PauseCanvas: {fileID: 0}
+  m_AudioSource: {fileID: 0}
 --- !u!1 &1213185541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,6 +3310,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6a443b0899d66b42885d98218586fcb, type: 3}
+--- !u!1001 &1526920330
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3669950450146736808, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669950450146736808, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669950450146736808, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_Size.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.056086
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.99999905
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 46.42013
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4498994498468635557, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
+      propertyPath: m_Name
+      value: VoidDoor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
 --- !u!1001 &1567989751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3637,14 +3703,6 @@ PrefabInstance:
     - target: {fileID: 3633222660248086224, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079615630243033513, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: CamTrans
-      value: 
-      objectReference: {fileID: 1065093846}
-    - target: {fileID: 6914921656727950697, guid: 476dbd1ae8afa8c46b9fd18ed40f87de, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4764,6 +4822,9 @@ MonoBehaviour:
   ActivateReinforcementButtons:
     m_PersistentCalls:
       m_Calls: []
+  PauseGame:
+    m_PersistentCalls:
+      m_Calls: []
   MasterVolume: 1
   EffectsVolume: 1
   DialogueVolume: 1
@@ -4930,3 +4991,4 @@ SceneRoots:
   - {fileID: 82757462}
   - {fileID: 1052126170}
   - {fileID: 777419287}
+  - {fileID: 1526920330}

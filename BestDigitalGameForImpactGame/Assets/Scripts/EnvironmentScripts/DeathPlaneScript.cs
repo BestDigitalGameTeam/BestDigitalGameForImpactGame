@@ -37,5 +37,11 @@ public class DeathPlaneScript : MonoBehaviour
                 tempPlatForm.Enable();
             }
         }
+        else if (other.gameObject.CompareTag("PuzzleCube") || other.gameObject.CompareTag("PuzzleSphere") ||
+                 other.gameObject.CompareTag("PuzzlePyramid"))
+        {
+            other.transform.position = other.GetComponent<FollowPlatformScript>().m_SpawnPos;
+            other.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        }
     }
 }
