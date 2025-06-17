@@ -23,11 +23,9 @@ public class EnemyRanged : EnemyBase
     {
         if (!m_ProjectilePrefab || !m_FirePoint || !m_PlayerTransform) return;
 
-        GameObject pProjectile = Instantiate(m_ProjectilePrefab, m_FirePoint.position, Quaternion.identity);
-
-        Vector3 v3Direction = (m_PlayerTransform.position - m_FirePoint.position).normalized;
+        GameObject pProjectile = Instantiate(m_ProjectilePrefab, m_FirePoint.position, m_FirePoint.rotation);
         Rigidbody pRigidBodyProjectile = pProjectile.GetComponent<Rigidbody>();
-        pRigidBodyProjectile.linearVelocity = v3Direction * m_fProjectileSpeed;
+        pRigidBodyProjectile.linearVelocity = m_FirePoint.forward * m_fProjectileSpeed;
 
         Debug.Log("Ranged Enemy fires projectile.");
     }
