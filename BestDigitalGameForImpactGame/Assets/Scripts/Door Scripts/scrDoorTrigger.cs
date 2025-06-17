@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class scrDoorTrigger : MonoBehaviour
 {
-    public string doorColor = "Red"; // Set this in Inspector
+    public UnityEvent DoorUsed;
     public GenreBias doorType = GenreBias.None;
 
     [SerializeField] private string[] m_LevelNames;
@@ -14,9 +15,9 @@ public class scrDoorTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            DoorUsed.Invoke();
             AnnouncerAlgorithm.Instance.IncreaseGenreBias(doorType, 1);
-            int levelKey = Random.Range(0, m_LevelNames.Length);
-            GameManager.Instance.LoadLevel.Invoke(m_LevelNames[levelKey]);
+            GameManager.Instance.LoadLevel.Invoke(m_LevelNames[GameManager.Instance.GetNextDoor(doorType)]);
         }
     }
 }

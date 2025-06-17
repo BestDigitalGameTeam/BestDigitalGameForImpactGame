@@ -18,6 +18,11 @@ public class PlayerHealth : SingletonPersistent<PlayerHealth>
         }
     }
 
+    public void ResetHealth()
+    {
+        m_fCurrentHealth = m_iMaxHealth;
+    }
+
     public void TakeDamage(float _fDamage)
     {
         m_fCurrentHealth -= _fDamage;

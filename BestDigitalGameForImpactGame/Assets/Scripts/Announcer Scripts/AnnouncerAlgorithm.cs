@@ -72,6 +72,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         GameManager.Instance.VoidLoaded.AddListener(EnterVoid);
         GameManager.Instance.PlayerPressedReinforcementButton.AddListener(PlayerPressedButton);
         GameManager.Instance.PauseGame.AddListener(PauseDialogue);
+        GameManager.Instance.ResetGame.AddListener(ResetAnnouncer);
     }
 
     private void EnterVoid()
@@ -145,18 +146,21 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                 { 
                     m_fGenreBias_Shooter += m_fAnchoringBiasWeight;
                     StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "ShooterLevel1", 15.0f));
+                    GameManager.Instance.ShootDoor();
                 }
                 break;
             case GenreBias.Platformer:
                 {
                     m_fGenreBias_Platformer += m_fAnchoringBiasWeight;
                     StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PlatformerLevel1", 15.0f));
+                    GameManager.Instance.PlatDoor();
                 }
                 break;
             case GenreBias.Puzzle:
                 { 
                     m_fGenreBias_Puzzle += m_fAnchoringBiasWeight; 
                     StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PuzzleLevel1", 15.0f));
+                    GameManager.Instance.PuzzDoor();
                 }
                 break;
         }
@@ -490,5 +494,17 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         CalculateBiasWeightings();
     }
     #endregion
+
+    private void ResetAnnouncer()
+    {
+        m_TimesVisitedVoid = 0;
+
+        m_fGenreBias_Shooter = 0;
+        m_fGenreBias_Platformer = 0;
+        m_fGenreBias_Puzzle = 0;
+
+        m_InitialAnchorBias = GenreBias.None;
+        m_CurrentBias = GenreBias.None;
+    }
 }
 

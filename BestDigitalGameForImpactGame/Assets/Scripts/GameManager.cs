@@ -14,10 +14,15 @@ public class GameManager : SingletonPersistent<GameManager>
     public UnityEvent<bool> PlayerPressedReinforcementButton;
     public UnityEvent ActivateReinforcementButtons;
     public UnityEvent<bool> PauseGame;
+    public UnityEvent ResetGame;
 
     public float MasterVolume = 1.0f;
     public float EffectsVolume = 1.0f;
     public float DialogueVolume = 1.0f;
+
+    public int TimesThroughShooterDoor = 0;
+    public int TimesThroughPuzzleDoor = 0;
+    public int TimesThroughPlatformerDoor = 0;
 
     public bool isPaused { get; private set; } = false;
 
@@ -26,6 +31,7 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         LoadLevel.AddListener(LoadScene);
         PauseGame.AddListener(PauseMenu);
+        ResetGame.AddListener(GameReset);
     }
 
     private void LoadScene(string _name)
@@ -51,6 +57,7 @@ public class GameManager : SingletonPersistent<GameManager>
         Debug.Log("Loading Level");
         while (!asyncLoad.isDone) { yield return null; }
         SpawnPos = GameObject.Find("Spawn").transform;
+        PlayerHealth.Instance.ResetHealth();
 
         GameObject player = GameObject.FindWithTag("Player");
         CharacterController controller = player.GetComponent<CharacterController>();
@@ -103,5 +110,42 @@ public class GameManager : SingletonPersistent<GameManager>
     public void Quit()
     {
         Application.Quit();
+    }
+    public void GameReset()
+    {
+        TimesThroughShooterDoor = 0;
+        TimesThroughPuzzleDoor = 0;
+        TimesThroughPlatformerDoor = 0;
+    }
+
+    public void PlatDoor()
+    {
+        TimesThroughPlatformerDoor++;
+    }
+    public void ShootDoor()
+    {
+        TimesThroughShooterDoor++;
+    }
+    public void PuzzDoor()
+    {
+        TimesThroughPuzzleDoor++;
+    }
+
+    public int GetNextDoor(GenreBias _bias)
+    {
+        switch (_bias)
+        {
+            case GenreBias.None:
+                break;
+            case GenreBias.Shooter:
+                return TimesThroughShooterDoor;
+            case GenreBias.Platformer:
+                return TimesThroughPlatformerDoor;
+            case GenreBias.Puzzle:
+                return TimesThroughPuzzleDoor;
+            default:
+                break;
+        }
+        return 0;
     }
 }
