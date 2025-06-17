@@ -6,11 +6,10 @@ public class ObjectHoldingScript : MonoBehaviour
     private RaycastHit objectHit;
     private LayerMask PickupAbleMask;
     private LayerMask nullMask;
+    private LayerMask PlayerMask;
     public Transform CameraTrans;
     public Transform HoldTrans;
     public float fRayDist = 10.0f;
-    public float fMoveForce = 1.0f;
-    public float fSlowRadius = 1.0f;
     public GameObject HeldObject;
     private Rigidbody HeldRB;
     private CharacterController characterController;
@@ -24,12 +23,15 @@ public class ObjectHoldingScript : MonoBehaviour
         HeldRB.useGravity = true;
         HeldRB.freezeRotation = false;
         HeldRB.linearVelocity = characterController.velocity;
+        HeldRB.excludeLayers = nullMask;
         HeldRB = null;
         HeldObject = null;
     }
     private void Start()
     {
         PickupAbleMask = LayerMask.GetMask("Pickup");
+        PlayerMask = LayerMask.GetMask("Player");
+        nullMask = LayerMask.GetMask();
         characterController = GetComponent<CharacterController>();
     }
 
@@ -50,9 +52,12 @@ public class ObjectHoldingScript : MonoBehaviour
                 HeldRB.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
                 HeldRB.interpolation = RigidbodyInterpolation.Interpolate;
                 HeldRB.freezeRotation = true;
+                HeldRB.excludeLayers = PlayerMask;
+                HeldObject.transform.position = HoldTrans.position;
 
                 FixedJoint joint = HoldTrans.gameObject.AddComponent<FixedJoint>();
                 joint.connectedBody = HeldRB;
+                joint.connectedAnchor = Vector3.zero;
                 joint.breakForce = Mathf.Infinity;
                 joint.breakTorque = Mathf.Infinity;
                 joint.enableCollision = true;
@@ -65,13 +70,6 @@ public class ObjectHoldingScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 DropObject();
-            }
-            else if (characterController.isGrounded && Physics.Raycast(transform.position, -transform.up, out objectHit, 10f, PickupAbleMask))
-            {
-                if (objectHit.collider.gameObject == HeldObject)
-                {
-                    DropObject();
-                }
             }
         }
         else
