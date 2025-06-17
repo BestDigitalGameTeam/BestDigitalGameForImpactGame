@@ -4,10 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShooterHUD : Singleton<ShooterHUD>
+public class ShooterHUD : SingletonPersistent<ShooterHUD>
 {
     [SerializeField] private Slider m_HealthBar;
-    [SerializeField] private AnimationCurve m_HealthbarEase = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField] private AnimationCurve m_HealthbarEase = AnimationCurve.EaseInOut(0, 0, 0.25f, 0.25f);
     [SerializeField, Range(0, 0.25f)] private float AnimationDuration = 0.1f;
     public TMP_Text AmmoCountText;
     [SerializeField] private Image[] WeaponImages;
@@ -22,7 +22,12 @@ public class ShooterHUD : Singleton<ShooterHUD>
     {
         // wait one frame before adding listener to make sure it is loaded
         yield return null;
-        PlayerController.Instance.GetComponent<PlayerHealth>()?.PlayerHealthChanged.AddListener(ChangeHealthValue);
+        PlayerController.Instance.GetComponent<PlayerHealth>().PlayerHealthChanged.AddListener(ChangeHealthValue);
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.Instance.GetComponent<PlayerHealth>().PlayerHealthChanged.AddListener(ChangeHealthValue);
     }
 
     private void ChangeHealthValue(float _newHealth)
@@ -41,7 +46,7 @@ public class ShooterHUD : Singleton<ShooterHUD>
         {
             time += Time.deltaTime;
 
-            float lerpValue = m_HealthbarEase.Evaluate(time / AnimationDuration);
+            float lerpValue = m_HealthbarEase.Evaluate(time/AnimationDuration);
             m_HealthBar.value = Mathf.Lerp(startValue, endValue, lerpValue);
 
             yield return null;

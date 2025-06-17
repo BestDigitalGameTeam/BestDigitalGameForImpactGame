@@ -41,6 +41,7 @@ public class UIManager : SingletonPersistent<UIManager>
         GameManager.Instance.PauseGame.AddListener(ShowPauseMenu);
         PauseCanvas.enabled = false;
         m_FPSHUD = GetComponentInChildren<ShooterHUD>();
+        m_FPSHUD.gameObject.SetActive(false);
     }
 
     private void ShowDialogueSubtitle(int _key)
@@ -87,11 +88,13 @@ public class UIManager : SingletonPersistent<UIManager>
 
     public void ChangeWeapon(GameObject _newWeaponPrefab)
     {
+        m_FPSHUD.gameObject.SetActive(true);
         m_FPSHUD.ChangeActiveGun(_newWeaponPrefab.GetComponent<Gun>().WeaponHUDKey);
         m_FPSHUD.ChangeAmmoCount(_newWeaponPrefab.GetComponent<Gun>().GetGunData().m_iCurrentAmmo);
     }
     public void UpdateAmmoCount(int _ammo)
     {
+        m_FPSHUD.gameObject.SetActive(true);
         m_FPSHUD.ChangeAmmoCount(_ammo);
     }
 }

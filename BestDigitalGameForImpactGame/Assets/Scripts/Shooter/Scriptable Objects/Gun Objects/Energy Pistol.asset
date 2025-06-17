@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: Energy Pistol
   m_EditorClassIdentifier: 
   m_sWeaponName: Energy Pistol
-  m_fDamage: 40
-  m_fRange: 50
   m_iCurrentAmmo: 12
   m_iClipSize: 12
   m_fFireRate: 200
-  m_fReloadTime: 1.1
+  m_fReloadTime: 0.7
   m_fProjectileSpeed: 80
   m_bReloading: 0

@@ -102,19 +102,19 @@ public class PlayerController : SingletonPersistent<PlayerController>
         // Scroll Selected Gun
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        if (scroll > 0f)
-        {
-            SwitchWeapon.Invoke();
-            m_iCurrentGunIndex = (m_iCurrentGunIndex + 1) % guns.Length;
+        //if (scroll > 0f)
+        //{
+        //    SwitchWeapon.Invoke();
+        //    m_iCurrentGunIndex = (m_iCurrentGunIndex + 1) % guns.Length;
 
-            ActivateGun(m_iCurrentGunIndex);
-        }
-        else if (scroll < 0f)
-        {
-            SwitchWeapon.Invoke();
-            m_iCurrentGunIndex = (m_iCurrentGunIndex - 1 + guns.Length) % guns.Length;
-            ActivateGun(m_iCurrentGunIndex);
-        }
+        //    ActivateGun(m_iCurrentGunIndex);
+        //}
+        //else if (scroll < 0f)
+        //{
+        //    SwitchWeapon.Invoke();
+        //    m_iCurrentGunIndex = (m_iCurrentGunIndex - 1 + guns.Length) % guns.Length;
+        //    ActivateGun(m_iCurrentGunIndex);
+        //}
         // ---
         
         

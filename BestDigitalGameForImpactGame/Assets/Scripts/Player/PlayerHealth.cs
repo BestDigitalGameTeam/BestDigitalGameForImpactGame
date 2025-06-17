@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : SingletonPersistent<PlayerHealth>
 {
     [SerializeField] private int m_iMaxHealth = 100;
     private float m_fCurrentHealth;
