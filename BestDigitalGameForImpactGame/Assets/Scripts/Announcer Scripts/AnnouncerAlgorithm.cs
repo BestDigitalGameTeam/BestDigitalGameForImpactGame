@@ -48,9 +48,6 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     [SerializeField] private GameObject PlatformerDoorPrefab;
     private GameObject PlatformerDoor;
 
-    [SerializeField] private GameObject TestDoorPref;
-    private GameObject TestDoor;
-
     [SerializeField] private int m_TimesVisitedVoid = 1;
 
     #endregion
@@ -80,7 +77,6 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(10.0f, 0.0f, 0.0f), new Quaternion());
         PlatformerDoor = Instantiate(PlatformerDoorPrefab, new Vector3(10.0f, 0.0f, 5.0f), new Quaternion());
 
-        TestDoor = Instantiate(TestDoorPref, new Vector3(-10.0f, 1.0f, 0.0f), new Quaternion());
         ShooterDoor.SetActive(false);
         PuzzleDoor.SetActive(false);
         PlatformerDoor.SetActive(false);
@@ -98,8 +94,6 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         ShooterDoor.SetActive(false);
         PuzzleDoor.SetActive(false);
         PlatformerDoor.SetActive(false);
-
-        TestDoor = Instantiate(TestDoorPref, new Vector3(-10.0f, 1.0f, 0.0f), new Quaternion());
 
         CalculateBiasWeightings();
         BeginEventSequence();
