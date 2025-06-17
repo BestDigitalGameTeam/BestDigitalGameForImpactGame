@@ -105210,6 +105210,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6675943329055211887, guid: 94a2f93a8628d0b45985788259dc39dd, type: 3}
   projectileSpawnPoint: {fileID: 1432000385}
   m_shootAudioPlayer: {fileID: 893552580}
+  m_ShootAudio: {fileID: 0}
+  WeaponHUDKey: 0
 --- !u!65 &1721633091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -105436,18 +105438,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077931bf183ae174abdfd4965aa49346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_vec3MoveDir: {x: 0, y: 0, z: 0}
+  guns: []
   m_fJumpForce: 5
   m_fGravityForce: 9.81
   PlayerCam: {fileID: 1888869580}
   m_fSensitivity: 2
   m_fMoveSpeed: 6
   m_fSprintSpeed: 12
+  m_fAirResistance: 1.5
   m_bCanMove: 1
+  m_bWasSprinting: 0
   m_defaultAudioPlayer: {fileID: 893552580}
-  m_movementAudioPlayer: {fileID: 893552579}
-  m_speedAudioPlayer: {fileID: 893552578}
-  m_interactAudioPlayer: {fileID: 893552575}
+  SwitchWeapon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!143 &1793799067
 CharacterController:
   m_ObjectHideFlags: 0
