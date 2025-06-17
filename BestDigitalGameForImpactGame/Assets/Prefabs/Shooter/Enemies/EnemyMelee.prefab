@@ -214,4 +214,4 @@ MonoBehaviour:
   m_fIdleWaitTime: 3
   m_MaterialNormal: {fileID: 2100000, guid: adc8d96456d92c84c9b6d5dbd32f3e53, type: 2}
   m_MaterialAlert: {fileID: 2100000, guid: 6052e152830e717458a22eaf16b513f5, type: 2}
-  m_MaterialAttack: {fileID: 2100000, guid: 3c2a28b11b972e84687ffe79734ce968, type: 2}
+  m_MaterialAttack: {fileID: 2100000, guid: 1fc2058c706be1548a9982cf928f8f65, type: 2}

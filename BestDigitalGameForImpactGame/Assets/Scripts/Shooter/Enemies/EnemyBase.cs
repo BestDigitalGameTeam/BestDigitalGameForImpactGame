@@ -164,6 +164,8 @@ public class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(float _fDamage)
     {
         m_fCurrentHealth -= _fDamage;
+        
+        m_Renderer.material = m_MaterialNormal;
 
         if (m_fCurrentHealth <= 0)
             Die();
