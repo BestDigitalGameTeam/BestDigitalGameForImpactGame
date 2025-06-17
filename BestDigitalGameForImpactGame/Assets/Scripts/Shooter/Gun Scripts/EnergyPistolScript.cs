@@ -71,7 +71,9 @@ public class EnergyPistolScript : Gun
 {
     private void Start()
     {
+        base.Start();
         gunData.m_iCurrentAmmo = gunData.m_iClipSize;
+        WeaponHUDKey = 0;
     }
 
     private void Update()
@@ -80,6 +82,11 @@ public class EnergyPistolScript : Gun
 
         if (Input.GetKeyDown(KeyCode.R) && !gunData.m_bReloading && gunData.m_iCurrentAmmo < gunData.m_iClipSize)
             StartCoroutine(Reload());
+    }
+
+    public override GunData GetGunData()
+    {
+        return gunData;
     }
 
     public override void Shoot()
@@ -104,5 +111,6 @@ public class EnergyPistolScript : Gun
         yield return new WaitForSeconds(gunData.m_fReloadTime);
         gunData.m_iCurrentAmmo = gunData.m_iClipSize;
         gunData.m_bReloading = false;
+        UpdateAmmoCount();
     }
 }

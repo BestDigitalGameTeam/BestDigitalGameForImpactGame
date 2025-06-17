@@ -1,14 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 // Handles gun behavior: shooting, reloading, and audio
 public class Gun : MonoBehaviour
 {
-    [SerializeField] protected GunData gunData;                         // ScriptableObject holding gun stats and state
+    [SerializeField] protected GunData gunData;                        // ScriptableObject holding gun stats and state
     [SerializeField] protected GameObject projectilePrefab;             // Prefab to instantiate when shooting
     [SerializeField] protected Transform projectileSpawnPoint;          // Where the projectile spawns from
     public AudioSource m_shootAudioPlayer;                              // Audio source for shooting sound
     [SerializeField] protected AudioClip m_ShootAudio;
+    [SerializeField] public int WeaponHUDKey;
 
     protected float m_fTimeSinceLastShot;                               // Timer to manage fire rate
     
@@ -30,6 +32,16 @@ public class Gun : MonoBehaviour
         /*if (Input.GetKeyDown(KeyCode.R) && !gunData.m_bReloading && gunData.m_iCurrentAmmo < gunData.m_iClipSize)
             StartCoroutine(Reload());*/
         // ---
+    }
+
+    public virtual GunData GetGunData()
+    {
+        return gunData;
+    }
+
+    protected virtual void UpdateAmmoCount()
+    {
+        UIManager.Instance.UpdateAmmoCount(gunData.m_iCurrentAmmo);
     }
 
     // Checks if gun can fire based on reload state and fire rate
@@ -75,6 +87,9 @@ public class Gun : MonoBehaviour
     // Can be used to play effects
     protected void OnGunShot()
     {
+        // Update ammo count on HUD
+        UpdateAmmoCount();
+
         // Plays shooting sound with random pitch for variation
         m_shootAudioPlayer.pitch = Random.Range(0.85f, 1.15f);
         m_shootAudioPlayer.PlayOneShot(m_ShootAudio, GameManager.Instance.MasterVolume * GameManager.Instance.EffectsVolume);

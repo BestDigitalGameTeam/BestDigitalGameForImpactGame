@@ -10,11 +10,17 @@ public class ShotgunScript : Gun
     {
         base.Start();
         gunData.m_iCurrentAmmo = gunData.m_iClipSize;
+        WeaponHUDKey = 2;
     }
 
     private void Update()
     {
         m_fTimeSinceLastShot += Time.deltaTime;
+    }
+
+    public override GunData GetGunData()
+    {
+        return gunData;
     }
 
     public override void Shoot()
@@ -52,5 +58,6 @@ public class ShotgunScript : Gun
         yield return new WaitForSeconds(gunData.m_fReloadTime);
         gunData.m_iCurrentAmmo = gunData.m_iClipSize;
         gunData.m_bReloading = false;
+        UpdateAmmoCount();
     }
 }

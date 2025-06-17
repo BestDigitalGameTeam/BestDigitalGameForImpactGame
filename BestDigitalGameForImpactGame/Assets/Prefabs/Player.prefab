@@ -248,10 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077931bf183ae174abdfd4965aa49346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guns:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  guns: []
   m_fJumpForce: 5
   m_fGravityForce: 13
   PlayerCam: {fileID: 411770963696239002}
@@ -342,6 +339,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_iMaxHealth: 100
+  PlayerHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6288850967838752487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,7 +583,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

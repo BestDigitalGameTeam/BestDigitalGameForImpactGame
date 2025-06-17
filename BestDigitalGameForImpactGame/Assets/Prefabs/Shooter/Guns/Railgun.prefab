@@ -106,6 +106,7 @@ MonoBehaviour:
   projectileSpawnPoint: {fileID: 8346341711004967072}
   m_shootAudioPlayer: {fileID: 0}
   m_ShootAudio: {fileID: 0}
+  WeaponHUDKey: 1
 --- !u!1 &6388292179550580785
 GameObject:
   m_ObjectHideFlags: 0

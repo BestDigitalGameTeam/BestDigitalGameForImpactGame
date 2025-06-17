@@ -51,6 +51,7 @@ MonoBehaviour:
   projectileSpawnPoint: {fileID: 8346341711004967072}
   m_shootAudioPlayer: {fileID: 0}
   m_ShootAudio: {fileID: 0}
+  WeaponHUDKey: 2
   m_iPelletCount: 12
   m_fSpreadAngle: 10
 --- !u!1 &6388292179550580785
