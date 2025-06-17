@@ -72,6 +72,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         GameManager.Instance.VoidLoaded.AddListener(EnterVoid);
         GameManager.Instance.PlayerPressedReinforcementButton.AddListener(PlayerPressedButton);
         GameManager.Instance.PauseGame.AddListener(PauseDialogue);
+        GameManager.Instance.ResetGame.AddListener(ResetAnnouncer);
     }
 
     private void EnterVoid()
@@ -87,7 +88,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         PlatformerDoor.SetActive(false);
 
         CalculateBiasWeightings();
-        BeginEventSequence();
+        StartCoroutine(BeginEventSequence());
     }
 
     #region Algorithm weights and calculations
@@ -145,25 +146,30 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                 { 
                     m_fGenreBias_Shooter += m_fAnchoringBiasWeight;
                     StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "ShooterLevel1", 15.0f));
+                    GameManager.Instance.ShootDoor();
                 }
                 break;
             case GenreBias.Platformer:
                 {
                     m_fGenreBias_Platformer += m_fAnchoringBiasWeight;
                     StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PlatformerLevel1", 15.0f));
+                    GameManager.Instance.PlatDoor();
                 }
                 break;
             case GenreBias.Puzzle:
                 { 
                     m_fGenreBias_Puzzle += m_fAnchoringBiasWeight; 
                     StartCoroutine(InvokeEventAfterTime<string>(GameManager.Instance.LoadLevel, "PuzzleLevel1", 15.0f));
+                    GameManager.Instance.PuzzDoor();
                 }
                 break;
         }
     }
 
-    private void BeginEventSequence()
+    private IEnumerator BeginEventSequence()
     {
+        yield return new WaitForSeconds(1.0f);
+
         if (m_TimesVisitedVoid == 1) FirstEventSequence(); 
         else if (m_TimesVisitedVoid == 2) SecondEventSequence();
         else if (m_TimesVisitedVoid > 2 && m_TimesVisitedVoid <= 3) // for visit times 3, 4, 5
@@ -488,5 +494,17 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         CalculateBiasWeightings();
     }
     #endregion
+
+    private void ResetAnnouncer()
+    {
+        m_TimesVisitedVoid = 0;
+
+        m_fGenreBias_Shooter = 0;
+        m_fGenreBias_Platformer = 0;
+        m_fGenreBias_Puzzle = 0;
+
+        m_InitialAnchorBias = GenreBias.None;
+        m_CurrentBias = GenreBias.None;
+    }
 }
 

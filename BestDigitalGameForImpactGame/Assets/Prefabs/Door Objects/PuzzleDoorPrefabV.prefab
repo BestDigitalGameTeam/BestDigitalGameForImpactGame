@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: m_LevelNames.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: 'm_LevelNames.Array.data[0]'
@@ -27,6 +27,38 @@ PrefabInstance:
     - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: 'm_LevelNames.Array.data[2]'
       value: PuzzleLevel3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: 'm_LevelNames.Array.data[3]'
+      value: PuzzleLevel3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: DoorUsed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: DoorUsed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: DoorUsed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7238471737593072916, guid: 097906df1a1e4e743b0da86ca0a75b3c, type: 3}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: DoorUsed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: DoorUsed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PuzzDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: DoorUsed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815186976674427893, guid: db565005444411846b228b548e41cc50, type: 3}
+      propertyPath: DoorUsed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 436722643706367496, guid: db565005444411846b228b548e41cc50, type: 3}
       propertyPath: m_Color.b
