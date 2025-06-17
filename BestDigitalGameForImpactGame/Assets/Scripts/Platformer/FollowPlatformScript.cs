@@ -4,6 +4,7 @@ using UnityEngine;
 public class FollowPlatformScript : MonoBehaviour
 {
     public float m_fRayDist;
+    public Vector3 m_SpawnPos; // Notused for this script - used by death plane dont judge me
     private RaycastHit platformCast;
     private LayerMask platformMask;
     private SplineFollower m_currentSpline;
@@ -13,6 +14,7 @@ public class FollowPlatformScript : MonoBehaviour
 
     void Start()
     {
+        m_SpawnPos = transform.position;
         platformMask = LayerMask.GetMask("Platform");
         ObjectRigidBody = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();

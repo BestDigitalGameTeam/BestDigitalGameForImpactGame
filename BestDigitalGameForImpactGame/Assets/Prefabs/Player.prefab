@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8550080484145884629}
   - component: {fileID: 351548593379933488}
   - component: {fileID: 917460730773754027}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990972382907151099}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -291,9 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraTrans: {fileID: 9184154553450596901}
   HoldTrans: {fileID: 8977171105784678358}
-  fRayDist: 10
-  fMoveForce: 1
-  fSlowRadius: 1
+  fRayDist: 5
   HeldObject: {fileID: 0}
 --- !u!114 &5079615630243033513
 MonoBehaviour:
