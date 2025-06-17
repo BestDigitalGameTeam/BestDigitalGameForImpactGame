@@ -125,3 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bIsPositive: 1
   m_bIsActive: 0
+  m_bTriggered: 0
+  m_fAnimationSpeed: 1
+  m_EndTrans: {fileID: 0}
