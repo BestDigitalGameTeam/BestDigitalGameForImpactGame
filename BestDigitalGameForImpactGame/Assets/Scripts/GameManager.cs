@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class GameManager : SingletonPersistent<GameManager>
 {
+    [SerializeField] private UIManager m_UIManager;
+    
     public UnityEvent<string> LoadLevel;
     public UnityEvent VoidLoaded;
     public Transform SpawnPos;
@@ -31,6 +31,12 @@ public class GameManager : SingletonPersistent<GameManager>
     private void LoadScene(string _name)
     {
         StartCoroutine(LoadSceneAsync(_name));
+    }
+
+    public void LoadVoid()
+    {
+        m_UIManager.HideMainMenu();
+        LoadScene("Void");
     }
 
     private IEnumerator LoadSceneAsync(string _LevelName)
@@ -88,5 +94,9 @@ public class GameManager : SingletonPersistent<GameManager>
     public void SetDialogueVolume(System.Single _vol)
     {
         DialogueVolume = _vol;
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
