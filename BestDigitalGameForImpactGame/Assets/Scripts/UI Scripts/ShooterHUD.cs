@@ -77,20 +77,19 @@ public class ShooterHUD : SingletonPersistent<ShooterHUD>
 
     private IEnumerator DeathAnimation()
     {
-        while (m_fDeathCoverValue <= 1.0f && m_fDeathCoverValue >= 0.0f)
-        {
-            m_fDeathCoverValue -= 0.016666f;
-            DeathCover.color = new UnityEngine.Color(0.0f,0.0f,0.0f,m_fDeathCoverValue);
-            yield return null;
-        }
-
-        m_fDeathCoverValue = 0.0f;
-        
         while (m_fDeathCoverValue >= 0.0f && m_fDeathCoverValue <= 1.0f)
         {
             m_fDeathCoverValue += 0.016666f;
             DeathCover.color = new UnityEngine.Color(0.0f,0.0f,0.0f,m_fDeathCoverValue);
             yield return null;
         }
+        m_fDeathCoverValue = 1.0f;
+        while (m_fDeathCoverValue <= 1.0f && m_fDeathCoverValue >= 0.0f)
+        {
+            m_fDeathCoverValue -= 0.016666f;
+            DeathCover.color = new UnityEngine.Color(0.0f,0.0f,0.0f,m_fDeathCoverValue);
+            yield return null;
+        }
+        DeathCover.color = new UnityEngine.Color(0.0f,0.0f,0.0f,0.0f);
     }
 }

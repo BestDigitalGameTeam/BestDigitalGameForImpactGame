@@ -38,9 +38,12 @@ public class PlayerHealth : SingletonPersistent<PlayerHealth>
                 Debug.Log(SpawnPos);
             }
             Debug.Log("Player died.");
-            m_fCurrentHealth = m_iMaxHealth;
-            transform.position = SpawnPos.position;
             UIManager.Instance.PlayerDied();
+            m_fCurrentHealth = m_iMaxHealth;
+            PlayerHealthChanged.Invoke(m_fCurrentHealth);
+            Quaternion rot = Quaternion.LookRotation(Vector3.forward,Vector3.up);
+            transform.SetPositionAndRotation(SpawnPos.position,rot);
+
             // Handle player death
             // Load death hud
             // reload level
