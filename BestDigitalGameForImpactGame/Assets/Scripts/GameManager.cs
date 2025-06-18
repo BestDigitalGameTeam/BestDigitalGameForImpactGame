@@ -91,8 +91,12 @@ public class GameManager : SingletonPersistent<GameManager>
         else
         {
             Time.timeScale = 1.0f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+
+            if (FindFirstObjectByType<ResetScript>() == null)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
     }
 
