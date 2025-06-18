@@ -1293,6 +1293,7 @@ MonoBehaviour:
   ShooterDoorPrefab: {fileID: 8359788750577585139, guid: c7fda00f1c586d74483f88db07af5d4c, type: 3}
   PuzzleDoorPrefab: {fileID: 8359788750577585139, guid: 967d0bab64006024989ab2477991a5bd, type: 3}
   PlatformerDoorPrefab: {fileID: 8359788750577585139, guid: e4932cdcf8d281b42b6cf3669a1340ff, type: 3}
+  ExitDoorPrefab: {fileID: 2004698472482030537, guid: 29142b9c6cb3a0646af3f9da9f9a91a1, type: 3}
   m_TimesVisitedVoid: 0
   AnnouncerDialogue:
     m_PersistentCalls:
@@ -1360,6 +1361,26 @@ MonoBehaviour:
       Value: {fileID: 8300000, guid: e08046bbb58774c418b2f130a217a6cd, type: 3}
     - Key: 81
       Value: {fileID: 8300000, guid: ccf0c6be0e30128469a0c123498e864d, type: 3}
+    - Key: 82
+      Value: {fileID: 8300000, guid: 311ddef7c4d778242ad3ec506f92215b, type: 3}
+    - Key: 110
+      Value: {fileID: 8300000, guid: a36edb919d3423542b20216ce8e2f6a3, type: 3}
+    - Key: 111
+      Value: {fileID: 8300000, guid: 1547795340097d241b056685bee24128, type: 3}
+    - Key: 112
+      Value: {fileID: 8300000, guid: c21e9addcccbef0478e218fe9a8f79bc, type: 3}
+    - Key: 120
+      Value: {fileID: 8300000, guid: 5237824a2896a91438786bcdf041fc77, type: 3}
+    - Key: 121
+      Value: {fileID: 8300000, guid: bc1cee12b7c0e0f44980b935a608c12a, type: 3}
+    - Key: 122
+      Value: {fileID: 8300000, guid: 49fd7c25f62464a4f823a018c9bf2b11, type: 3}
+    - Key: 130
+      Value: {fileID: 8300000, guid: ef9e09bc09cf60e468fb4a7ae1e72441, type: 3}
+    - Key: 131
+      Value: {fileID: 8300000, guid: 94707d659fe90f4448aed1814ba0b7cb, type: 3}
+    - Key: 132
+      Value: {fileID: 8300000, guid: 8efe8739e20879e40a9e5d732a63dee7, type: 3}
   AnnouncerAudioSource: {fileID: 1621698378}
 --- !u!4 &588464925
 Transform:

@@ -16,8 +16,9 @@ public class scrDoorTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             AnnouncerAlgorithm.Instance.IncreaseGenreBias(doorType, 1);
-            GameManager.Instance.LoadLevel.Invoke(m_LevelNames[GameManager.Instance.GetNextDoor(doorType)]);
+            int nextDoor = GameManager.Instance.GetNextDoor(doorType);
             DoorUsed.Invoke();
+            GameManager.Instance.LoadLevel.Invoke(m_LevelNames[nextDoor]);
         }
     }
 }
