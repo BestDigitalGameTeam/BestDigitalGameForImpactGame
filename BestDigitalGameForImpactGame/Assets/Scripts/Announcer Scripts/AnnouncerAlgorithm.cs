@@ -48,6 +48,9 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
     [SerializeField] private GameObject PlatformerDoorPrefab;
     private GameObject PlatformerDoor;
 
+    [SerializeField] private GameObject ExitDoorPrefab;
+    private GameObject ExitDoor;
+
     [SerializeField] private int m_TimesVisitedVoid = 0;
 
     #endregion
@@ -80,9 +83,9 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         m_iTimesDeniedThisVoid = 0;
         m_TimesVisitedVoid++;
 
-        ShooterDoor = Instantiate(ShooterDoorPrefab, new Vector3(10.0f, 0.0f, -20.0f), new Quaternion());
-        PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(10.0f, 0.0f, 0.0f), new Quaternion());
-        PlatformerDoor = Instantiate(PlatformerDoorPrefab, new Vector3(10.0f, 0.0f, 20.0f), new Quaternion());
+        ShooterDoor = Instantiate(ShooterDoorPrefab, new Vector3(30.0f, 0.0f, -20.0f), new Quaternion());
+        PuzzleDoor = Instantiate(PuzzleDoorPrefab, new Vector3(30.0f, 0.0f, 0.0f), new Quaternion());
+        PlatformerDoor = Instantiate(PlatformerDoorPrefab, new Vector3(30.0f, 0.0f, 20.0f), new Quaternion());
         ShooterDoor.SetActive(false);
         PuzzleDoor.SetActive(false);
         PlatformerDoor.SetActive(false);
@@ -184,13 +187,17 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                 // TODO: dialogue: 
                 // How am I supposed to find the pattern when you act like this? Let me make assumptions! Let me tell you what you want!
                 // I've had enough of this. Please leave.
+                StartCoroutine(PlayDialogueSequence(new int[3] { 110, 111, 112 }));
+                yield return new WaitForSeconds(10.0f);
+                ExitDoor = Instantiate(ExitDoorPrefab, new Vector3(30.0f, 0.0f, 0.0f), new Quaternion());
             }
             else if (m_GenreBiasList[0] - m_GenreBiasList[1] <= 8.0f && m_GenreBiasList[1] - m_GenreBiasList[2] >= 10.0f)
             {
                 // TODO: dialogue: "I don't want to be wrong... why aren't you being more predictable?"
                 // But I can see the pattern...
                 // Why don't you start again?
-
+                StartCoroutine(PlayDialogueSequence(new int[3] { 120, 121, 122 }));
+                ExitDoor = Instantiate(ExitDoorPrefab, new Vector3(30.0f, 0.0f, 0.0f), new Quaternion());
             }
             else
             {
@@ -198,6 +205,8 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                 // Just as I expected. I had already made up my mind but this confirms it.
                 // This was a huge success. Thank you participant.
                 // Please do not try anything differently next time.
+                StartCoroutine(PlayDialogueSequence(new int[3] { 130, 131, 132 }));
+                ExitDoor = Instantiate(ExitDoorPrefab, new Vector3(30.0f, 0.0f, 0.0f), new Quaternion());
             }
         }
     }
@@ -472,7 +481,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                         if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 10.0f)
                         {
                             // TODO: Fine, have all the options.
-
+                            StartCoroutine(PlayDialogue(82));
                             EnableDoors(true, true, true);
                         }
                         else
