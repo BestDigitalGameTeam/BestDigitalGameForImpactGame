@@ -1293,6 +1293,7 @@ MonoBehaviour:
   ShooterDoorPrefab: {fileID: 8359788750577585139, guid: c7fda00f1c586d74483f88db07af5d4c, type: 3}
   PuzzleDoorPrefab: {fileID: 8359788750577585139, guid: 967d0bab64006024989ab2477991a5bd, type: 3}
   PlatformerDoorPrefab: {fileID: 8359788750577585139, guid: e4932cdcf8d281b42b6cf3669a1340ff, type: 3}
+  ExitDoorPrefab: {fileID: 2004698472482030537, guid: 29142b9c6cb3a0646af3f9da9f9a91a1, type: 3}
   m_TimesVisitedVoid: 0
   AnnouncerDialogue:
     m_PersistentCalls:
