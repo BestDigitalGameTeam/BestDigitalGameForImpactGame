@@ -72,6 +72,13 @@ public class ObjectHoldingScript : MonoBehaviour
             {
                 DropObject();
             }
+            else if (characterController.isGrounded && Physics.Raycast(transform.position, -transform.up, out objectHit, 10f, PickupAbleMask))
+            {
+                if (objectHit.collider.gameObject == HeldObject)
+                {
+                    DropObject();
+                }
+            }
         }
         else
         {
