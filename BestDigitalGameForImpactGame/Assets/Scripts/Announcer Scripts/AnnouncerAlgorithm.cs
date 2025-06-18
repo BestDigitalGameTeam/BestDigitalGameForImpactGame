@@ -182,7 +182,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
         }
         else if (m_TimesVisitedVoid >= 4)
         {
-            if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 5.0f)
+            if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 12.0f)
             {
                 // TODO: dialogue: 
                 // How am I supposed to find the pattern when you act like this? Let me make assumptions! Let me tell you what you want!
@@ -191,7 +191,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
                 yield return new WaitForSeconds(10.0f);
                 ExitDoor = Instantiate(ExitDoorPrefab, new Vector3(30.0f, 0.0f, 0.0f), new Quaternion());
             }
-            else if (m_GenreBiasList[0] - m_GenreBiasList[1] <= 8.0f && m_GenreBiasList[1] - m_GenreBiasList[2] >= 10.0f)
+            else if (m_GenreBiasList[0] - m_GenreBiasList[1] <= 8.0f)
             {
                 // TODO: dialogue: "I don't want to be wrong... why aren't you being more predictable?"
                 // But I can see the pattern...

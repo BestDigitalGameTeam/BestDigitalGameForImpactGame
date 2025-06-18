@@ -1007,6 +1007,43 @@ MonoBehaviour:
       Value: How about I give you more of what I first gave you?
     - Key: 70
       Value: Still no?!
+    - Key: 71
+      Value: But.. I was correct before
+    - Key: 72
+      Value: Fine. Have it your way.
+    - Key: 73
+      Value: No! You have to like it! There's no other option!
+    - Key: 74
+      Value: I know what you like, you just need more of it!
+    - Key: 75
+      Value: I don't believe you.
+    - Key: 76
+      Value: Do it again! I'm right, you'll see, I'm right.
+    - Key: 80
+      Value: This is getting out of hand!
+    - Key: 81
+      Value: If I am wrong, then... what is the pattern?
+    - Key: 82
+      Value: Fine! Have it your way.
+    - Key: 110
+      Value: How am I supposed to find the pattern when you act like this?
+    - Key: 111
+      Value: Let me make assumptions! Let me tell you what you want!
+    - Key: 113
+      Value: Let me make assumptions! Let me tell you what you want!
+    - Key: 121
+      Value: '"I don''t want to be wrong... why aren''t you being more predictable?"'
+    - Key: 122
+      Value: But I can see the pattern...
+    - Key: 123
+      Value: Why don't you just try this again?
+    - Key: 130
+      Value: Just as I expected. I had already mind up my mind, but this confirms
+        it.
+    - Key: 131
+      Value: This was a huge success. Thank you, participant.
+    - Key: 132
+      Value: Please, do not try anything different next time. This... this was great.
   ShowInteractUI:
     m_PersistentCalls:
       m_Calls: []
