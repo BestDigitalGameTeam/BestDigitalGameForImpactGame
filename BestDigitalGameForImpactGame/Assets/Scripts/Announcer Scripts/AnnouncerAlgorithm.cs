@@ -180,7 +180,7 @@ public class AnnouncerAlgorithm : SingletonPersistent<AnnouncerAlgorithm>
             // create the buttons, don't check
             StartCoroutine(AskPlayerIfLikedLevel());
         }
-        else if (m_TimesVisitedVoid > 4)
+        else if (m_TimesVisitedVoid >= 4)
         {
             if (m_GenreBiasList[0] - m_GenreBiasList[2] <= 5.0f)
             {

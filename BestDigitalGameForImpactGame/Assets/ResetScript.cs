@@ -14,5 +14,6 @@ public class ResetScript : MonoBehaviour
         yield return null;
         yield return null;
         GameManager.Instance.ResetGame.Invoke();
+        UIManager.Instance.ShowMainMenu();
     }
 }
