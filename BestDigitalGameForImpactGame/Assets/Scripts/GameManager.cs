@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEditor;
 
 public class GameManager : SingletonPersistent<GameManager>
 {
@@ -109,7 +110,11 @@ public class GameManager : SingletonPersistent<GameManager>
     }
     public void Quit()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+        #else
+            Application.Quit();
+        #endif
     }
     public void GameReset()
     {
