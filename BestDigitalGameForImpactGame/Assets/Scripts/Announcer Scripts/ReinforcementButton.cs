@@ -7,6 +7,7 @@ public class ReinforcementButton : MonoBehaviour
     [SerializeField] private bool m_bTriggered;
     [SerializeField] private float m_fAnimationSpeed = 0.01f;
     [SerializeField] private Transform m_EndTrans;
+    [SerializeField] private GameObject m_MovingObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,9 +19,9 @@ public class ReinforcementButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_bTriggered && transform.position.y > m_EndTrans.position.y)
+        if (m_bTriggered && m_MovingObject.transform.position.y > m_EndTrans.position.y)
         {
-            transform.position = new Vector3(transform.position.x,transform.position.y-(m_fAnimationSpeed*Time.deltaTime),transform.position.z);
+            m_MovingObject.transform.position = new Vector3(m_MovingObject.transform.position.x,m_MovingObject.transform.position.y-m_fAnimationSpeed*Time.deltaTime,m_MovingObject.transform.position.z);
         }
     }
 

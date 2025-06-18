@@ -1240,6 +1240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fc479e70845f54c87267d64e9d5acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_UIManager: {fileID: 0}
   LoadLevel:
     m_PersistentCalls:
       m_Calls: []
@@ -2446,6 +2447,7 @@ MonoBehaviour:
   IntActive: 0
   InteractImage: {fileID: 1711750175}
   PauseCanvas: {fileID: 0}
+  MainMenuCanvas: {fileID: 0}
   m_AudioSource: {fileID: 0}
   m_FPSHUD: {fileID: 0}
 --- !u!224 &890302997
@@ -4817,6 +4819,10 @@ PrefabInstance:
     - target: {fileID: 1828396784255898736, guid: 57a435fa522086944812246a6885345c, type: 3}
       propertyPath: m_Name
       value: Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828396784255898736, guid: 57a435fa522086944812246a6885345c, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

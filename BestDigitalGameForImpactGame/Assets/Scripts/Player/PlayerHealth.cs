@@ -5,16 +5,17 @@ public class PlayerHealth : SingletonPersistent<PlayerHealth>
 {
     [SerializeField] private int m_iMaxHealth = 100;
     private float m_fCurrentHealth;
-    [SerializeField] private Transform SpawnPos;
+    [SerializeField] private Transform SpawnPos = null;
 
     public UnityEvent<float> PlayerHealthChanged;
 
     private void Start()
     {
         m_fCurrentHealth = m_iMaxHealth;
-        if (!SpawnPos)
+        if (SpawnPos == null)
         {
             SpawnPos = GameManager.Instance.SpawnPos;
+            Debug.Log(SpawnPos);
         }
     }
 
@@ -31,6 +32,11 @@ public class PlayerHealth : SingletonPersistent<PlayerHealth>
 
         if (m_fCurrentHealth <= 0)
         {
+            if (SpawnPos == null)
+            {
+                SpawnPos = GameManager.Instance.SpawnPos;
+                Debug.Log(SpawnPos);
+            }
             Debug.Log("Player died.");
             m_fCurrentHealth = m_iMaxHealth;
             transform.position = SpawnPos.position;
