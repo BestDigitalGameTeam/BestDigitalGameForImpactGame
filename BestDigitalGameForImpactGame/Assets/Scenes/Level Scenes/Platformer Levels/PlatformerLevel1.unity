@@ -6441,6 +6441,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1577443859950592378, guid: 42e694fc1f991274cb57c4da6b2eb667, type: 3}
+      propertyPath: cullingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577443859950592378, guid: 42e694fc1f991274cb57c4da6b2eb667, type: 3}
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
@@ -7356,9 +7360,15 @@ MonoBehaviour:
   PauseGame:
     m_PersistentCalls:
       m_Calls: []
+  ResetGame:
+    m_PersistentCalls:
+      m_Calls: []
   MasterVolume: 1
   EffectsVolume: 1
   DialogueVolume: 1
+  TimesThroughShooterDoor: 0
+  TimesThroughPuzzleDoor: 0
+  TimesThroughPlatformerDoor: 0
 --- !u!4 &1328902117
 Transform:
   m_ObjectHideFlags: 0

@@ -3259,9 +3259,15 @@ MonoBehaviour:
   PauseGame:
     m_PersistentCalls:
       m_Calls: []
+  ResetGame:
+    m_PersistentCalls:
+      m_Calls: []
   MasterVolume: 1
   EffectsVolume: 1
   DialogueVolume: 1
+  TimesThroughShooterDoor: 0
+  TimesThroughPuzzleDoor: 0
+  TimesThroughPlatformerDoor: 0
 --- !u!4 &865723248
 Transform:
   m_ObjectHideFlags: 0
@@ -5284,7 +5290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.7799988
+      value: 3.07
       objectReference: {fileID: 0}
     - target: {fileID: 3976052469846125209, guid: 894a11f4b8e45d944ae5b07fc55c08a9, type: 3}
       propertyPath: m_LocalRotation.w
